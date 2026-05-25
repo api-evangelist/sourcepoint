@@ -1,0 +1,325 @@
+aid: sourcepoint
+name: Sourcepoint
+description: >-
+  Sourcepoint is a New York City-headquartered enterprise privacy and consent
+  management technology company founded in 2015 by Ben Barokas and Brian Kane.
+  The platform began as an ad-block recovery solution for publishers and
+  evolved into a Consent Management Platform (CMP) used by leading global
+  publishers and brands — including Axel Springer, Bauer Media, CNN
+  International, Future, Haymarket, LADBible, Autotrader, and Ancestry — to
+  handle GDPR, CCPA, U.S. Multi-State Privacy (USNAT), LGPD, and other
+  regulations under the IAB TCF v2.2 and IAB Global Privacy Platform (GPP)
+  frameworks. Sourcepoint products include the multi-campaign CMP across web,
+  AMP, mobile (iOS, Android, React Native), Unity, Roku, HTML5 OTT and CTV
+  surfaces, Compliance Monitoring (Diagnose), DSAR Handling, Universal Consent
+  & Preferences, Marketing Preferences, Privacy Lens, and tooling for ad-block
+  recovery. The Sourcepoint Public API exposes REST endpoints for GDPR TCF,
+  GDPR Standard, U.S. Multi-State Privacy, Global Enterprise consent, and
+  Preferences history, plus reporting endpoints for dashboards. Sourcepoint
+  technology powers over 30 billion consumer touchpoints per month. In July
+  2025, Sourcepoint was acquired by Paris-based Didomi (a Marlin Equity
+  Partners portfolio company) to consolidate global consent management;
+  Sourcepoint continues to operate under its existing brand and developer
+  surface during integration.
+type: Index
+position: Provider
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Privacy
+  - Consent Management
+  - Consent Management Platform
+  - CMP
+  - GDPR
+  - CCPA
+  - LGPD
+  - IAB TCF
+  - IAB GPP
+  - USNAT
+  - DSAR
+  - Adblock Recovery
+  - Compliance Monitoring
+  - Publisher Technology
+  - AdTech
+  - MarTech
+  - Privacy Engineering
+  - CTV
+  - OTT
+  - Mobile SDK
+  - Web SDK
+url: https://raw.githubusercontent.com/api-evangelist/sourcepoint/refs/heads/main/apis.yml
+created: '2026-05-25'
+modified: '2026-05-25'
+specificationVersion: '0.20'
+apis:
+  - aid: sourcepoint:sourcepoint-gdpr-tcf-api
+    name: Sourcepoint GDPR TCF API
+    description: >-
+      REST API surfacing end-user consent operations under the GDPR using the
+      IAB Transparency & Consent Framework (TCF v2.2). Supports retrieving
+      end-user consent status and history by site, merging an end-user's
+      custom vendor consent profile with the IAB vendor list derived from a
+      provided TCString, deleting consent records (DSAR-style erasure), and
+      mapping vendor purposes and URLs. The GDPR TCF web layer also exposes
+      __tcfapi command surface (ping, getTCData, addEventListener,
+      removeEventListener, getCustomVendorConsents, getVendorPurposeMapping,
+      postRejectAll, postCustomConsent) plus the tcData object and
+      euconsentWithDisclosedVendors helper.
+    humanURL: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+    tags:
+      - Consent
+      - GDPR
+      - IAB TCF
+      - TCF v2.2
+      - Privacy
+    properties:
+      - type: Documentation
+        url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+      - type: Documentation
+        url: https://docs.sourcepoint.com/hc/en-us/articles/4416092045587-GDPR-TCF-implementation-guide-web
+      - type: Documentation
+        url: https://docs.sourcepoint.com/hc/en-us/articles/4405890450323-Update-end-user-consent-profile-with-Sourcepoint-API-GDPR-TCF-
+      - type: Documentation
+        url: https://docs.sourcepoint.com/hc/en-us/articles/4405613823123-Retrieve-end-user-consent-data-history
+  - aid: sourcepoint:sourcepoint-gdpr-standard-api
+    name: Sourcepoint GDPR Standard API
+    description: >-
+      REST API exposing GDPR consent operations outside of the IAB TCF
+      framework for organizations that need GDPR compliance with custom vendor
+      lists. Operations include retrieving end-user consent status, deleting
+      consent status, mapping vendors and purposes, vendor URL mapping, and
+      web command surface for getCustomVendorConsents, getVendorPurposeMapping,
+      postRejectAll, postCustomConsent, and addEventListener.
+    humanURL: https://sourcepoint-public-api.readme.io/reference
+    tags:
+      - Consent
+      - GDPR
+      - Privacy
+    properties:
+      - type: Documentation
+        url: https://sourcepoint-public-api.readme.io/reference
+  - aid: sourcepoint:sourcepoint-usnat-multi-state-privacy-api
+    name: Sourcepoint U.S. Multi-State Privacy API
+    description: >-
+      REST API for U.S. Multi-State Privacy (USNAT) end-user consent handling,
+      built on the IAB Global Privacy Platform (GPP) string. Supports
+      retrieving end-user consent history, deleting consent status, opt-out
+      across all privacy choices and vendors, and a web command surface
+      including hasSection, getSection, getField, getUserConsents,
+      postRejectAll, ping, addEventListener, and removeEventListener. Covers
+      U.S. National and per-state privacy sections (CA, VA, CO, CT, UT, and
+      newer state regimes).
+    humanURL: https://sourcepoint-public-api.readme.io/reference
+    tags:
+      - Consent
+      - U.S. Multi-State Privacy
+      - USNAT
+      - CCPA
+      - GPP
+      - Privacy
+    properties:
+      - type: Documentation
+        url: https://sourcepoint-public-api.readme.io/reference
+  - aid: sourcepoint:sourcepoint-global-enterprise-api
+    name: Sourcepoint Global Enterprise API
+    description: >-
+      REST API for the Global Enterprise consent product, providing a single
+      multi-regulation consent surface across global properties. Supports
+      retrieving end-user consent history, deleting consent status, and web
+      methods including getUserConsents and postRejectAll for cross-regulation
+      consent orchestration.
+    humanURL: https://sourcepoint-public-api.readme.io/reference
+    tags:
+      - Consent
+      - Global Privacy
+      - Enterprise
+    properties:
+      - type: Documentation
+        url: https://sourcepoint-public-api.readme.io/reference
+      - type: Documentation
+        url: https://docs.sourcepoint.com/hc/en-us/articles/41919922996243-Global-Enterprise-implementation-guide
+  - aid: sourcepoint:sourcepoint-preferences-api
+    name: Sourcepoint Preferences API
+    description: >-
+      REST API for Universal Consent & Preferences and Marketing Preferences,
+      letting organizations retrieve and delete an end-user's preferences
+      history and read getUserPreferences on the web surface. Enables a unified
+      first-party preference profile across channels alongside the regulatory
+      consent surface.
+    humanURL: https://sourcepoint-public-api.readme.io/reference
+    tags:
+      - Preferences
+      - Marketing Preferences
+      - Universal Consent
+      - First-Party Data
+    properties:
+      - type: Documentation
+        url: https://sourcepoint-public-api.readme.io/reference
+      - type: Documentation
+        url: https://docs.sourcepoint.com/hc/en-us/articles/30557096773139-Preferences-implementation-guide-web
+  - aid: sourcepoint:sourcepoint-reporting-api
+    name: Sourcepoint Reporting API
+    description: >-
+      REST API exposing aggregated dashboard data for GDPR and U.S.
+      Multi-State Privacy campaigns, including pageview and message data
+      filtered by period for dashboard and BI integration. Powers the
+      Sourcepoint portal's analytics views.
+    humanURL: https://sourcepoint-public-api.readme.io/reference
+    tags:
+      - Reporting
+      - Analytics
+      - Consent
+      - Dashboards
+    properties:
+      - type: Documentation
+        url: https://sourcepoint-public-api.readme.io/reference
+common:
+  - type: Website
+    url: https://www.sourcepoint.com
+  - type: Portal
+    url: https://docs.sourcepoint.com/hc/en-us
+  - type: Documentation
+    url: https://sourcepoint-public-api.readme.io/reference
+    name: Sourcepoint Public API Hub
+  - type: Documentation
+    url: https://docs.sourcepoint.com/hc/en-us/articles/4416092045587-GDPR-TCF-implementation-guide-web
+    name: GDPR TCF implementation guide (web)
+  - type: Documentation
+    url: https://docs.sourcepoint.com/hc/en-us/articles/4405397484307-Event-callbacks-CMP
+    name: Event callbacks (CMP)
+  - type: Documentation
+    url: https://docs.sourcepoint.com/hc/en-us/articles/4405412419731-Client-configuration-parameters
+    name: Client configuration parameters
+  - type: Documentation
+    url: https://docs.sourcepoint.com/hc/en-us/articles/4403274791699-Authenticated-consent
+    name: Authenticated consent
+  - type: Documentation
+    url: https://docs.sourcepoint.com/hc/en-us/articles/6490142709139-Native-App-Messages-App-setup
+    name: Native App Messages - App setup
+  - type: Documentation
+    url: https://docs.sourcepoint.com/hc/en-us/articles/25872524725267-Google-Consent-Mode-2-0-GDPR-TCF-web
+    name: Google Consent Mode 2.0 (GDPR TCF - web)
+  - type: Product
+    url: https://sourcepoint.com/cmp-2/
+    name: Consent Management Platform
+  - type: Product
+    url: https://sourcepoint.com/diagnose/
+    name: Diagnose - Compliance Monitoring
+  - type: Product
+    url: https://sourcepoint.com/dsar/
+    name: DSAR Handling
+  - type: Product
+    url: https://sourcepoint.com/marketing-preferences/
+    name: Marketing Preferences
+  - type: Product
+    url: https://sourcepoint.com/universal-consent-and-preferences
+    name: Universal Consent & Preferences
+  - type: Product
+    url: https://sourcepoint.com/privacy-lens/
+    name: Privacy Lens
+  - type: Product
+    url: https://sourcepoint.com/ott-ctv/
+    name: CMP for OTT / CTV
+  - type: Product
+    url: https://sourcepoint.com/cmp-for-mobile-apps/
+    name: CMP for Mobile Apps
+  - type: Solution
+    url: https://sourcepoint.com/gdpr-compliance/
+    name: GDPR Compliance
+  - type: Solution
+    url: https://sourcepoint.com/ccpa-compliance/
+    name: CCPA Compliance
+  - type: Solution
+    url: https://sourcepoint.com/publishers/
+    name: For Publishers
+  - type: Solution
+    url: https://sourcepoint.com/brands/
+    name: For Brands
+  - type: Solution
+    url: https://sourcepoint.com/gaming
+    name: For Gaming
+  - type: Pricing
+    url: https://hs.sourcepoint.com/pricing
+  - type: SignUp
+    url: https://www.sourcepoint.com/schedule-a-demo/
+    name: Schedule a Demo
+  - type: Blog
+    url: https://www.sourcepoint.com/blog/
+  - type: News
+    url: https://www.sourcepoint.com/news/
+  - type: About
+    url: https://www.sourcepoint.com/about-us/
+  - type: GitHubOrganization
+    url: https://github.com/SourcePointUSA
+  - type: SDK
+    url: https://github.com/SourcePointUSA/ios-cmp-app
+    name: iOS CMP SDK (Swift, ConsentViewController, CocoaPods / Carthage / SPM / XCFramework)
+  - type: SDK
+    url: https://github.com/SourcePointUSA/android-cmp-app
+    name: Android CMP SDK (Kotlin, com.sourcepoint.cmplibrary:cmplibrary on Maven Central)
+  - type: SDK
+    url: https://github.com/SourcePointUSA/react-native-sourcepoint-cmp
+    name: React Native CMP bridge (@sourcepoint/react-native-cmp)
+  - type: SDK
+    url: https://github.com/SourcePointUSA/unity-sdk
+    name: Unity CMP SDK (C#, iOS + Android)
+  - type: SDK
+    url: https://github.com/SourcePointUSA/sp-roku-sdk
+    name: Roku SDK (BrighterScript)
+  - type: SDK
+    url: https://github.com/SourcePointUSA/SP_HTML5_OTT
+    name: HTML5 OTT SDK
+  - type: SDK
+    url: https://github.com/SourcePointUSA/mobile-core
+    name: Mobile Core (network and data layers for native mobile SDKs)
+  - type: SDK
+    url: https://github.com/SourcePointUSA/diagnose-sdk
+    name: Diagnose SDK (Swift)
+  - type: SDK
+    url: https://github.com/SourcePointUSA/es3-QR-SDK-develop
+    name: ES3 QR Code SDK (JavaScript - CTV authentication via QR)
+  - type: Plugin
+    url: https://github.com/SourcePointUSA/sp-wordpress-plugin
+    name: Sourcepoint WordPress Plugin
+  - type: Plugin
+    url: https://github.com/SourcePointUSA/sp-magento-plugin
+    name: Sourcepoint Magento Plugin
+  - type: Plugin
+    url: https://github.com/SourcePointUSA/GTM-GCM-Template
+    name: Google Tag Manager Google Consent Mode Template
+  - type: Tool
+    url: https://github.com/SourcePointUSA/sdks-auth-consent-test-page
+    name: Authenticated Consent SDK Test Page
+  - type: Tool
+    url: https://github.com/SourcePointUSA/FORK-iabgpp-es
+    name: iabgpp-es fork (IAB Global Privacy Platform encoder/decoder)
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/sourcepoint
+  - type: Twitter
+    url: https://twitter.com/sourcepoint
+  - type: Features
+    data:
+      - Multi-campaign Consent Management Platform across web, AMP, mobile, OTT, CTV, and gaming surfaces
+      - IAB TCF v2.2 support including Transaction Receipts, Legal Preferences, and sensitive-data opt-in
+      - IAB Global Privacy Platform (GPP) support for U.S. Multi-State Privacy (USNAT) sections
+      - GDPR, CCPA / U.S. Multi-State Privacy, LGPD, and global multi-regulation orchestration
+      - Universal Consent & Preferences for unified first-party preference data
+      - Authenticated Consent for syncing an end-user's preferences across devices
+      - Diagnose compliance monitoring of vendors, trackers, and data flows on a property
+      - DSAR Handling for data subject access and erasure workflows
+      - Marketing Preferences and Privacy Lens measurement
+      - Ad-block recovery heritage for publisher monetization
+      - Google Consent Mode 2.0 integration and GTM template
+      - Native mobile SDKs for iOS (Swift / CocoaPods / SPM / XCFramework), Android (Kotlin / Maven Central), React Native, Unity, Roku, and HTML5 OTT
+      - Web messaging via cdn.privacy-mgmt.com/unified/wrapperMessagingWithoutDetection.js with optional CNAME subdomain
+      - Public REST API for GDPR TCF, GDPR Standard, U.S. Multi-State Privacy, Global Enterprise, Preferences, and Reporting
+      - Approximately 30 billion consumer touchpoints powered per month
+    sources:
+      - https://www.sourcepoint.com
+      - https://docs.sourcepoint.com/hc/en-us
+      - https://sourcepoint-public-api.readme.io/reference
+      - https://github.com/SourcePointUSA
+    updated: '2026-05-25'
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
