@@ -223,24 +223,24 @@ common:
   - type: Product
     url: https://sourcepoint.com/cmp-for-mobile-apps/
     name: CMP for Mobile Apps
-  - type: Solution
+  - type: Solutions
     url: https://sourcepoint.com/gdpr-compliance/
     name: GDPR Compliance
-  - type: Solution
+  - type: Solutions
     url: https://sourcepoint.com/ccpa-compliance/
     name: CCPA Compliance
-  - type: Solution
+  - type: Solutions
     url: https://sourcepoint.com/publishers/
     name: For Publishers
-  - type: Solution
+  - type: Solutions
     url: https://sourcepoint.com/brands/
     name: For Brands
-  - type: Solution
+  - type: Solutions
     url: https://sourcepoint.com/gaming
     name: For Gaming
   - type: Pricing
     url: https://hs.sourcepoint.com/pricing
-  - type: SignUp
+  - type: Signup
     url: https://www.sourcepoint.com/schedule-a-demo/
     name: Schedule a Demo
   - type: Blog
@@ -251,31 +251,31 @@ common:
     url: https://www.sourcepoint.com/about-us/
   - type: GitHubOrganization
     url: https://github.com/SourcePointUSA
-  - type: SDK
+  - type: SDKs
     url: https://github.com/SourcePointUSA/ios-cmp-app
     name: iOS CMP SDK (Swift, ConsentViewController, CocoaPods / Carthage / SPM / XCFramework)
-  - type: SDK
+  - type: SDKs
     url: https://github.com/SourcePointUSA/android-cmp-app
     name: Android CMP SDK (Kotlin, com.sourcepoint.cmplibrary:cmplibrary on Maven Central)
-  - type: SDK
+  - type: SDKs
     url: https://github.com/SourcePointUSA/react-native-sourcepoint-cmp
     name: React Native CMP bridge (@sourcepoint/react-native-cmp)
-  - type: SDK
+  - type: SDKs
     url: https://github.com/SourcePointUSA/unity-sdk
     name: Unity CMP SDK (C#, iOS + Android)
-  - type: SDK
+  - type: SDKs
     url: https://github.com/SourcePointUSA/sp-roku-sdk
     name: Roku SDK (BrighterScript)
-  - type: SDK
+  - type: SDKs
     url: https://github.com/SourcePointUSA/SP_HTML5_OTT
     name: HTML5 OTT SDK
-  - type: SDK
+  - type: SDKs
     url: https://github.com/SourcePointUSA/mobile-core
     name: Mobile Core (network and data layers for native mobile SDKs)
-  - type: SDK
+  - type: SDKs
     url: https://github.com/SourcePointUSA/diagnose-sdk
     name: Diagnose SDK (Swift)
-  - type: SDK
+  - type: SDKs
     url: https://github.com/SourcePointUSA/es3-QR-SDK-develop
     name: ES3 QR Code SDK (JavaScript - CTV authentication via QR)
   - type: Plugin
@@ -287,10 +287,10 @@ common:
   - type: Plugin
     url: https://github.com/SourcePointUSA/GTM-GCM-Template
     name: Google Tag Manager Google Consent Mode Template
-  - type: Tool
+  - type: Tools
     url: https://github.com/SourcePointUSA/sdks-auth-consent-test-page
     name: Authenticated Consent SDK Test Page
-  - type: Tool
+  - type: Tools
     url: https://github.com/SourcePointUSA/FORK-iabgpp-es
     name: iabgpp-es fork (IAB Global Privacy Platform encoder/decoder)
   - type: LinkedIn
