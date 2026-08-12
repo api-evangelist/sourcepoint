@@ -1,0 +1,276 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/ (7 harvested specs) + mcp/sourcepoint-mcp.yml (401-gated probe of the ReadMe hub MCP
+  server)
+surfaces:
+  openapi:
+    files:
+    - openapi/sourcepoint-gdpr-tcf-openapi.yml
+    - openapi/sourcepoint-gdpr-standard-openapi.yml
+    - openapi/sourcepoint-usnat-openapi.yml
+    - openapi/sourcepoint-global-enterprise-openapi.yml
+    - openapi/sourcepoint-preferences-openapi.yml
+    - openapi/sourcepoint-reporting-gdpr-openapi.yml
+    - openapi/sourcepoint-reporting-usnat-openapi.yml
+    operations: 21
+    gated: false
+    note: Harvested from the hub /openapi/<id> download endpoints listed in the RFC 9727 api-catalog.
+  graphql:
+    endpoint: null
+    note: Sourcepoint publishes no GraphQL surface; no /graphql endpoint on any host.
+  mcp:
+    url: https://sourcepoint-public-api.readme.io/mcp
+    gated: true
+    note: tools/list returns HTTP 401 "Authorization required", so the served tool names and inputSchemas
+      are unverified.
+crosswalk:
+- tool: sourcepoint_getGdprTcfConsentHistory
+  category: consent
+  rest:
+  - getGdprTcfConsentHistory
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from GET /consent/v3/history/{siteId} in openapi/sourcepoint-gdpr-tcf-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_mergeGdprTcfConsentWithTcString
+  category: consent
+  rest:
+  - mergeGdprTcfConsentWithTcString
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from POST /consent/v3/{siteId}/tcstring in openapi/sourcepoint-gdpr-tcf-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_deleteGdprTcfConsent
+  category: consent
+  rest:
+  - deleteGdprTcfConsent
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from DELETE /consent/v3/{siteId} in openapi/sourcepoint-gdpr-tcf-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_getGdprTcfVendorPurposeMapping
+  category: vendor-list
+  rest:
+  - getGdprTcfVendorPurposeMapping
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from GET /vendor-list/vendor-purpose-mapping in openapi/sourcepoint-gdpr-tcf-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_postGdprTcfVendorUrlMapping
+  category: vendor-list
+  rest:
+  - postGdprTcfVendorUrlMapping
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from POST /vendor-list/vendor-url-mapping in openapi/sourcepoint-gdpr-tcf-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_getGdprTcfVendors
+  category: vendor-list
+  rest:
+  - getGdprTcfVendors
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from GET /vendor-list/vendors in openapi/sourcepoint-gdpr-tcf-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_getGdprStandardConsentHistory
+  category: consent
+  rest:
+  - getGdprStandardConsentHistory
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from GET /consent/v3/history/{siteId} in openapi/sourcepoint-gdpr-standard-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_deleteGdprStandardConsent
+  category: consent
+  rest:
+  - deleteGdprStandardConsent
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from DELETE /consent/v3/{siteId} in openapi/sourcepoint-gdpr-standard-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_getGdprStandardVendorPurposeMapping
+  category: vendor-list
+  rest:
+  - getGdprStandardVendorPurposeMapping
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from GET /vendor-list/vendor-purpose-mapping in openapi/sourcepoint-gdpr-standard-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_postGdprStandardVendorUrlMapping
+  category: vendor-list
+  rest:
+  - postGdprStandardVendorUrlMapping
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from POST /vendor-list/vendor-url-mapping in openapi/sourcepoint-gdpr-standard-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_getUsnatConsentHistory
+  category: consent
+  rest:
+  - getUsnatConsentHistory
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from GET /consent/history/{siteId} in openapi/sourcepoint-usnat-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_deleteUsnatConsent
+  category: consent
+  rest:
+  - deleteUsnatConsent
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from DELETE /consent/{siteId} in openapi/sourcepoint-usnat-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_postUsnatRejectAll
+  category: consent
+  rest:
+  - postUsnatRejectAll
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from POST /consent/{siteId}/reject-all in openapi/sourcepoint-usnat-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_getGlobalEnterpriseConsentHistory
+  category: consent
+  rest:
+  - getGlobalEnterpriseConsentHistory
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from GET /consent/history/{siteId} in openapi/sourcepoint-global-enterprise-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_deleteGlobalEnterpriseConsent
+  category: consent
+  rest:
+  - deleteGlobalEnterpriseConsent
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from DELETE /consent/{siteId} in openapi/sourcepoint-global-enterprise-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_getPreferencesHistory
+  category: preferences
+  rest:
+  - getPreferencesHistory
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from GET /user-preference/history in openapi/sourcepoint-preferences-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_deletePreferencesHistory
+  category: preferences
+  rest:
+  - deletePreferencesHistory
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from DELETE /user-preference in openapi/sourcepoint-preferences-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_postGdprPageviewReport
+  category: reporting
+  rest:
+  - postGdprPageviewReport
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from POST /tcfv2/dashboard-v2-pv-users/{periodFilter} in openapi/sourcepoint-reporting-gdpr-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_postGdprMessageReport
+  category: reporting
+  rest:
+  - postGdprMessageReport
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from POST /tcfv2/dashboard-v2-messages/{periodFilter} in openapi/sourcepoint-reporting-gdpr-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_postUsnatPageviewReport
+  category: reporting
+  rest:
+  - postUsnatPageviewReport
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from POST /usnat/dashboard-v2-pv-users/{periodFilter} in openapi/sourcepoint-reporting-usnat-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+- tool: sourcepoint_postUsnatMessageReport
+  category: reporting
+  rest:
+  - postUsnatMessageReport
+  binding: rest
+  confidence: low
+  note: Candidate tool derived from POST /usnat/dashboard-v2-messages/{periodFilter} in openapi/sourcepoint-reporting-usnat-openapi.yml.
+    The live MCP tools/list is 401-gated, so this row records what a REST-backed tool WOULD bind to, not
+    a tool Sourcepoint is known to serve.
+mcp_only:
+- tool: search
+  reason: ReadMe platform documentation-agent tool advertised in the hub client configuration (reservedWords.tools)
+    rather than a Sourcepoint REST operation; unverified because tools/list is 401-gated.
+- tool: fetch
+  reason: ReadMe platform documentation-agent tool advertised in the hub client configuration (reservedWords.tools)
+    rather than a Sourcepoint REST operation; unverified because tools/list is 401-gated.
+- tool: list-specs
+  reason: ReadMe platform documentation-agent tool advertised in the hub client configuration (reservedWords.tools)
+    rather than a Sourcepoint REST operation; unverified because tools/list is 401-gated.
+- tool: list-endpoints
+  reason: ReadMe platform documentation-agent tool advertised in the hub client configuration (reservedWords.tools)
+    rather than a Sourcepoint REST operation; unverified because tools/list is 401-gated.
+- tool: get-endpoint
+  reason: ReadMe platform documentation-agent tool advertised in the hub client configuration (reservedWords.tools)
+    rather than a Sourcepoint REST operation; unverified because tools/list is 401-gated.
+- tool: search-endpoints
+  reason: ReadMe platform documentation-agent tool advertised in the hub client configuration (reservedWords.tools)
+    rather than a Sourcepoint REST operation; unverified because tools/list is 401-gated.
+- tool: get-server-variables
+  reason: ReadMe platform documentation-agent tool advertised in the hub client configuration (reservedWords.tools)
+    rather than a Sourcepoint REST operation; unverified because tools/list is 401-gated.
+- tool: execute-request
+  reason: ReadMe platform documentation-agent tool advertised in the hub client configuration (reservedWords.tools)
+    rather than a Sourcepoint REST operation; unverified because tools/list is 401-gated.
+rest_only:
+- capability: GDPR TCF vendor list
+  operations:
+  - getGdprTcfVendorPurposeMapping
+  - postGdprTcfVendorUrlMapping
+  - getGdprTcfVendors
+- capability: GDPR Standard vendor list
+  operations:
+  - getGdprStandardVendorPurposeMapping
+  - postGdprStandardVendorUrlMapping
+- capability: Consent erasure (DSAR)
+  operations:
+  - deleteGdprTcfConsent
+  - deleteGdprStandardConsent
+  - deleteUsnatConsent
+  - deleteGlobalEnterpriseConsent
+  - deletePreferencesHistory
+- capability: Dashboard reporting
+  operations:
+  - postGdprPageviewReport
+  - postGdprMessageReport
+  - postUsnatPageviewReport
+  - postUsnatMessageReport
+coverage:
+  rest_operations: 21
+  tools_named: 0
+  tools_bound: 0
+  candidate_tools: 21
+  mcp_only: 8
+  rest_ops_with_a_verified_tool: 0
+notes:
+- 'NO VERIFIED BINDINGS EXIST. Every crosswalk row is confidence: low because the MCP server refused an
+  anonymous tools/list.'
+- The client-side __tcfapi / __gpp / _sp_ command surfaces (ping, getTCData, addEventListener, getCustomVendorConsents,
+  postRejectAll, getUserConsents, resetUserState) are browser JavaScript APIs documented on the hub, not
+  HTTP operations, so they appear in neither list.

@@ -1,0 +1,46 @@
+generated: '2026-08-12'
+method: probed
+source: https://sourcepoint-public-api.readme.io/reference/introduction plus live response-header inspection
+  of both production hosts on 2026-08-12
+limit_count: 0
+documented: false
+limits: []
+response_headers:
+  observed: []
+  documented: []
+  note: No X-RateLimit-*, RateLimit-*, Retry-After or 429 signal appears on any observed response from
+    https://cdn.privacy-mgmt.com or https://portal.sourcepoint.com, and none is documented on the hub.
+evidence:
+- url: https://cdn.privacy-mgmt.com/consent/tcfv2/vendor-list/vendors?siteId=1
+  http_status: 404
+  headers_seen:
+  - strict-transport-security
+  - access-control-allow-origin
+  - cache-control
+  - x-cache
+  - via
+  - x-amz-cf-pop
+  - x-amz-cf-id
+  note: No rate-limit header of any kind.
+- url: https://portal.sourcepoint.com/api/external/v1/reports/tcfv2/dashboard-v2-pv-users/day
+  http_status: 403
+  headers_seen:
+  - x-powered-by
+  - strict-transport-security
+  - etag
+  - x-frame-options
+  - x-content-type-options
+  - referrer-policy
+  - x-cache
+  - via
+  note: No rate-limit header of any kind.
+- url: https://sourcepoint-public-api.readme.io/reference/introduction
+  http_status: 200
+  note: 'Only quantitative statement on the page: "Responses from the reporting API does not support pagination
+    and there are no limits to number of entries returned by the API." That is a response-size statement,
+    not a request-rate limit.'
+notes:
+- 'An honest zero: Sourcepoint documents no request-rate limits and emits no runtime rate-limit signal,
+  so an agent has nothing to back off against except the status code it receives.'
+- The docs hub itself rate-limits aggressively (HTTP 429 observed on repeated /openapi/<id> and /reference/*.md
+  fetches), but that is ReadMe protecting the documentation host, not the Sourcepoint API.

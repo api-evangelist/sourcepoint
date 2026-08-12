@@ -1,0 +1,139 @@
+generated: '2026-08-12'
+method: searched
+source: npm registry, Maven Central (repo1 maven-metadata.xml), CocoaPods trunk API, GitHub releases API
+  for github.com/SourcePointUSA, and the Sourcepoint CDN build banner
+org: https://github.com/SourcePointUSA
+packages:
+- language: kotlin
+  registry: maven
+  name: com.sourcepoint.cmplibrary:cmplibrary
+  url: https://central.sonatype.com/artifact/com.sourcepoint.cmplibrary/cmplibrary
+  install: implementation "com.sourcepoint.cmplibrary:cmplibrary:7.15.13"
+  official: true
+  version: 7.15.13
+  published: '2026-04-08'
+  source_repo: https://github.com/SourcePointUSA/android-cmp-app
+  note: Android CMP SDK. Version/date read from repo1.maven.org maven-metadata.xml (lastUpdated 20260408140923);
+    matches GitHub release v7.15.13.
+- language: kotlin
+  registry: maven
+  name: com.sourcepoint:core-android
+  url: https://central.sonatype.com/artifact/com.sourcepoint/core-android
+  install: implementation "com.sourcepoint:core-android:0.1.16"
+  official: true
+  version: 0.1.16
+  published: '2026-04-07'
+  source_repo: https://github.com/SourcePointUSA/mobile-core
+  note: Kotlin Multiplatform mobile-core network/data layer; also published as core, core-iosarm64, core-iosx64,
+    core-iossimulatorarm64, core-tvosarm64, core-tvosx64, core-tvossimulatorarm64.
+- language: swift
+  registry: cocoapods
+  name: ConsentViewController
+  url: https://cocoapods.org/pods/ConsentViewController
+  install: pod 'ConsentViewController', '7.12.10'
+  official: true
+  version: 7.12.10
+  published: '2026-06-12'
+  source_repo: https://github.com/SourcePointUSA/ios-cmp-app
+  note: iOS CMP SDK. 148 versions on CocoaPods trunk; also distributed via Swift Package Manager, Carthage
+    and a prebuilt XCFramework from the same repo.
+- language: javascript
+  registry: npm
+  name: '@sourcepoint/react-native-cmp'
+  url: https://www.npmjs.com/package/@sourcepoint/react-native-cmp
+  install: npm install @sourcepoint/react-native-cmp
+  official: true
+  version: 1.0.13
+  published: '2025-11-07'
+  source_repo: https://github.com/SourcePointUSA/react-native-sourcepoint-cmp
+  note: React Native bridge to the native iOS/Android CMP SDKs. Last publish 2025-11-07, nine months behind
+    the native SDKs it wraps (iOS 7.12.10 / Android 7.15.13).
+- language: csharp
+  registry: github
+  name: SourcePointUSA/unity-sdk
+  url: https://github.com/SourcePointUSA/unity-sdk
+  install: Unity Package Manager - add the git URL from the repo README
+  official: true
+  version: 3.2.0
+  published: '2025-12-23'
+  note: Unity CMP SDK (AGPL-3.0). Distributed from GitHub releases; not published to OpenUPM or the Unity
+    Asset Store, so there is no package-registry metadata endpoint to query.
+- language: brightscript
+  registry: github
+  name: SourcePointUSA/sp-roku-sdk
+  url: https://github.com/SourcePointUSA/sp-roku-sdk
+  install: clone the repo and copy the component library into the channel
+  official: true
+  version: v2.7.0
+  published: '2025-02-07'
+  note: Roku SDK (BrighterScript). GitHub releases only - no registry.
+- language: javascript
+  registry: github
+  name: SourcePointUSA/SP_HTML5_OTT
+  url: https://github.com/SourcePointUSA/SP_HTML5_OTT
+  install: clone the repo
+  official: true
+  version: null
+  published: null
+  note: 'HTML5 OTT SDK. Checked GitHub releases: none published (HTTP 404 on releases/latest); last push
+    2025-03-07. No registry and no tagged release, so no version can be recorded.'
+- language: swift
+  registry: github
+  name: SourcePointUSA/diagnose-sdk
+  url: https://github.com/SourcePointUSA/diagnose-sdk
+  install: Swift Package Manager - add the repo URL
+  official: true
+  version: null
+  published: null
+  note: Diagnose SDK. No GitHub release (404 on releases/latest) and no CocoaPods/SPM registry entry;
+    last push 2024-11-12.
+- language: javascript
+  registry: cdn
+  name: wrapperMessagingWithoutDetection.js
+  url: https://cdn.privacy-mgmt.com/unified/wrapperMessagingWithoutDetection.js
+  install: <script src="https://cdn.privacy-mgmt.com/unified/wrapperMessagingWithoutDetection.js"></script>
+  official: true
+  version: null
+  published: null
+  note: The web CMP message wrapper. The documented URL is UNPINNED - it always floats to the current
+    build, so a consumer cannot tell what they are getting. The served file carries an inline build banner
+    (GIT_TAG 4.40.2-dev, GIT_COMMIT 14ddb9e751a67f78a0558a05547cf8e5c5862831, BUILD_TIMESTAMP 1785776096)
+    observed on 2026-08-12; that banner is a build tag, not a published package version, so version is
+    recorded null.
+- language: php
+  registry: github
+  name: SourcePointUSA/sp-wordpress-plugin
+  url: https://github.com/SourcePointUSA/sp-wordpress-plugin
+  install: install the plugin from the repo
+  official: true
+  version: null
+  published: null
+  note: WordPress plugin. Not listed on wordpress.org/plugins and no GitHub release; last push 2025-06-04.
+- language: php
+  registry: github
+  name: SourcePointUSA/sp-magento-plugin
+  url: https://github.com/SourcePointUSA/sp-magento-plugin
+  install: install the module from the repo
+  official: true
+  version: null
+  published: null
+  note: Magento plugin. Not on Packagist and no GitHub release; last push 2024-07-24.
+third_party:
+- name: '@schibsted/sourcepoint'
+  registry: npm
+  version: 6.0.5
+  published: '2026-03-19'
+  official: false
+  note: Publisher-maintained Sourcepoint wrapper (Schibsted), not first-party.
+- name: '@spring-media/red-sourcepoint-cmp'
+  registry: npm
+  version: 0.73.0
+  published: '2022-11-14'
+  official: false
+  note: Publisher-maintained wrapper (Spring/Media), not first-party; last published 2022.
+notes:
+- 'Registry currency check on 2026-08-12: the native SDKs are current (Android 7.15.13 Apr 2026, iOS 7.12.10
+  Jun 2026), the React Native bridge lags at 1.0.13 (Nov 2025), and the Unity, Roku, HTML5 OTT, Diagnose,
+  WordPress and Magento distributions carry no registry entry at all.'
+- com.sourcepoint.ccpa_cmplibrary:ccpa_cmplibrary is still on Maven Central at 1.3.4 (2021-03-11) - a
+  superseded pre-USNAT artifact, recorded here only so its abandonment is visible.

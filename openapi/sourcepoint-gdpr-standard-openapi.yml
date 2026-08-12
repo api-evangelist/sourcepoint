@@ -1,0 +1,414 @@
+openapi: 3.0.2
+info:
+  title: Sourcepoint GDPR Standard API
+  version: 1.0.0
+  description: Sourcepoint Technologies API for managing property and end-user GDPR Standard information.
+servers:
+- url: https://cdn.privacy-mgmt.com/consent/tcfv2
+paths:
+  /consent/v3/history/{siteId}:
+    get:
+      tags:
+      - GDPR Standard end-user consent status
+      summary: Get end-user consent status
+      description: Returns end-user GDPR Standard consent status for a property. In addition to the `siteId`,
+        you will also need to include <u>either</u> the end-user's `consentUUID` or `authId`.
+      parameters:
+      - name: siteId
+        in: path
+        required: true
+        description: The property ID for the property in the Sourcepoint portal.
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/consentUUID'
+      - $ref: '#/components/parameters/authId'
+      - $ref: '#/components/parameters/latest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getConsentResponse'
+  /consent/v3/{siteId}:
+    delete:
+      tags:
+      - GDPR Standard end-user consent status
+      summary: Delete end-user consent status
+      description: Deletes end-user GDPR Standard consent status for a property. In addition to the `siteId`,
+        you will also need to include <u>either</u> the end-user's `consentUUID` or `authId`.<br><br>This
+        endpoint does not support mass deletions of end-user consent records. Please speak to your Sourcepoint
+        representative to execute any mass deletions.
+      parameters:
+      - name: siteId
+        in: path
+        required: true
+        description: The property ID for the property in the Sourcepoint portal.
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/consentUUID'
+      - $ref: '#/components/parameters/authId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    n:
+                      type: integer
+                      example: 1
+                    ok:
+                      type: integer
+                      example: 1
+                    deletedCount:
+                      type: integer
+                      example: 1
+  /vendor-list/vendor-purpose-mapping:
+    get:
+      tags:
+      - GDPR Standard vendor list
+      summary: Map vendors and purposes
+      description: 'Returns mapping of vendors and purposes with legal bases on the vendor list associated
+        with the property.
+
+
+        **Note**: *For each vendor, the response will only include purposes that have a configured legal
+        basis ( **Consent**, **Legitimate Interest**, **Disclosure Only**). Any purposes that are **Not
+        Applicable** will not be returned in the response.*
+
+
+        *Additionally, vendors will need at least one purpose with a configured legal basis to be returned
+        in the response.*'
+      parameters:
+      - name: siteId
+        in: query
+        required: true
+        description: The property ID for the property in the Sourcepoint portal.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mapResponse'
+  /vendor-list/vendor-url-mapping:
+    post:
+      tags:
+      - GDPR Standard vendor list
+      summary: Vendor URL mapping
+      description: Intended to be used by publishing systems to help determine if a vendor URL has been
+        defined appropriately in the Sourcepoint system. This API can help developers that are integrating
+        with Content Management Systems (CMS) verify that a URL referenced in content can be related to
+        vendor and purpose consent preferences which can be queried and set based on user actions.<br><br>Before
+        utilizing this API, ensure [vendor URL mappings are configured for the vendor](https://docs.sourcepoint.com/hc/en-us/articles/4403605574419#h_01H0N5Q7SC3ZPB47GMRNKR8PG0)
+        in the Sourcepoint portal.
+      parameters:
+      - name: allCategoryMapping
+        in: query
+        required: false
+        description: Will return `categoryMapping` array which details all vendors and their configured
+          purposes for the property
+        schema:
+          type: boolean
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                siteId:
+                  type: string
+                  description: Property ID for the property in the Sourcepoint portal.
+                  example: 1234
+                vendorUrls:
+                  type: array
+                  description: Array of URLs to be matched against
+                  items:
+                    type: string
+                    description: URL
+                    example: www.sourcepoint.com
+              required:
+              - siteId
+              - vendorUrls
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/vendorURLMappingResponse'
+components:
+  schemas:
+    mapResponse:
+      description: Returned response to vendor purpose mapping
+      type: array
+      items:
+        type: object
+        properties:
+          vendorId:
+            type: string
+            description: Unique ID for a vendor
+            example: abcd2fbeb8e05c306f2aefgh
+          categories:
+            type: array
+            description: Details purposes configured for each vendor
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Unique ID for purpose
+                  example: 1234e01e32bd4d27654b5678
+                type:
+                  type: string
+                  description: Legal basis configured for purpose
+                  example: CONSENT
+    getConsentResponse:
+      description: Returned response to get consent request
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: Unique identifier for the consent record
+            example: 6842d825666f5a1254fd263f
+          siteId:
+            type: number
+            description: Sourcepoint ID for property.
+            example: 39470
+          dateCreated:
+            type: string
+            description: Date consent status was created
+            example: '2023-05-08T15:37:18.365Z'
+          consentUUID:
+            type: string
+            description: Consent UUID for end-user
+            example: 1234f5a8-67c9-4a38-a7cd-6fe4f30a5678
+          messageId:
+            type: integer
+            description: ID of the first layer message shown to end-user
+            example: 123456
+          vendorListId:
+            type: string
+            description: ID of the vendor list
+            example: 9876a560b8e05c06542b2a31
+          vendors:
+            type: array
+            description: Vendors consented to
+            items:
+              anyOf:
+              - $ref: '#/components/schemas/customVendors'
+              - $ref: '#/components/schemas/GoogleATPVendors'
+          legIntVendors:
+            type: array
+            description: Vendors consented to who use legitimate interest as a legal basis for at least
+              one purpose.
+            items:
+              anyOf:
+              - $ref: '#/components/schemas/customVendors'
+              - $ref: '#/components/schemas/GoogleATPVendors'
+          categories:
+            type: array
+            description: Purposes consented to
+            items:
+              $ref: '#/components/schemas/customPurposes'
+          legIntCategories:
+            type: array
+            description: Purposes consented to who use legitimate interest as a legal basis.
+            items:
+              $ref: '#/components/schemas/customPurposes'
+    customVendors:
+      description: Returns custom vendor information
+      properties:
+        id:
+          type: string
+          description: Sourcepoint vendor ID
+          example: 5f23e826b8e05c0c0abcdef
+        name:
+          type: string
+          description: Vendor name
+          example: Custom vendor example
+        vendorType:
+          type: string
+          description: Vendor type
+          example: CUSTOM
+    GoogleATPVendors:
+      description: Returns Google ATP vendor information
+      properties:
+        id:
+          type: string
+          description: Sourcepoint vendor ID
+          example: 1234abcd5678efgh0d4fdb8f
+        name:
+          type: string
+          description: Vendor name
+          example: Google ATP vendor
+        vendorType:
+          type: string
+          description: Vendor type
+          example: CUSTOM
+        googleId:
+          type: integer
+          description: Google vendor ID
+          example: 1234
+    customPurposes:
+      description: Returns custom purpose information
+      properties:
+        id:
+          type: string
+          description: Sourcepoint purpose ID
+          example: 5fdbbcdf4f3f9789140e23a0
+        name:
+          type: string
+          description: Purpose name
+          example: Custom purpose example
+    vendorURLMappingResponse:
+      description: Returns vendor URL mapping for property
+      properties:
+        vendorUrlMapping:
+          type: array
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                description: URL that is being mapped and has been passed in the body of the request.
+                example: www.sourcepoint.com
+              matchPattern:
+                type: array
+                description: Pattern(s) matched for a particular vendor.
+                items:
+                  type: object
+                  properties:
+                    ruleBoolean:
+                      type: boolean
+                      description: Boolean field in the pattern configuration for the vendor (i.e. MUST
+                        or MUST NOT).
+                      example: true
+                    type:
+                      type: string
+                      description: Type of match made to the urlPattern (e.g. "MATCH", "BEGINS_WITH",
+                        "ENDS_WITH")
+                      example: CONTAINS
+                    urlPattern:
+                      type: string
+                      description: URL pattern for comparison configured in Sourcepoint portal for vendor
+                      example: sourcepoint.com
+              rules:
+                type: array
+                description: All patterns configured for the vendor.
+                items:
+                  type: object
+                  properties:
+                    patterns:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          ruleBoolean:
+                            type: boolean
+                            description: Boolean field in the pattern configuration for the vendor (i.e.
+                              MUST or MUST NOT).
+                            example: true
+                          type:
+                            type: string
+                            description: Type of match made to the urlPattern (e.g. "MATCH", "BEGINS_WITH",
+                              "ENDS_WITH")
+                            example: CONTAINS
+                          urlPattern:
+                            type: string
+                            description: URL pattern for comparison configured in Sourcepoint portal for
+                              vendor
+                            example: sourcepoint.com
+              vendorId:
+                type: string
+                description: Sourcepoint ID for the vendor
+                example: 5f23e826b8e05c0c0d4fdb8f
+              vendorType:
+                type: string
+                description: Type of vendor (i.e. CUSTOM)
+                example: CUSTOM
+              name:
+                type: string
+                description: Name of the vendor
+                example: Sourcepoint Technologies, Inc. (non-CMP)
+              description:
+                type: string
+                description: If configured for the vendor in the Sourcepoint portal, the description of
+                  the vendor.
+                example: Description example for the vendor
+              policyUrl:
+                type: string
+                description: If available, the URL to the vendor's privacy policy
+                example: https://www.sourcepoint.com/privacy-notice/
+              purposes:
+                type: array
+                description: Details the purposes configured for the vendor.
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: ID for purpose
+                      example: 5fdbbcdf4f3f9789140e23a0
+                    type:
+                      type: string
+                      description: Legal basis configured for the purpose.
+                      example: CONSENT
+        categoryMapping:
+          description: Only returned if the allCategoryMapping query parameter is set to true. Details
+            **all** the vendors and their configured purposes for the property.
+          type: array
+          items:
+            type: object
+            properties:
+              vendorId:
+                type: string
+                description: Sourcepoint ID for the vendor
+                example: 23452fbeb8e05c3057240f85
+              categories:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: ID for purpose
+                      example: 5fd7e01e32bd4d27654ba1d5
+                    type:
+                      type: string
+                      description: Legal basis configured for the purpose.
+                      example: LEGITIMATE_INTEREST
+  parameters:
+    consentUUID:
+      name: consentUUID
+      in: query
+      description: Retrieved from the first-party cookie consentUUID
+      required: false
+      schema:
+        type: string
+    authId:
+      name: authId
+      in: query
+      description: Retrieved from the first-party cookie authId
+      required: false
+      schema:
+        type: string
+    latest:
+      name: latest
+      in: query
+      description: (Optional) Only return latest consent record for the end-user
+      required: false
+      schema:
+        type: boolean
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

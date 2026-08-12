@@ -1,0 +1,66 @@
+generated: '2026-08-12'
+method: searched
+source: https://docs.sourcepoint.com/api/v2/help_center/en-us/categories/1500000668981/articles.json and
+  the GitHub SourcePointUSA releases API
+scheme: help-center articles (platform) + semver GitHub releases (SDKs)
+public_platform_changelog: false
+access_note: 'The dated CMP release notes are NOT public: the public Releases category exposes 8 articles,
+  of which the substantive ones are subscription instructions. docs.sourcepoint.com returns HTTP 403 to
+  non-browser clients on the section/category HTML pages; only the Zendesk Help Center JSON API answers
+  anonymously.'
+channels:
+- name: Releases (help center category)
+  url: https://docs.sourcepoint.com/hc/en-us/categories/1500000668981-Releases
+  public_articles: 8
+- name: CMP release notes (subscribe)
+  url: https://docs.sourcepoint.com/hc/en-us/articles/4403426593939-Subscribe-to-CMP-release-notes
+- name: iOS SDK releases
+  url: https://github.com/SourcePointUSA/ios-cmp-app/releases
+- name: Android SDK releases
+  url: https://github.com/SourcePointUSA/android-cmp-app/releases
+entries:
+- date: '2026-06-12'
+  component: iOS CMP SDK
+  version: 7.12.10
+  breaking: false
+  source: https://github.com/SourcePointUSA/ios-cmp-app/releases
+- date: '2026-04-08'
+  component: Android CMP SDK
+  version: v7.15.13
+  breaking: false
+  source: https://github.com/SourcePointUSA/android-cmp-app/releases
+- date: '2026-04-07'
+  component: mobile-core (Kotlin Multiplatform)
+  version: 0.1.16
+  breaking: false
+  source: https://repo1.maven.org/maven2/com/sourcepoint/core-android/maven-metadata.xml
+- date: '2026-01-30'
+  component: CMP platform
+  title: Migration to IAB TCF 2.3
+  breaking: true
+  highlights:
+  - Framework migration from IAB TCF v2.2 to v2.3
+  source: https://docs.sourcepoint.com/hc/en-us/categories/1500000668981-Releases
+- date: '2025-12-23'
+  component: Unity CMP SDK
+  version: 3.2.0
+  breaking: false
+  source: https://github.com/SourcePointUSA/unity-sdk/releases
+- date: '2025-11-07'
+  component: React Native CMP bridge
+  version: v1.0.13
+  breaking: false
+  source: https://github.com/SourcePointUSA/react-native-sourcepoint-cmp/releases
+- date: '2025-10-23'
+  component: Dialogue
+  title: Dialogue Pre-release notification (Oct 27 - Oct 30)
+  breaking: false
+  source: https://docs.sourcepoint.com/hc/en-us/categories/1500000668981-Releases
+- date: '2025-02-07'
+  component: Roku SDK
+  version: v2.7.0
+  breaking: false
+  source: https://github.com/SourcePointUSA/sp-roku-sdk/releases
+notes:
+- No changelog exists for the REST APIs themselves - none of the seven OpenAPI documents carries a version
+  beyond info.version 1.0.0, and no API change history is published.

@@ -1,0 +1,74 @@
+generated: '2026-08-12'
+method: searched
+source: https://docs.sourcepoint.com/hc/en-us, https://sourcepoint-public-api.readme.io/reference, https://github.com/SourcePointUSA,
+  live fetch of the CDN loader
+families:
+- name: Web CMP message layer
+  type: script loader + hosted message UI
+  loader:
+    url: https://cdn.privacy-mgmt.com/unified/wrapperMessagingWithoutDetection.js
+    pinned: false
+    observed_build: GIT_TAG 4.40.2-dev, commit 14ddb9e751a67f78a0558a05547cf8e5c5862831 (fetched 2026-08-12)
+  config: window._sp_ configuration object (accountId, propertyHref, baseEndpoint, campaign environment,
+    events)
+  surfaces:
+  - first-layer consent message
+  - Privacy Manager (second layer)
+  - custom message builder templates
+  customization: optional CNAME subdomain so the CMP is served first-party from the customer domain
+  docs: https://docs.sourcepoint.com/hc/en-us/articles/4405412419731-Client-configuration-parameters
+- name: Browser command APIs
+  type: client-side JavaScript API
+  surfaces:
+  - __tcfapi (ping, getTCData, addEventListener, removeEventListener, getCustomVendorConsents, getVendorPurposeMapping,
+    postRejectAll, postCustomConsent)
+  - __gpp (ping, hasSection, getSection, getField, addEventListener, removeEventListener)
+  - _sp_ Sourcepoint commands (getUserConsents, getUserPreferences, postRejectAll, resetUserState, addEventListener)
+  docs: https://sourcepoint-public-api.readme.io/reference/iab-gdpr-tcf-api
+- name: Event callbacks
+  type: client-side hooks
+  surfaces:
+  - onMessageReady
+  - onConsentReady
+  - onMessageChoiceSelect
+  - onMessageChoiceError
+  - onPrivacyManagerAction
+  - onPMCancel
+  - onMessageReceiveData
+  - onSPPMObjectReady
+  - onError
+  docs: https://docs.sourcepoint.com/hc/en-us/articles/4405397484307-Event-callbacks-CMP
+  note: Client-side only - not webhooks.
+- name: Native app message UI
+  type: embedded SDK view
+  surfaces:
+  - iOS ConsentViewController
+  - Android cmplibrary message view
+  - React Native bridge
+  - Unity CMP view
+  docs: https://docs.sourcepoint.com/hc/en-us/articles/6490142709139-Native-App-Messages-App-setup
+- name: OTT / CTV surfaces
+  type: embedded SDK view
+  surfaces:
+  - Roku SDK (BrighterScript) components
+  - HTML5 OTT message renderer
+  - ES3 QR-code authentication SDK for CTV consent handoff
+  repos:
+  - https://github.com/SourcePointUSA/sp-roku-sdk
+  - https://github.com/SourcePointUSA/SP_HTML5_OTT
+  - https://github.com/SourcePointUSA/es3-QR-SDK-develop
+- name: CMS / tag-manager drop-ins
+  type: plugin
+  surfaces:
+  - WordPress plugin
+  - Magento plugin
+  - Google Tag Manager Google Consent Mode template
+  repos:
+  - https://github.com/SourcePointUSA/sp-wordpress-plugin
+  - https://github.com/SourcePointUSA/sp-magento-plugin
+  - https://github.com/SourcePointUSA/GTM-GCM-Template
+notes:
+- 'Sourcepoint is component-first: the consent UI is delivered as a hosted, remotely-configured message
+  layer rather than as something the customer builds against the REST API.'
+- The REST APIs in openapi/ are the server-side read/erase counterpart to these components, not the way
+  the consent experience is rendered.

@@ -1,0 +1,110 @@
+generated: '2026-08-12'
+method: probed
+status: published
+source: POST https://sourcepoint-public-api.readme.io/mcp with {"jsonrpc":"2.0","id":1,"method":"tools/list"}
+  on 2026-08-12
+server:
+  name: sourcepoint-public-api
+  transport: http
+  url: https://sourcepoint-public-api.readme.io/mcp
+  auth: required
+  provider: ReadMe-hosted documentation MCP server on the Sourcepoint API hub
+  first_party: hosted for Sourcepoint on their documentation host; the server software is ReadMe platform
+    infrastructure, not Sourcepoint-authored
+x-evidence:
+  fetched: '2026-08-12'
+  url: https://sourcepoint-public-api.readme.io/mcp
+  http_status: 401
+  body: '{"jsonrpc":"2.0","error":{"code":-32001,"message":"Authorization required"},"id":null}'
+  content_type: application/json; charset=utf-8
+  note: A well-formed JSON-RPC error proves an MCP server is deployed at this path, but tools/list is
+    authorization-gated so the live tool set and its inputSchemas could not be read anonymously. No WWW-Authenticate
+    header and no /.well-known/oauth-protected-resource (404), so there is no anonymous OAuth discovery
+    path either.
+tools:
+- name: sourcepoint_getGdprTcfConsentHistory
+  description: Return an end-user GDPR TCF consent status/history for a property by siteId plus consentUUID
+    or authId
+  status: candidate
+  source_operation: openapi/sourcepoint-gdpr-tcf-openapi.yml#getGdprTcfConsentHistory
+- name: sourcepoint_mergeGdprTcfConsentWithTcString
+  description: Merge an end-user custom vendor consent profile with IAB vendor consent decoded from a
+    supplied TCString
+  status: candidate
+  source_operation: openapi/sourcepoint-gdpr-tcf-openapi.yml#mergeGdprTcfConsentWithTcString
+- name: sourcepoint_deleteGdprTcfConsent
+  description: Delete an end-user GDPR TCF consent record for a property (DSAR-style erasure)
+  status: candidate
+  source_operation: openapi/sourcepoint-gdpr-tcf-openapi.yml#deleteGdprTcfConsent
+- name: sourcepoint_getGdprTcfVendorPurposeMapping
+  description: Return the vendor-to-purpose mapping with legal bases for a property GDPR TCF vendor list
+  status: candidate
+  source_operation: openapi/sourcepoint-gdpr-tcf-openapi.yml#getGdprTcfVendorPurposeMapping
+- name: sourcepoint_postGdprTcfVendorUrlMapping
+  description: Resolve vendor URLs against configured vendor URL mappings for a property
+  status: candidate
+  source_operation: openapi/sourcepoint-gdpr-tcf-openapi.yml#postGdprTcfVendorUrlMapping
+- name: sourcepoint_getGdprTcfVendors
+  description: List the vendors on a property GDPR TCF vendor list
+  status: candidate
+  source_operation: openapi/sourcepoint-gdpr-tcf-openapi.yml#getGdprTcfVendors
+- name: sourcepoint_getGdprStandardConsentHistory
+  description: Return an end-user GDPR Standard (non-TCF) consent status/history
+  status: candidate
+  source_operation: openapi/sourcepoint-gdpr-standard-openapi.yml#getGdprStandardConsentHistory
+- name: sourcepoint_deleteGdprStandardConsent
+  description: Delete an end-user GDPR Standard consent record
+  status: candidate
+  source_operation: openapi/sourcepoint-gdpr-standard-openapi.yml#deleteGdprStandardConsent
+- name: sourcepoint_getUsnatConsentHistory
+  description: Return an end-user U.S. Multi-State Privacy consent history
+  status: candidate
+  source_operation: openapi/sourcepoint-usnat-openapi.yml#getUsnatConsentHistory
+- name: sourcepoint_deleteUsnatConsent
+  description: Delete an end-user U.S. Multi-State Privacy consent record
+  status: candidate
+  source_operation: openapi/sourcepoint-usnat-openapi.yml#deleteUsnatConsent
+- name: sourcepoint_postUsnatRejectAll
+  description: Opt an end-user out of all U.S. Multi-State Privacy choices and vendors
+  status: candidate
+  source_operation: openapi/sourcepoint-usnat-openapi.yml#postUsnatRejectAll
+- name: sourcepoint_getGlobalEnterpriseConsentHistory
+  description: Return an end-user Global Enterprise consent history
+  status: candidate
+  source_operation: openapi/sourcepoint-global-enterprise-openapi.yml#getGlobalEnterpriseConsentHistory
+- name: sourcepoint_deleteGlobalEnterpriseConsent
+  description: Delete an end-user Global Enterprise consent record
+  status: candidate
+  source_operation: openapi/sourcepoint-global-enterprise-openapi.yml#deleteGlobalEnterpriseConsent
+- name: sourcepoint_getPreferencesHistory
+  description: Return an end-user preferences history for an account
+  status: candidate
+  source_operation: openapi/sourcepoint-preferences-openapi.yml#getPreferencesHistory
+- name: sourcepoint_deletePreferencesHistory
+  description: Delete an end-user preferences history for a property
+  status: candidate
+  source_operation: openapi/sourcepoint-preferences-openapi.yml#deletePreferencesHistory
+- name: sourcepoint_postGdprPageviewReport
+  description: Return GDPR dashboard pageview/user data for a period
+  status: candidate
+  source_operation: openapi/sourcepoint-reporting-gdpr-openapi.yml#postGdprPageviewReport
+- name: sourcepoint_postGdprMessageReport
+  description: Return GDPR dashboard message data for a period
+  status: candidate
+  source_operation: openapi/sourcepoint-reporting-gdpr-openapi.yml#postGdprMessageReport
+- name: sourcepoint_postUsnatPageviewReport
+  description: Return U.S. Multi-State Privacy dashboard pageview/user data for a period
+  status: candidate
+  source_operation: openapi/sourcepoint-reporting-usnat-openapi.yml#postUsnatPageviewReport
+- name: sourcepoint_postUsnatMessageReport
+  description: Return U.S. Multi-State Privacy dashboard message data for a period
+  status: candidate
+  source_operation: openapi/sourcepoint-reporting-usnat-openapi.yml#postUsnatMessageReport
+notes:
+- tools[] here are CANDIDATES derived one-per-operation from the seven harvested OpenAPI documents. They
+  are NOT the tool list the deployed server returns - that call is 401. Do not present these names as
+  Sourcepoint-published tools.
+- The deployed server is ReadMe hub MCP, whose documented tool surface is documentation-shaped (search,
+  list/get endpoints, execute-request) rather than one tool per Sourcepoint operation. See mcp/sourcepoint-tool-crosswalk.yml.
+- operationIds referenced above are assigned by overlays/sourcepoint-*-overlay.yaml; the published specs
+  carry no operationIds.

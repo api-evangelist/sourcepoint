@@ -1,0 +1,356 @@
+openapi: 3.0.2
+info:
+  title: Sourcepoint U.S. Multi-State Privacy API
+  version: 1.0.0
+  description: Sourcepoint Technologies API for managing property and end-user U.S. Multi-State Privacy
+    information.
+servers:
+- url: https://cdn.privacy-mgmt.com/usnat
+paths:
+  /consent/history/{siteId}:
+    get:
+      tags:
+      - U.S. Multi-State Privacy end-user consent status
+      summary: Get end-user consent history
+      description: Returns end-user consent history. In addition to the `siteId`, you will also need to
+        include <u>either</u> the end-user's `usnatUUID` or `authId`.
+      parameters:
+      - name: siteId
+        in: path
+        required: true
+        description: The property ID for the property in the Sourcepoint portal.
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/authId'
+      - $ref: '#/components/parameters/latest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getConsentHistory'
+  /consent/{siteId}:
+    delete:
+      tags:
+      - U.S. Multi-State Privacy end-user consent status
+      summary: Delete end-user consent status
+      description: Deletes end-user U.S. Multi-State Privacy consent status for a property. In addition
+        to the `siteId`, you will also need to include <u>either</u> the end-user's `usnatUUID` or `authId`.<br><br>This
+        endpoint does not support mass deletions of end-user consent records. Please speak to your Sourcepoint
+        representative to execute any mass deletions.
+      parameters:
+      - name: siteId
+        in: path
+        required: true
+        description: The property ID for the property in the Sourcepoint portal.
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/authId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deleteConsentStatus'
+  /consent/{siteId}/reject-all:
+    post:
+      tags:
+      - U.S. Multi-State Privacy end-user consent status
+      summary: Opt-out all privacy choices and vendors
+      description: Opt-out of all vendors and privacy choices for an end-user's consent profile within
+        the U.S. Multi-State Privacy framework. In addition to the `siteId`, you will also need to include
+        the end-user's `authId` or `uuid`.<br><br>**Note:** This is a server-side call and will not update
+        client-side end-user consent unless your organization is utilizing `authId`. To opt an end-user
+        out of all vendors and purposes using their `uuid` please refer to [postRejectAll command](https://sourcepoint-public-api.readme.io/reference/postrejectall-4).
+      parameters:
+      - name: siteId
+        in: path
+        required: true
+        description: The property ID for the property in the Sourcepoint portal.
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/authId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rejectAll'
+components:
+  schemas:
+    rejectAll:
+      description: Returned response for opt-out of all privacy choices and vendors
+      type: object
+      properties:
+        applies:
+          type: boolean
+          description: 'true: end-user''s region is in the framework territories | false: end-user''s
+            region is not in the framework territories'
+          example: true
+        applicableSections:
+          type: array
+          items:
+            type: string
+            description: Section ID considered to be enforced for this transaction. In most cases, this
+              field should have a single section ID. In rare occasions where such a single section ID
+              can not be determined, the field may contain up to 2 values. [Click here](https://github.com/InteractiveAdvertisingBureau/Global-Privacy-Platform/blob/main/Sections/Section%20Information.md#section-ids)
+              for more information on section ID values.
+            example: 7
+        categories:
+          type: array
+          items:
+            type: string
+            description: Privacy choices opted into by the end-user. A successful reject all call should
+              produce an empty array.
+            example: null
+        gpcEnabled:
+          type: boolean
+          description: '`true` if the vendor list utilizes *Respect Global Privacy Control* setting and
+            the end-user''s browser had GPC enabled when the consent history record was created.'
+          example: false
+        consentedToAll:
+          type: boolean
+          description: Is consent profile consented to all vendors and privacy choices on the vendor list?
+            A successful reject all call should produce a `false` response.
+          example: false
+        rejectedAny:
+          type: boolean
+          description: Has consent profile reject any privacy choices or vendors? A successful reject
+            all call should produce a `true` response.
+          example: true
+        consentStatus:
+          type: object
+          properties:
+            rejectedAny:
+              type: boolean
+              description: Has consent profile reject any privacy choices or vendors? A successful reject
+                all call should produce a `true` response.
+              example: true
+            consentedToAll:
+              type: boolean
+              description: Is consent profile consented to all vendors and privacy choices on the vendor
+                list? A successful reject all call should produce a `false` response.
+              example: false
+            consentedToAny:
+              type: boolean
+              description: Is consent profile consented to any vendors and privacy choices on the vendor
+                list? A successful reject all call should produce a `false` response.
+              example: false
+            granularStatus:
+              type: object
+              properties:
+                sellStatus:
+                  type: boolean
+                  description: Is consent profile consented to the selling of personal data? A successful
+                    reject all call should produce a `false` response.
+                  example: false
+                shareStatus:
+                  type: boolean
+                  description: Is consent profile consented to the sharing of personal data? A successful
+                    reject all call should produce a `false` response.
+                  example: false
+                sensitiveDataStatus:
+                  type: boolean
+                  description: Is consent profile consented to the processing of any sensitive data category?
+                    A successful reject all call should produce a `false` response.
+                  example: false
+                gpcStatus:
+                  type: boolean
+                  description: Did end-user have gpc enabled on their browser?
+                  example: false
+                previousOptInAll:
+                  type: boolean
+                  description: Was the end-user's consent profile previously opted into all privacy choices
+                    and vendors?
+                  example: false
+            hasConsentData:
+              type: boolean
+              description: Does the end-user have consent data?
+              example: true
+        consentStrings:
+          type: array
+          items:
+            type: object
+            properties:
+              sectionId:
+                type: number
+                description: Section ID considered to be enforced for this transaction.
+                example: 7
+              sectionName:
+                type: string
+                description: Section name considered to be enforced for this transaction
+                example: usnat
+              consentString:
+                type: string
+                description: End-user consent string.
+                example: BVVVUAAAAgA
+        sectionId:
+          type: number
+          description: Section ID considered to be enforced for this transaction.
+          example: 7
+        dateCreated:
+          type: string
+          description: The date of reject all action
+          example: '2025-06-13T14:40:09.318Z'
+        expirationDate:
+          type: string
+          description: When the end-user's consent profile expires
+          example: '2025-06-23T14:40:09.318Z'
+        uuid:
+          type: string
+          description: End-user's unique id for which a consent profile is stored against.
+          example: 68837d4a-d61a-4777-af52-03683c411cc3_126
+        cookies:
+          type: array
+          description: Cookies created/updated
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/usnatUUIDcookie'
+            - $ref: '#/components/schemas/consentDateUsnat'
+    usnatUUIDcookie:
+      type: object
+      properties:
+        key:
+          type: string
+          example: usnatUUID
+        value:
+          type: string
+          example: 68837d4a-d61a-4777-af52-03683c411cc3_126
+        maxAge:
+          type: number
+          example: 864000
+        shareRootDomain:
+          type: boolean
+          example: true
+    consentDateUsnat:
+      type: object
+      properties:
+        key:
+          type: string
+          example: consentDateUsnat
+        value:
+          type: string
+          example: '2025-06-13T14:40:09.318Z'
+        maxAge:
+          type: number
+          example: 864000
+        shareRootDomain:
+          type: boolean
+          example: true
+    deleteConsentStatus:
+      description: Returned response to delete consent status
+      type: array
+      items:
+        type: object
+        properties:
+          acknowledged:
+            type: boolean
+            example: true
+          deletedCount:
+            type: number
+            example: 1
+    getConsentHistory:
+      description: Returned response to get consent history
+      type: array
+      items:
+        type: object
+        description: Consent status entry for the given `dateCreated`
+        properties:
+          _id:
+            type: string
+            description: Unique identifier for the consent record
+            example: 6842d825666f5a1254fd263f
+          siteId:
+            type: number
+            description: Sourcepoint ID for property.
+            example: 39470
+          dateCreated:
+            type: string
+            description: The date the consent status was created/last updated.
+            example: '2023-08-07T14:17:35.388Z'
+          uuid:
+            type: string
+            description: Retrieved from`usnat` object in the `_sp_user_consent_{propertyId}` local storage
+              item
+            example: abcd0c03-b8d6-49a4-a2e8-6bbcb8d0e1d7
+          messageId:
+            type: number
+            description: First layer message ID.
+            example: 123456
+          privacyManagerId:
+            type: string
+            description: Privacy manager ID. This property will be `null` if consent was given from the
+              first layer message.
+            example: 987654
+          vendorListId:
+            type: string
+            description: The U.S. Multi-State Privacy vendor list associated with the property
+            example: 656a2175e17a3c2f823f12345
+          vendors:
+            type: array
+            description: Vendors that have been opted into by the end-user. A vendor is considered opted
+              into if at least one of the mapped privacy choices to the vendor is opted into.
+            items:
+              type: object
+              properties:
+                _id:
+                  type: string
+                  description: Vendor ID
+                  example: 5e37fc3e56a5e60e0031234
+                name:
+                  type: string
+                  description: Name of the vendor
+                  example: Demo vendor name
+                vendorType:
+                  type: string
+                  description: Whether the vendor is an IAB vendor or custom vendor
+                  example: IAB
+          categories:
+            type: array
+            description: Privacy choices that has been opted into by the end-user
+            items:
+              type: object
+              properties:
+                _id:
+                  type: string
+                  description: Privacy choice ID
+                  example: 656f28c517853af88460a54a
+                name:
+                  type: string
+                  description: Name of the privacy choice
+                  example: Sell or share my personal information / opt into targeted advertising
+                systemId:
+                  type: number
+                  description: If available, a global ID that remains the same across all vendor lists
+                    for Sourcepoint-supplied privacy choices. Custom privacy choices do not have system
+                    IDs because they vary for each vendor list.
+                  example: 3
+  parameters:
+    uuid:
+      name: uuid
+      in: query
+      description: Retrieved from`usnat` object in the `_sp_user_consent_{propertyId}` local storage item
+      schema:
+        type: string
+    authId:
+      name: authId
+      in: query
+      description: Retrieved from the first-party cookie authId
+      required: false
+      schema:
+        type: string
+    latest:
+      name: latest
+      in: query
+      description: (Optional) Only return latest consent record for the end-user
+      schema:
+        type: boolean
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

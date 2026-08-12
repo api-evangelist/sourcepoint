@@ -1,0 +1,26 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Sourcepoint U.S. Multi-State Privacy API
+  version: 1.0.0
+extends: openapi/sourcepoint-usnat-openapi.yml
+x-generated: '2026-08-12'
+x-method: generated
+x-source: openapi/sourcepoint-usnat-openapi.yml
+x-note: Sourcepoint publishes these specs without operationIds; this overlay assigns stable operationIds
+  used by the repo derived artifacts (skills, crosswalk, error catalog, data model). The harvested spec
+  itself is never mutated.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-source: https://sourcepoint-public-api.readme.io/openapi/663ba208487c36002b37b99e
+    x-apievangelist-harvested: '2026-08-12'
+    x-apievangelist-provider: sourcepoint
+- target: $.paths['/consent/history/{siteId}'].get
+  update:
+    operationId: getUsnatConsentHistory
+- target: $.paths['/consent/{siteId}'].delete
+  update:
+    operationId: deleteUsnatConsent
+- target: $.paths['/consent/{siteId}/reject-all'].post
+  update:
+    operationId: postUsnatRejectAll

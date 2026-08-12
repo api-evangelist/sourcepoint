@@ -1,0 +1,172 @@
+openapi: 3.0.2
+info:
+  title: Preferences API
+  version: 1.0.0
+  description: Sourcepoint Technologies API for managing end-user Preferences data.
+servers:
+- url: https://cdn.privacy-mgmt.com/preferences
+paths:
+  /user-preference/history:
+    get:
+      tags:
+      - Preferences end-user history
+      summary: Get end-user preferences history
+      description: Returns end-user preferences history. In addition to the `accountId`, you will also
+        need to include <u>either</u> the end-user's `uuid` or `authId` in the `id` parameter.
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/preferencesHistory'
+              example:
+              - system: SP
+                messageId: 1326089
+                propertyId: 12345
+                vendorListId: 677c0006b4aaddaae14c1234a
+                timestamp: '2025-07-15T18:53:13.907Z'
+                categories:
+                - id: 0
+                  name: AI Waiver
+                  type: LEGAL-TRANSACTION
+                  subType: AI-POLICY
+                  legalDoc:
+                    id: abc123
+                    name: AI Policy 2025
+                - id: 4
+                  name: Customer Service Communication
+                  type: MARKETING
+                _id: 6877a0b70b23e3a5cbe11234
+  /user-preference:
+    delete:
+      tags:
+      - Preferences end-user history
+      summary: Delete end-user preferences history
+      description: Deletes end-user preferences history for a property. In addition to the `propertyId`,
+        you will also need to include <u>either</u> the end-user's `uuid` or `authId`.
+      parameters:
+      - name: propertyId
+        in: query
+        required: true
+        description: The property ID for the property in the Sourcepoint portal.
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/authId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deletePreferencesHistory'
+components:
+  schemas:
+    preferencesHistory:
+      description: Returned response for successful get end-user preferences history.
+      type: array
+      items:
+        type: object
+        properties:
+          system:
+            type: string
+            description: System powering the message for which the end-user performed the transaction.
+              If syncing with a third-party vendor (e.g. Hubspot) then the system powering the message
+              can be the third-party if the action was taken through a message served by that party.
+          messageId:
+            type: number
+            description: ID of the Preferences message within the Sourcepoint portal
+          propertyId:
+            type: number
+            description: ID of the property within the Sourcepoint portal.
+          vendorListId:
+            type: string
+            description: ID of the Preferences configuration within the Sourcepoint portal.
+          timestamp:
+            type: string
+            description: Date and time end-user performed their preference choice transaction.
+          categories:
+            type: array
+            description: Preferences categories accepted by the end-user.
+            items:
+              type: object
+              properties:
+                id:
+                  type: number
+                  description: Category ID for the Marketing preference category or Legal preference category.
+                name:
+                  type: string
+                  description: Name configured for the Marketing preference category or Legal preference
+                    category.
+                type:
+                  type: string
+                  description: Identifies whether the category is a Marketing preference or Legal preference
+                    category.
+                subType:
+                  type: string
+                  description: Returned when the category is a Legal preference category and reflects
+                    the Document Type selected for the Legal preference category.
+                legalDoc:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: ID of the legal document mapped to the Legal document category that
+                        was opted-into by the end-user.
+                    name:
+                      type: string
+                      description: Name of the legal document mapped to the Legal document category that
+                        was opted-into by the end-user.
+          _id:
+            type: string
+            description: ID of the end-user transaction where they made their preferences choice.
+            example: 6877a0b70b23e3a5cbe11234
+    deletePreferencesHistory:
+      description: Returned response for successful delete end-user preferences history request.
+      type: object
+      properties:
+        deletedCount:
+          type: number
+          description: Number of preference records associated with the uuid or authId that was deleted.
+          example: 4
+        message:
+          type: string
+          description: Confirmation message.
+          example: Successfully deleted 4 user preference record(s)
+  parameters:
+    uuid:
+      name: uuid
+      in: query
+      description: Retrieved from preferences object in the `_sp_user_consent_{propertyId}` local storage
+        item
+      required: false
+      schema:
+        type: string
+    authId:
+      name: authId
+      in: query
+      description: Retrieved from the first-party cookie `authId`
+      required: false
+      schema:
+        type: string
+    accountId:
+      name: accountId
+      in: query
+      description: Your organization's Sourcepoint account ID.
+      required: true
+      schema:
+        type: number
+    id:
+      name: id
+      in: query
+      description: The end-user's uuid or authId
+      required: true
+      schema:
+        type: string
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

@@ -60,7 +60,7 @@ tags:
   - Web SDK
 url: https://raw.githubusercontent.com/api-evangelist/sourcepoint/refs/heads/main/apis.yml
 created: '2026-05-25'
-modified: '2026-05-25'
+modified: '2026-08-12'
 specificationVersion: '0.20'
 apis:
   - aid: sourcepoint:sourcepoint-gdpr-tcf-api
@@ -77,6 +77,7 @@ apis:
       postRejectAll, postCustomConsent) plus the tcData object and
       euconsentWithDisclosedVendors helper.
     humanURL: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+    baseURL: https://cdn.privacy-mgmt.com/consent/tcfv2
     tags:
       - Consent
       - GDPR
@@ -92,6 +93,12 @@ apis:
         url: https://docs.sourcepoint.com/hc/en-us/articles/4405890450323-Update-end-user-consent-profile-with-Sourcepoint-API-GDPR-TCF-
       - type: Documentation
         url: https://docs.sourcepoint.com/hc/en-us/articles/4405613823123-Retrieve-end-user-consent-data-history
+      - type: OpenAPI
+        url: openapi/sourcepoint-gdpr-tcf-openapi.yml
+      - type: Overlay
+        url: overlays/sourcepoint-gdpr-tcf-overlay.yaml
+      - type: APIReference
+        url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
   - aid: sourcepoint:sourcepoint-gdpr-standard-api
     name: Sourcepoint GDPR Standard API
     description: >-
@@ -102,6 +109,7 @@ apis:
       web command surface for getCustomVendorConsents, getVendorPurposeMapping,
       postRejectAll, postCustomConsent, and addEventListener.
     humanURL: https://sourcepoint-public-api.readme.io/reference
+    baseURL: https://cdn.privacy-mgmt.com/consent/tcfv2
     tags:
       - Consent
       - GDPR
@@ -109,6 +117,12 @@ apis:
     properties:
       - type: Documentation
         url: https://sourcepoint-public-api.readme.io/reference
+      - type: OpenAPI
+        url: openapi/sourcepoint-gdpr-standard-openapi.yml
+      - type: Overlay
+        url: overlays/sourcepoint-gdpr-standard-overlay.yaml
+      - type: APIReference
+        url: https://sourcepoint-public-api.readme.io/reference/gdpr-standard-end-user-consent-status
   - aid: sourcepoint:sourcepoint-usnat-multi-state-privacy-api
     name: Sourcepoint U.S. Multi-State Privacy API
     description: >-
@@ -121,6 +135,7 @@ apis:
       U.S. National and per-state privacy sections (CA, VA, CO, CT, UT, and
       newer state regimes).
     humanURL: https://sourcepoint-public-api.readme.io/reference
+    baseURL: https://cdn.privacy-mgmt.com/usnat
     tags:
       - Consent
       - U.S. Multi-State Privacy
@@ -131,6 +146,12 @@ apis:
     properties:
       - type: Documentation
         url: https://sourcepoint-public-api.readme.io/reference
+      - type: OpenAPI
+        url: openapi/sourcepoint-usnat-openapi.yml
+      - type: Overlay
+        url: overlays/sourcepoint-usnat-overlay.yaml
+      - type: APIReference
+        url: https://sourcepoint-public-api.readme.io/reference/us-multi-state-privacy-end-user-consent-status-1
   - aid: sourcepoint:sourcepoint-global-enterprise-api
     name: Sourcepoint Global Enterprise API
     description: >-
@@ -140,6 +161,7 @@ apis:
       methods including getUserConsents and postRejectAll for cross-regulation
       consent orchestration.
     humanURL: https://sourcepoint-public-api.readme.io/reference
+    baseURL: https://cdn.privacy-mgmt.com/global-cmp
     tags:
       - Consent
       - Global Privacy
@@ -149,6 +171,12 @@ apis:
         url: https://sourcepoint-public-api.readme.io/reference
       - type: Documentation
         url: https://docs.sourcepoint.com/hc/en-us/articles/41919922996243-Global-Enterprise-implementation-guide
+      - type: OpenAPI
+        url: openapi/sourcepoint-global-enterprise-openapi.yml
+      - type: Overlay
+        url: overlays/sourcepoint-global-enterprise-overlay.yaml
+      - type: APIReference
+        url: https://sourcepoint-public-api.readme.io/reference/global-enterprise-end-user-consent-status
   - aid: sourcepoint:sourcepoint-preferences-api
     name: Sourcepoint Preferences API
     description: >-
@@ -158,6 +186,7 @@ apis:
       first-party preference profile across channels alongside the regulatory
       consent surface.
     humanURL: https://sourcepoint-public-api.readme.io/reference
+    baseURL: https://cdn.privacy-mgmt.com/preferences
     tags:
       - Preferences
       - Marketing Preferences
@@ -168,6 +197,12 @@ apis:
         url: https://sourcepoint-public-api.readme.io/reference
       - type: Documentation
         url: https://docs.sourcepoint.com/hc/en-us/articles/30557096773139-Preferences-implementation-guide-web
+      - type: OpenAPI
+        url: openapi/sourcepoint-preferences-openapi.yml
+      - type: Overlay
+        url: overlays/sourcepoint-preferences-overlay.yaml
+      - type: APIReference
+        url: https://sourcepoint-public-api.readme.io/reference/get_user-preference-history-1
   - aid: sourcepoint:sourcepoint-reporting-api
     name: Sourcepoint Reporting API
     description: >-
@@ -176,6 +211,7 @@ apis:
       filtered by period for dashboard and BI integration. Powers the
       Sourcepoint portal's analytics views.
     humanURL: https://sourcepoint-public-api.readme.io/reference
+    baseURL: https://portal.sourcepoint.com/api/external/v1/reports
     tags:
       - Reporting
       - Analytics
@@ -184,7 +220,19 @@ apis:
     properties:
       - type: Documentation
         url: https://sourcepoint-public-api.readme.io/reference
+      - type: OpenAPI
+        url: openapi/sourcepoint-reporting-gdpr-openapi.yml
+      - type: OpenAPI
+        url: openapi/sourcepoint-reporting-usnat-openapi.yml
+      - type: Overlay
+        url: overlays/sourcepoint-reporting-gdpr-overlay.yaml
+      - type: Overlay
+        url: overlays/sourcepoint-reporting-usnat-overlay.yaml
+      - type: APIReference
+        url: https://sourcepoint-public-api.readme.io/reference/gdpr-reporting-api
 common:
+  - type: Authentication
+    url: authentication/sourcepoint-authentication.yml
   - type: DomainSecurity
     url: security/sourcepoint-domain-security.yml
   - type: Website
@@ -333,6 +381,78 @@ common:
       - https://sourcepoint-public-api.readme.io/reference
       - https://github.com/SourcePointUSA
     updated: '2026-05-25'
+  - type: LLMsTxt
+    url: llms/sourcepoint-llms.txt
+  - type: WellKnown
+    url: well-known/sourcepoint-well-known.yml
+  - type: APICatalog
+    url: well-known/sourcepoint-api-catalog.json
+    name: RFC 9727 api-catalog served by the Sourcepoint API hub
+  - type: MCPServer
+    url: mcp/sourcepoint-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/sourcepoint-tool-crosswalk.yml
+  - type: Packages
+    url: packages/sourcepoint-packages.yml
+  - type: SDKs
+    url: packages/sourcepoint-packages.yml
+    name: First-party SDK and package inventory with registry versions
+  - type: Conformance
+    url: conformance/sourcepoint-conformance.yml
+  - type: Compliance
+    url: https://www.sourcepoint.com/trust-and-security/
+    name: ISO/IEC 27001 and ISO/IEC 27701 certification, audited annually
+  - type: TrustCenter
+    url: security/sourcepoint-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/sourcepoint-vulnerability-disclosure.yml
+  - type: Security
+    url: https://www.sourcepoint.com/trust-and-security/
+    name: Security contact - informationsecurity@sourcepoint.com
+  - type: ErrorCatalog
+    url: errors/sourcepoint-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/sourcepoint-lifecycle.yml
+  - type: Conventions
+    url: conventions/sourcepoint-conventions.yml
+  - type: ChangeLog
+    url: changelog/sourcepoint-changelog.yml
+  - type: Components
+    url: components/sourcepoint-components.yml
+  - type: DataModel
+    url: data-model/sourcepoint-data-model.yml
+  - type: Plans
+    url: plans/sourcepoint-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/sourcepoint-rate-limits.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference
+    name: Sourcepoint Public API Hub reference
+  - type: GettingStarted
+    url: https://sourcepoint-public-api.readme.io/reference/welcome-to-the-sourcepoint-api-hub
+    name: Welcome to the Sourcepoint API Hub
+  - type: HelpCenter
+    url: https://docs.sourcepoint.com/hc/en-us
+    name: Sourcepoint Help Center
+  - type: TermsOfService
+    url: https://www.sourcepoint.com/terms-of-use/
+  - type: PrivacyPolicy
+    url: https://www.sourcepoint.com/privacy-policy/
+  - type: PrivacyNotice
+    url: https://www.sourcepoint.com/privacy-notice/
+    name: Sourcepoint Services Privacy Notice
+  - type: Login
+    url: https://portal.sourcepoint.com
+    name: Sourcepoint portal sign-in
+  - type: Press
+    url: https://www.sourcepoint.com/press/
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-12'
+  status: enriched
+  artifacts_added: 38
+  pass: local-v1

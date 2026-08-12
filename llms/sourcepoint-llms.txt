@@ -1,0 +1,105 @@
+# Sourcepoint Public API Documentation
+
+> Sourcepoint offers your organization multiple APIs to manage end-user consent and vendor lists across multiple regulatory frameworks.
+
+## API Reference
+- [Welcome to the Sourcepoint API Hub](https://sourcepoint-public-api.readme.io/reference/welcome-to-the-sourcepoint-api-hub.md)
+- [GDPR TCF end-user consent status](https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status.md)
+- [Get end-user consent status](https://sourcepoint-public-api.readme.io/reference/get_consent-v3-history-siteid-1.md): Returns end-user GDPR TCF consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `consentUUID` or `authId`.
+- [Merge end-user consent status with identity provider](https://sourcepoint-public-api.readme.io/reference/post_consent-v3-siteid-tcstring.md): Merge an end-user's custom vendor consent profile with the information Sourcepoint has for IAB vendors taken from a TCString that is provided. Though originally planned for the German consortium *NetId*, it is available for any identity provider to confirm or revoke vendor consent in one place<br><br>*Your organization will require their own CMP ID to use this API. Please contact your Sourcepoint Client Support team if you require more information.*
+- [Delete end-user consent status](https://sourcepoint-public-api.readme.io/reference/delete_consent-v3-siteid-1.md): Deletes end-user GDPR TCF consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `consentUUID` or `authId`.<br><br>This endpoint does not support mass deletions of end-user consent records. Please speak to your Sourcepoint representative to execute any mass deletions.
+- [GDPR TCF vendor list](https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-vendor-list.md)
+- [Map vendors and purposes](https://sourcepoint-public-api.readme.io/reference/get_vendor-list-vendor-purpose-mapping-1.md): Returns mapping of vendors and purposes with legal bases for the vendor list associated with the property.  **Note**: *For each vendor, the response will only include purposes that have a configured legal basis (**Consent**, **Legitimate Interest**, **Disclosure Only**). Any purposes that are **Not Applicable** will not be returned in the response.*  *Additionally, vendors will need at least one purpose with a configured legal basis to be returned in the response.*
+- [Vendor URL mapping](https://sourcepoint-public-api.readme.io/reference/post_vendor-list-vendor-url-mapping-1.md): Intended to be used by publishing systems to help determine if a vendor URL has been defined appropriately in the Sourcepoint system. This API can help developers that are integrating with Content Management Systems (CMS) verify that a URL referenced in content can be related to vendor and purpose consent preferences which can be queried and set based on user actions.<br><br>Before utilizing this API, ensure [vendor URL mappings are configured for the vendor](https://docs.sourcepoint.com/hc/en-us/articles/4403605562259#h_01H08080CKBEKA9KBF6AHFB1TC) in the Sourcepoint portal.
+- [Retrieve vendors on vendor list](https://sourcepoint-public-api.readme.io/reference/get_vendor-list-vendors.md): Returns a list of vendors for the GDPR TCF vendor list associated with the specified property.
+- [IAB GDPR TCF API](https://sourcepoint-public-api.readme.io/reference/iab-gdpr-tcf-api.md)
+- [ping](https://sourcepoint-public-api.readme.io/reference/ping.md)
+- [getTCData (Deprecated TCF 2.2)](https://sourcepoint-public-api.readme.io/reference/gettcdata.md)
+- [addEventListener](https://sourcepoint-public-api.readme.io/reference/addeventlistener.md)
+- [removeEventListener](https://sourcepoint-public-api.readme.io/reference/removeeventlistener.md)
+- [getCustomVendorConsents](https://sourcepoint-public-api.readme.io/reference/getcustomvendorconsents.md)
+- [getVendorPurposeMapping](https://sourcepoint-public-api.readme.io/reference/getvendorpurposemapping.md)
+- [postRejectAll](https://sourcepoint-public-api.readme.io/reference/postrejectall-1.md)
+- [postCustomConsent](https://sourcepoint-public-api.readme.io/reference/postcustomconsent.md)
+- [tcData object](https://sourcepoint-public-api.readme.io/reference/tcdata-object.md)
+- [euconsentWithDisclosedVendors](https://sourcepoint-public-api.readme.io/reference/euconsentwithdisclosedvendors.md)
+- [Sourcepoint commands](https://sourcepoint-public-api.readme.io/reference/sourcepoint-commands-2.md)
+- [addEventListener](https://sourcepoint-public-api.readme.io/reference/addeventlistener-sourcepoint.md)
+- [resetUserState](https://sourcepoint-public-api.readme.io/reference/resetuserstate.md)
+- [GDPR Standard end-user consent status](https://sourcepoint-public-api.readme.io/reference/gdpr-standard-end-user-consent-status.md)
+- [Get end-user consent status](https://sourcepoint-public-api.readme.io/reference/get_consent-v3-history-siteid.md): Returns end-user GDPR Standard consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `consentUUID` or `authId`.
+- [Delete end-user consent status](https://sourcepoint-public-api.readme.io/reference/delete_consent-v3-siteid.md): Deletes end-user GDPR Standard consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `consentUUID` or `authId`.<br><br>This endpoint does not support mass deletions of end-user consent records. Please speak to your Sourcepoint representative to execute any mass deletions.
+- [GDPR Standard vendor list](https://sourcepoint-public-api.readme.io/reference/gdpr-standard-vendor-list.md)
+- [Map vendors and purposes](https://sourcepoint-public-api.readme.io/reference/get_vendor-list-vendor-purpose-mapping.md): Returns mapping of vendors and purposes with legal bases on the vendor list associated with the property.  **Note**: *For each vendor, the response will only include purposes that have a configured legal basis ( **Consent**, **Legitimate Interest**, **Disclosure Only**). Any purposes that are **Not Applicable** will not be returned in the response.*  *Additionally, vendors will need at least one purpose with a configured legal basis to be returned in the response.*
+- [Vendor URL mapping](https://sourcepoint-public-api.readme.io/reference/post_vendor-list-vendor-url-mapping.md): Intended to be used by publishing systems to help determine if a vendor URL has been defined appropriately in the Sourcepoint system. This API can help developers that are integrating with Content Management Systems (CMS) verify that a URL referenced in content can be related to vendor and purpose consent preferences which can be queried and set based on user actions.<br><br>Before utilizing this API, ensure [vendor URL mappings are configured for the vendor](https://docs.sourcepoint.com/hc/en-us/articles/4403605574419#h_01H0N5Q7SC3ZPB47GMRNKR8PG0) in the Sourcepoint portal.
+- [Sourcepoint commands](https://sourcepoint-public-api.readme.io/reference/sourcepoint-commands.md)
+- [getCustomVendorConsents](https://sourcepoint-public-api.readme.io/reference/getcustomvendorconsents-1.md)
+- [getVendorPurposeMapping](https://sourcepoint-public-api.readme.io/reference/getvendorpurposemapping-1.md)
+- [postRejectAll](https://sourcepoint-public-api.readme.io/reference/postrejectall-2.md)
+- [postCustomConsent](https://sourcepoint-public-api.readme.io/reference/postcustomconsent-1.md)
+- [addEventListener](https://sourcepoint-public-api.readme.io/reference/addeventlistener-2.md)
+- [resetUserState](https://sourcepoint-public-api.readme.io/reference/resetuserstate-1.md)
+- [Introduction](https://sourcepoint-public-api.readme.io/reference/introduction.md)
+- [GDPR reporting API](https://sourcepoint-public-api.readme.io/reference/gdpr-reporting-api.md)
+- [GDPR pageview data](https://sourcepoint-public-api.readme.io/reference/post_tcfv2-dashboard-v2-pv-users-periodfilter.md): Returns pageview data for properties that have implemented GDPR.<br><br>Include your API key in the provided **Header** field under **AUTHORIZATION** in the right-hand pane before trying your request.<br><br>In addition to the API key, you will also need to include `startDate`, `endDate`, and `siteId` in your request.
+- [GDPR message data](https://sourcepoint-public-api.readme.io/reference/post_tcfv2-dashboard-v2-messages-periodfilter.md): Returns message data for properties that have implemented GDPR.<br><br>Include your API key in the provided **Header** field under **AUTHORIZATION** in the right-hand pane before trying your request.<br><br>In addition to the API key, you will also need to include `startDate`, `endDate`, and `siteId` in your request.
+- [U.S. Multi-State Privacy end-user consent status](https://sourcepoint-public-api.readme.io/reference/us-multi-state-privacy-end-user-consent-status-1.md)
+- [Get end-user consent history](https://sourcepoint-public-api.readme.io/reference/get_consent-history-siteid-2.md): Returns end-user consent history. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `usnatUUID` or `authId`.
+- [Delete end-user consent status](https://sourcepoint-public-api.readme.io/reference/delete_consent-siteid-2.md): Deletes end-user U.S. Multi-State Privacy consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `usnatUUID` or `authId`.<br><br>This endpoint does not support mass deletions of end-user consent records. Please speak to your Sourcepoint representative to execute any mass deletions.
+- [Opt-out all privacy choices and vendors](https://sourcepoint-public-api.readme.io/reference/post_consent-siteid-reject-all-1.md): Opt-out of all vendors and privacy choices for an end-user's consent profile within the U.S. Multi-State Privacy framework. In addition to the `siteId`, you will also need to include the end-user's `authId` or `uuid`.<br><br>**Note:** This is a server-side call and will not update client-side end-user consent unless your organization is utilizing `authId`. To opt an end-user out of all vendors and purposes using their `uuid` please refer to [postRejectAll command](https://sourcepoint-public-api.readme.io/reference/postrejectall-4).
+- [IAB GPP framework](https://sourcepoint-public-api.readme.io/reference/national-and-state-frameworks.md)
+- [IAB GPP API](https://sourcepoint-public-api.readme.io/reference/iab-global-privacy-platform-gpp-api.md)
+- [ping](https://sourcepoint-public-api.readme.io/reference/ping-1.md)
+- [addEventListener](https://sourcepoint-public-api.readme.io/reference/addeventlistener-1.md)
+- [removeEventListener](https://sourcepoint-public-api.readme.io/reference/removeeventlistener-1.md)
+- [hasSection](https://sourcepoint-public-api.readme.io/reference/hassection.md)
+- [getSection](https://sourcepoint-public-api.readme.io/reference/getsection.md)
+- [getField](https://sourcepoint-public-api.readme.io/reference/getfield.md)
+- [Sourcepoint commands](https://sourcepoint-public-api.readme.io/reference/sourcepoint-commands-1.md)
+- [getUserConsents](https://sourcepoint-public-api.readme.io/reference/getuserconsents-2.md)
+- [postRejectAll](https://sourcepoint-public-api.readme.io/reference/postrejectall-4.md)
+- [Reference: systemId for IAB privacy choices](https://sourcepoint-public-api.readme.io/reference/reference-systemid-for-iab-privacy-choices.md)
+- [addEventListener](https://sourcepoint-public-api.readme.io/reference/addeventlistener-3.md)
+- [getUserConsentsUsnat](https://sourcepoint-public-api.readme.io/reference/getuserconsents.md)
+- [postRejectAllUsnat](https://sourcepoint-public-api.readme.io/reference/postrejectallusnat.md)
+- [resetUserState](https://sourcepoint-public-api.readme.io/reference/resetuserstate-2.md)
+- [U.S. National Section](https://sourcepoint-public-api.readme.io/reference/us-national.md)
+- [U.S. National Privacy Section (v1)](https://sourcepoint-public-api.readme.io/reference/us-national-privacy-section.md)
+- [U.S. National Privacy Section (v2)](https://sourcepoint-public-api.readme.io/reference/us-national-privacy-section-v2.md)
+- [U.S. State Sections](https://sourcepoint-public-api.readme.io/reference/us-states.md)
+- [California Privacy Section](https://sourcepoint-public-api.readme.io/reference/california-privacy-section.md)
+- [Colorado Privacy Section](https://sourcepoint-public-api.readme.io/reference/colorado-privacy-section.md)
+- [Connecticut Privacy Section](https://sourcepoint-public-api.readme.io/reference/connecticut-privacy-section.md)
+- [Delaware Privacy Section](https://sourcepoint-public-api.readme.io/reference/delaware-privacy-section.md)
+- [Florida Privacy Section](https://sourcepoint-public-api.readme.io/reference/florida-privacy-section.md)
+- [Iowa Privacy Section](https://sourcepoint-public-api.readme.io/reference/iowa-privacy-section.md)
+- [Montana Privacy Section](https://sourcepoint-public-api.readme.io/reference/montana-privacy-section.md)
+- [Nebraska Privacy Section](https://sourcepoint-public-api.readme.io/reference/nebraska-privacy-section.md)
+- [New Hampshire Privacy Section](https://sourcepoint-public-api.readme.io/reference/new-hampshire-privacy-section.md)
+- [New Jersey Privacy Section](https://sourcepoint-public-api.readme.io/reference/new-jersey-privacy-section.md)
+- [Oregon Privacy Section](https://sourcepoint-public-api.readme.io/reference/oregon-privacy-section.md)
+- [Tennessee Privacy Section](https://sourcepoint-public-api.readme.io/reference/tennessee-privacy-section.md)
+- [Texas Privacy Section](https://sourcepoint-public-api.readme.io/reference/texas-privacy-section.md)
+- [Utah Privacy Section](https://sourcepoint-public-api.readme.io/reference/utah-privacy-section.md)
+- [Virginia Privacy Section](https://sourcepoint-public-api.readme.io/reference/virginia-privacy-section.md)
+- [Standard framework](https://sourcepoint-public-api.readme.io/reference/standard.md)
+- [Sourcepoint commands](https://sourcepoint-public-api.readme.io/reference/sourcepoint-commands-3.md)
+- [getUserConsents](https://sourcepoint-public-api.readme.io/reference/getuserconsents-1.md)
+- [postRejectAll](https://sourcepoint-public-api.readme.io/reference/postrejectall-3.md)
+- [Reference: systemId for Standard privacy choices](https://sourcepoint-public-api.readme.io/reference/reference-systemid-for-standard-privacy-choices.md)
+- [Introduction](https://sourcepoint-public-api.readme.io/reference/introduction-1.md)
+- [U.S. Multi-State Privacy reporting API](https://sourcepoint-public-api.readme.io/reference/us-multi-state-privacy-reporting-api.md)
+- [U.S. Multi-State Privacy pageview data](https://sourcepoint-public-api.readme.io/reference/post_usnat-dashboard-v2-pv-users-periodfilter.md): Returns pageview data for properties that have implemented U.S. Multi-State Privacy.<br><br>Include your API key in the provided **Header** field under **AUTHORIZATION** in the right-hand pane before trying your request.<br><br>In addition to the API key, you will also need to include 'startDate', 'endDate', and `siteId` in your request.
+- [U.S. Multi-State Privacy message data](https://sourcepoint-public-api.readme.io/reference/post_usnat-dashboard-v2-messages-periodfilter.md): Returns message data for properties that have implemented U.S. Multi-State Privacy.<br><br>Include your API key in the provided **Header** field under **AUTHORIZATION** in the right-hand pane before trying your request.<br><br>In addition to the API key, you will also need to include `startDate`, `endDate`, and `siteId` in your request.
+- [Global Enterprise end-user consent status](https://sourcepoint-public-api.readme.io/reference/global-enterprise-end-user-consent-status.md)
+- [Get end-user consent history](https://sourcepoint-public-api.readme.io/reference/get_consent-history-siteid-1.md): Returns end-user consent history. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `globalcmpUUID` or `authId`.
+- [Delete end-user consent status](https://sourcepoint-public-api.readme.io/reference/delete_consent-siteid-1.md): Deletes end-user Global Enterprise consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `globalcmpUUID` or `authId`.<br><br>This endpoint does not support mass deletions of end-user consent records. Please speak to your Sourcepoint representative to execute any mass deletions.
+- [Sourcepoint commands](https://sourcepoint-public-api.readme.io/reference/sourcepoint-commands-4.md)
+- [getUserConsents](https://sourcepoint-public-api.readme.io/reference/getuserconsents-3.md)
+- [postRejectAll](https://sourcepoint-public-api.readme.io/reference/postrejectall-5.md)
+- [resetUserState](https://sourcepoint-public-api.readme.io/reference/resetuserstate-3.md)
+- [Get end-user preferences history](https://sourcepoint-public-api.readme.io/reference/get_user-preference-history-1.md): Returns end-user preferences history. In addition to the `accountId`, you will also need to include <u>either</u> the end-user's `uuid` or `authId` in the `id` parameter.
+- [Delete end-user preferences history](https://sourcepoint-public-api.readme.io/reference/delete_user-preference-1.md): Deletes end-user preferences history for a property. In addition to the `propertyId`, you will also need to include <u>either</u> the end-user's `uuid` or `authId`.
+- [Sourcepoint commands](https://sourcepoint-public-api.readme.io/reference/sourcepoint-commands-5.md)
+- [getUserPreferences](https://sourcepoint-public-api.readme.io/reference/getuserpreferences.md)
+- [resetUserState](https://sourcepoint-public-api.readme.io/reference/resetuserstate-4.md)

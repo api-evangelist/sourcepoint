@@ -1,4 +1,4 @@
-generated: '2026-07-11'
+generated: '2026-08-12'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
@@ -10,14 +10,32 @@ hosts:
 - host: docs.sourcepoint.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Sep 10 23:44:01 2026 GMT
+  cert_expires: Nov  9 23:43:29 2026 GMT
   hsts: true
   hsts_max_age: 259200
 - host: sourcepoint-public-api.readme.io
   https: true
   tls_version: TLSv1.3
   cert_expires: Oct  9 13:12:37 2026 GMT
-  hsts: null
+  hsts: true
+  hsts_max_age: 31536000
+- host: cdn.privacy-mgmt.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Jan 22 23:59:59 2027 GMT
+  hsts: true
+  hsts_max_age: 15552000
+  note: 'Production consent API host (OpenAPI servers[]). HSTS observed on an API response: max-age=15552000;
+    includeSubDomains. Added by the enrichment pass because probe-domain-security.py caps at the first
+    three hosts.'
+- host: portal.sourcepoint.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Feb 24 23:59:59 2027 GMT
+  hsts: true
+  hsts_max_age: 63072000
+  note: 'Production reporting API + portal host. HSTS on an API response: max-age=63072000; includeSubDomains;
+    preload. Added by the enrichment pass.'
 domains:
 - domain: sourcepoint.com
   dnssec: false
@@ -31,3 +49,12 @@ domains:
   spf: true
   dmarc: true
   dmarc_policy: quarantine
+- domain: privacy-mgmt.com
+  dnssec: false
+  caa: []
+  spf: false
+  dmarc: false
+  dmarc_policy: null
+  note: The CMP delivery domain that serves the consent APIs and the web wrapper. No SPF, no DMARC, no
+    CAA and no DS record - it is a service domain, not a mail domain, but the missing CAA leaves certificate
+    issuance unconstrained on the host that fronts every consent call.

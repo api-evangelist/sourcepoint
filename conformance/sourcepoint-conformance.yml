@@ -1,0 +1,97 @@
+generated: '2026-08-12'
+method: searched
+source: https://www.sourcepoint.com/trust-and-security/, https://sourcepoint-public-api.readme.io/reference,
+  openapi/, live probes
+standards:
+- id: iab-tcf-v2.2
+  conforms: true
+  evidence: Sourcepoint is a registered IAB TCF CMP; the GDPR TCF API operates on TCStrings and the hub
+    documents the __tcfapi command surface (ping, getTCData, addEventListener, getCustomVendorConsents).
+    Docs also announce migration to IAB TCF 2.3.
+  source: https://sourcepoint-public-api.readme.io/reference/iab-gdpr-tcf-api
+- id: iab-gpp
+  conforms: true
+  evidence: U.S. Multi-State Privacy API is built on the IAB Global Privacy Platform string; the hub documents
+    the __gpp command surface (hasSection, getSection, getField) and per-state GPP sections.
+  source: https://sourcepoint-public-api.readme.io/reference/iab-global-privacy-platform-gpp-api
+- id: global-privacy-control
+  conforms: true
+  evidence: Global Privacy Control listed as supported in every published pricing tier.
+  source: https://hs.sourcepoint.com/pricing
+- id: google-consent-mode-v2
+  conforms: true
+  evidence: Google Consent Mode v2 listed in all pricing tiers; dedicated implementation guides and a
+    GTM template repo.
+  source: https://hs.sourcepoint.com/pricing
+- id: iso-27001
+  conforms: true
+  evidence: '"Sourcepoint maintains certification to ISO/IEC 27001 and 27701 standards, of which it is
+    audited against annually."'
+  source: https://www.sourcepoint.com/trust-and-security/
+- id: iso-27701
+  conforms: true
+  evidence: Same trust-page statement; ISO/IEC 27701 privacy information management certification.
+  source: https://www.sourcepoint.com/trust-and-security/
+- id: gdpr
+  conforms: true
+  evidence: Product line is GDPR consent management; privacy contact privacy@sourcepoint.com published.
+  source: https://www.sourcepoint.com/gdpr-compliance/
+- id: ccpa-usnat
+  conforms: true
+  evidence: U.S. Multi-State Privacy product covers the U.S. National section plus CA, CO, CT, DE, FL,
+    IA, MT, NE, NH, NJ, OR, TN, TX, UT, VA state sections.
+  source: https://sourcepoint-public-api.readme.io/reference/us-states
+- id: rfc9727-api-catalog
+  conforms: true
+  evidence: https://sourcepoint-public-api.readme.io/.well-known/api-catalog returns HTTP 200 application/linkset+json
+    with service-desc links to the OpenAPI documents (one of the eight links 404s).
+  source: https://sourcepoint-public-api.readme.io/.well-known/api-catalog
+- id: llmstxt
+  conforms: true
+  evidence: https://sourcepoint-public-api.readme.io/llms.txt returns HTTP 200 text/plain with the full
+    reference index.
+  source: https://sourcepoint-public-api.readme.io/llms.txt
+- id: openapi-3
+  conforms: true
+  evidence: Seven OpenAPI 3.0.2 documents published and downloadable from the docs hub.
+  source: https://sourcepoint-public-api.readme.io/.well-known/api-catalog
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityScheme in any spec; the only declared scheme is an X-API-KEY header on the
+    two reporting APIs.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 or an SPA shell on every host.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: No application/problem+json anywhere in the specs; observed failures return bare text bodies
+    ("no route access", "no active vl for siteId").
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404/403 on all five hosts.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation headers documented or observed.
+- id: idempotency
+  conforms: false
+  evidence: No idempotency key header documented in the hub or present in any spec; the mutating operations
+    (DELETE consent, reject-all, tcstring merge) are naturally idempotent by shape but carry no published
+    idempotency contract.
+- id: pagination
+  conforms: false
+  evidence: Hub Introduction states "Responses from the reporting API does not support pagination and
+    there are no limits to number of entries returned by the API."
+  source: https://sourcepoint-public-api.readme.io/reference/introduction
+- id: soc2
+  conforms: false
+  evidence: No SOC 2 report or attestation named anywhere on the trust page; ISO 27001/27701 are the published
+    attestations.
+- id: fhir-r4
+  conforms: false
+  evidence: Not a healthcare data API.
+- id: scim2
+  conforms: false
+  evidence: No identity provisioning surface.
+notes:
+- ISO/IEC 27001 and 27701 are the only externally-audited certifications Sourcepoint names publicly; a
+  Compliance pointer is emitted for the trust page on that basis.

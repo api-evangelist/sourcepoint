@@ -1,0 +1,66 @@
+generated: '2026-08-12'
+method: searched
+source: https://sourcepoint-public-api.readme.io/reference, https://docs.sourcepoint.com/hc/en-us/categories/1500000668981-Releases,
+  GitHub SourcePointUSA releases, live probes
+versioning:
+  scheme: uri-path
+  current:
+    gdpr-tcf: v3 (/consent/v3/...)
+    gdpr-standard: v3 (/consent/v3/...)
+    usnat: unversioned (/consent/...)
+    global-enterprise: unversioned (/consent/...)
+    preferences: unversioned (/user-preference/...)
+    reporting: v1 external + dashboard-v2 resources (/api/external/v1/reports/.../dashboard-v2-*)
+  docs: https://sourcepoint-public-api.readme.io/reference
+  note: 'Versioning is inconsistent across the six surfaces: two carry /v3, three are unversioned, and
+    reporting mixes an /external/v1 prefix with dashboard-v2 resource names. No published version-support
+    or version-negotiation policy.'
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  documented_deprecations:
+  - item: getTCData
+    status: deprecated
+    evidence: Hub page titled "getTCData (Deprecated TCF 2.2)" - https://sourcepoint-public-api.readme.io/reference/gettcdata
+  - item: IAB TCF 2.2 -> 2.3
+    status: migration announced
+    date: '2026-01-30'
+    evidence: docs.sourcepoint.com Releases category article "Migration to IAB TCF 2.3" (created 2026-01-30)
+  - item: com.sourcepoint.ccpa_cmplibrary
+    status: superseded
+    evidence: Maven Central 1.3.4 last published 2021-03-11; replaced by the USNAT/GPP surface
+  note: No deprecation POLICY page exists - individual deprecations are announced in release notes only,
+    so no Deprecation pointer is emitted.
+sla:
+  url: null
+  uptime_target: null
+  note: No public SLA or uptime commitment found on sourcepoint.com, the pricing page or the docs.
+status_page: null
+status_page_probe:
+  url: https://sourcepoint.statuspage.io
+  http_status: 200
+  effective_url: https://sourcepoint.statuspage.io/inactive
+  note: A Statuspage tenant exists but redirects to /inactive - there is no live status page. status.sourcepoint.com
+    does not resolve (NXDOMAIN). No StatusPage pointer is emitted.
+release_channels:
+- name: CMP release notes
+  url: https://docs.sourcepoint.com/hc/en-us/sections/4403318809363-CMP-release-notes
+  note: Zendesk section; the public section carries only the "Subscribe to CMP release notes" article
+    - the dated notes themselves require a signed-in Sourcepoint account.
+- name: Releases category
+  url: https://docs.sourcepoint.com/hc/en-us/categories/1500000668981-Releases
+  public_articles: 8
+- name: iOS SDK releases
+  url: https://github.com/SourcePointUSA/ios-cmp-app/releases
+  latest: 7.12.10
+  date: '2026-06-12'
+- name: Android SDK releases
+  url: https://github.com/SourcePointUSA/android-cmp-app/releases
+  latest: v7.15.13
+  date: '2026-04-08'
+deprecated_operations: []
+notes:
+- 'No operation in any of the seven specs carries deprecated: true.'
+- The web CMP wrapper is delivered from an unpinned CDN URL, so the web surface has no consumer-visible
+  version at all (see packages/).

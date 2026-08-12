@@ -1,0 +1,23 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Sourcepoint Global Enterprise API
+  version: 1.0.0
+extends: openapi/sourcepoint-global-enterprise-openapi.yml
+x-generated: '2026-08-12'
+x-method: generated
+x-source: openapi/sourcepoint-global-enterprise-openapi.yml
+x-note: Sourcepoint publishes these specs without operationIds; this overlay assigns stable operationIds
+  used by the repo derived artifacts (skills, crosswalk, error catalog, data model). The harvested spec
+  itself is never mutated.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-source: https://sourcepoint-public-api.readme.io/openapi/6842efdc8cfb06004a05cf9e
+    x-apievangelist-harvested: '2026-08-12'
+    x-apievangelist-provider: sourcepoint
+- target: $.paths['/consent/history/{siteId}'].get
+  update:
+    operationId: getGlobalEnterpriseConsentHistory
+- target: $.paths['/consent/{siteId}'].delete
+  update:
+    operationId: deleteGlobalEnterpriseConsent

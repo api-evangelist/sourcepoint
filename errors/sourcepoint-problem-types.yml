@@ -1,0 +1,60 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/sourcepoint-reporting-gdpr-openapi.yml, openapi/sourcepoint-reporting-usnat-openapi.yml,
+  plus live unauthenticated probes of the two production hosts on 2026-08-12
+format: proprietary
+envelope:
+  content_type: text/html; charset=utf-8 on observed failures
+  shape: bare message string, no JSON envelope, no error code, no type URI
+  note: Not RFC 9457. The only error response modelled in any spec is a 401 on the reporting APIs; the
+    consent APIs document no non-2xx responses at all.
+problems:
+- status: 401
+  title: Unauthorized
+  description: API key is missing or invalid.
+  type: null
+  source_operation: openapi/sourcepoint-reporting-gdpr-openapi.yml#postGdprPageviewReport
+  applies_to:
+  - postGdprPageviewReport
+  - postGdprMessageReport
+  - postUsnatPageviewReport
+  - postUsnatMessageReport
+  remediation: Send a valid X-API-KEY header. Keys are issued by a Sourcepoint account manager and expire
+    after one year.
+  evidence: components.responses.UnauthorizedError in both reporting specs
+- status: 403
+  title: no route access
+  description: Observed response when the reporting API is called without an X-API-KEY header - the documented
+    401 is not what the deployed service returns.
+  type: null
+  source_operation: probe
+  method: probed
+  evidence: POST https://portal.sourcepoint.com/api/external/v1/reports/tcfv2/dashboard-v2-pv-users/day
+    with no key -> HTTP 403, body "no route access" (2026-08-12)
+  remediation: Treat 403 as the real missing/invalid-credential signal on the reporting host; do not branch
+    only on 401.
+- status: 404
+  title: no active vl for siteId
+  description: Observed response from the consent host when the siteId has no active vendor list.
+  type: null
+  source_operation: probe
+  method: probed
+  evidence: GET https://cdn.privacy-mgmt.com/consent/tcfv2/vendor-list/vendors?siteId=1 -> HTTP 404, body
+    "no active vl for siteId" (2026-08-12)
+  remediation: Confirm the property (siteId) exists and has a published vendor list in the Sourcepoint
+    portal.
+- status: 403
+  title: AccessDenied
+  description: The CDN origin returns an S3 AccessDenied XML document for paths outside the routed API
+    prefixes.
+  type: null
+  source_operation: probe
+  method: probed
+  evidence: GET https://cdn.privacy-mgmt.com/.well-known/security.txt -> HTTP 403 application/xml AccessDenied
+  remediation: Check the path prefix - the consent APIs are only routed under /consent, /usnat, /global-cmp,
+    /preferences and /unified.
+gaps:
+- None of the 17 consent/vendor-list/preferences operations document a single 4xx or 5xx response.
+- No machine-readable error code or type URI is published anywhere; agents must string-match plain-text
+  bodies.
+- The status code for a missing credential differs between the spec (401) and the deployed service (403).

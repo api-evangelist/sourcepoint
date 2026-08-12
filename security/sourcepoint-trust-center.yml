@@ -1,0 +1,67 @@
+generated: '2026-08-12'
+method: searched
+source: https://www.sourcepoint.com/trust-and-security/
+trust_center:
+  url: https://www.sourcepoint.com/trust-and-security/
+  hosted: first-party page on www.sourcepoint.com (no Vanta/Drata/SafeBase portal, no trust.sourcepoint.com
+    - NXDOMAIN)
+  languages:
+  - en
+  - de
+  - fr
+certifications:
+- name: ISO/IEC 27001
+  status: certified
+  cadence: audited annually
+  quote: Sourcepoint maintains certification to ISO/IEC 27001 and 27701 standards, of which it is audited
+    against annually.
+  source: https://www.sourcepoint.com/trust-and-security/
+- name: ISO/IEC 27701
+  status: certified
+  cadence: audited annually
+  source: https://www.sourcepoint.com/trust-and-security/
+not_claimed:
+- SOC 2
+- PCI DSS
+- HIPAA
+- FedRAMP
+- CSA STAR
+controls:
+  people:
+  - Chief Privacy Counsel and Information Security Director
+  - Security and privacy awareness training at least annually, onboarding plus quarterly
+  - Role-based training for developers and senior leadership
+  access:
+  - Least privilege and need-to-know
+  - Multi-factor authentication
+  - Breached password detection
+  - Quarterly access reviews
+  sdlc:
+  - Peer-reviewed application code
+  - OWASP Top 10 prevention
+  - Logically and/or physically segregated production and non-production environments
+  - Change management review and approval for all system, application and network changes
+  resilience:
+  - At least daily full database backups
+  - Encrypted backups retained no more than thirteen months
+  - Business continuity plans reviewed and tested at least annually
+  - Production hosted across multiple availability zones
+  logging:
+  - Production logs retained a minimum of 90 days
+  - Logs protected from unauthorized access, alteration or destruction
+  - Periodic review with alerting
+  vendors:
+  - 'Third-party risk management: vendors evaluated against Sourcepoint security and privacy standards'
+  data:
+  - Data minimization and retention limits on PII
+  - Anonymization and de-identification
+  - Randomly generated UUID per property visitor used only to map consent decisions
+  - IP addresses processed as Data Importer/Processor solely for geo-specific messaging
+legal:
+  privacy_policy: https://www.sourcepoint.com/privacy-policy/
+  services_privacy_notice: https://www.sourcepoint.com/privacy-notice/
+  terms: https://www.sourcepoint.com/terms-of-use/
+notes:
+- Page is titled "Trust and Security - EN - Sourcepoint by Didomi", confirming the July 2025 Didomi acquisition
+  is now reflected in the public brand.
+- No sub-processor list and no downloadable audit report or DPA are linked from the page.

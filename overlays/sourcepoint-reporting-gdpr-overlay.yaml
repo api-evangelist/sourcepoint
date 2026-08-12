@@ -1,0 +1,23 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Sourcepoint Reporting GDPR API
+  version: 1.0.0
+extends: openapi/sourcepoint-reporting-gdpr-openapi.yml
+x-generated: '2026-08-12'
+x-method: generated
+x-source: openapi/sourcepoint-reporting-gdpr-openapi.yml
+x-note: Sourcepoint publishes these specs without operationIds; this overlay assigns stable operationIds
+  used by the repo derived artifacts (skills, crosswalk, error catalog, data model). The harvested spec
+  itself is never mutated.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-source: https://sourcepoint-public-api.readme.io/openapi/653908061aba0e00335106bd
+    x-apievangelist-harvested: '2026-08-12'
+    x-apievangelist-provider: sourcepoint
+- target: $.paths['/tcfv2/dashboard-v2-pv-users/{periodFilter}'].post
+  update:
+    operationId: postGdprPageviewReport
+- target: $.paths['/tcfv2/dashboard-v2-messages/{periodFilter}'].post
+  update:
+    operationId: postGdprMessageReport

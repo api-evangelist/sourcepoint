@@ -1,0 +1,73 @@
+generated: '2026-08-12'
+method: searched
+source: https://hs.sourcepoint.com/pricing
+currency: USD
+billing_period: month
+plan_count: 3
+metering:
+  web: monthly page views - total times the site pages are loaded in a calendar month
+  mobile: monthly app users - unique individuals who open the app at least once in a calendar month
+  note: The published prices are entry prices; actual price scales with the metered volume, which the
+    page does not tabulate.
+plans:
+- name: Essentials
+  price: 500
+  currency: USD
+  period: month
+  cta: Get Started -> https://sourcepoint.com/contact-us/
+  included:
+  - Multi-regulation compliance
+  - Geotargeting at state/province, country or region level
+  - Granular consent/opt-out
+  - Automated third-party discovery (site and app SDK scanning)
+  - A/B testing
+  - Custom message builder (templates or custom CSS)
+  - Consent reporting
+  - Block unauthorized third parties
+  - IAB TCF v2.2, Global Privacy Control, IAB GPP, Google Consent Mode v2
+  - Weekly regulatory alerts
+  - Ticket support
+  excluded:
+  - Compliance Monitoring
+  - Preferences Management
+  - Data Subject Requests
+  - CTV/OTT
+  - Dedicated local account manager
+- name: Pro
+  price: 1250
+  currency: USD
+  period: month
+  label: Most popular
+  cta: Get Started -> https://sourcepoint.com/contact-us/
+  included:
+  - Everything in Essentials
+  - 'Compliance Monitoring: 1 region scanned'
+  - 'Compliance Monitoring: 1 domain/app scanned'
+  - Cookies metrics, pixel detection, possible fingerprinting, piggybacking tags, email alerts
+  - Dedicated local account manager
+  excluded:
+  - Preferences Management
+  - Data Subject Requests
+  - CTV/OTT
+- name: Enterprise
+  price: null
+  price_label: Contact us
+  currency: USD
+  period: month
+  cta: Get Started -> https://sourcepoint.com/contact-us/
+  included:
+  - Everything in Pro
+  - Custom regions and domains/apps scanned
+  - CTV/OTT
+  - 'Preferences Management (customer records, channels: email/SMS/phone/direct mail, topics, cadence,
+    integrations)'
+  - Data Subject Requests (workflow designer, customized forms, identity verification, deletion requests)
+api_access:
+  note: No tier on the pricing page mentions API access, API keys or API call quotas. Reporting API keys
+    are issued by an account manager, so API availability by tier is not published.
+notes:
+- Prices read from the default state of the pricing widget (data-toggle="srpone").
+- The same widget carries a second, unlabeled price set in .pricetwo (8 / 16 / 149). The served HTML contains
+  no switch labels for the two states, so the unit of that second set cannot be determined from the published
+  page and it is deliberately not recorded as a price.
+- 'No free tier, no self-serve signup, no trial: every CTA on the page routes to a contact form.'

@@ -1,0 +1,163 @@
+generated: '2026-08-12'
+method: probed
+source: live GET of /.well-known/* on every apis.yml host and every OpenAPI servers[] host
+hosts:
+- cdn.privacy-mgmt.com
+- portal.sourcepoint.com
+- www.sourcepoint.com
+- docs.sourcepoint.com
+- sourcepoint-public-api.readme.io
+summary:
+  hits: 1
+  served_documents:
+  - /.well-known/api-catalog
+  security_txt: false
+  openid_configuration: false
+  oauth_authorization_server: false
+  agent_card: false
+documents:
+- host: cdn.privacy-mgmt.com
+  path: /.well-known/security.txt
+  status: 403
+  note: S3/CloudFront origin returns AccessDenied XML for every /.well-known/ path
+- host: cdn.privacy-mgmt.com
+  path: /.well-known/openid-configuration
+  status: 403
+  note: S3/CloudFront origin returns AccessDenied XML for every /.well-known/ path
+- host: cdn.privacy-mgmt.com
+  path: /.well-known/oauth-authorization-server
+  status: 403
+  note: S3/CloudFront origin returns AccessDenied XML for every /.well-known/ path
+- host: cdn.privacy-mgmt.com
+  path: /.well-known/api-catalog
+  status: 403
+  note: S3/CloudFront origin returns AccessDenied XML for every /.well-known/ path
+- host: cdn.privacy-mgmt.com
+  path: /.well-known/ai-plugin.json
+  status: 403
+  note: S3/CloudFront origin returns AccessDenied XML for every /.well-known/ path
+- host: cdn.privacy-mgmt.com
+  path: /.well-known/agent-card.json
+  status: 403
+  note: S3/CloudFront origin returns AccessDenied XML for every /.well-known/ path
+- host: cdn.privacy-mgmt.com
+  path: /.well-known/agent.json
+  status: 403
+  note: S3/CloudFront origin returns AccessDenied XML for every /.well-known/ path
+- host: portal.sourcepoint.com
+  path: /.well-known/security.txt
+  status: 200
+  note: 'NOT a document: the portal single-page app answers 200 with its HTML shell for every path; treated
+    as a miss'
+- host: portal.sourcepoint.com
+  path: /.well-known/openid-configuration
+  status: 200
+  note: 'NOT a document: the portal single-page app answers 200 with its HTML shell for every path; treated
+    as a miss'
+- host: portal.sourcepoint.com
+  path: /.well-known/oauth-authorization-server
+  status: 200
+  note: 'NOT a document: the portal single-page app answers 200 with its HTML shell for every path; treated
+    as a miss'
+- host: portal.sourcepoint.com
+  path: /.well-known/api-catalog
+  status: 200
+  note: 'NOT a document: the portal single-page app answers 200 with its HTML shell for every path; treated
+    as a miss'
+- host: portal.sourcepoint.com
+  path: /.well-known/ai-plugin.json
+  status: 200
+  note: 'NOT a document: the portal single-page app answers 200 with its HTML shell for every path; treated
+    as a miss'
+- host: portal.sourcepoint.com
+  path: /.well-known/agent-card.json
+  status: 200
+  note: 'NOT a document: the portal single-page app answers 200 with its HTML shell for every path; treated
+    as a miss'
+- host: portal.sourcepoint.com
+  path: /.well-known/agent.json
+  status: 200
+  note: 'NOT a document: the portal single-page app answers 200 with its HTML shell for every path; treated
+    as a miss'
+- host: www.sourcepoint.com
+  path: /.well-known/security.txt
+  status: 404
+- host: www.sourcepoint.com
+  path: /.well-known/openid-configuration
+  status: 404
+- host: www.sourcepoint.com
+  path: /.well-known/oauth-authorization-server
+  status: 404
+- host: www.sourcepoint.com
+  path: /.well-known/api-catalog
+  status: 404
+- host: www.sourcepoint.com
+  path: /.well-known/ai-plugin.json
+  status: 404
+- host: www.sourcepoint.com
+  path: /.well-known/agent-card.json
+  status: 404
+- host: www.sourcepoint.com
+  path: /.well-known/agent.json
+  status: 404
+- host: docs.sourcepoint.com
+  path: /.well-known/security.txt
+  status: 404
+  note: Zendesk help center 404 page
+- host: docs.sourcepoint.com
+  path: /.well-known/openid-configuration
+  status: 404
+  note: Zendesk help center 404 page
+- host: docs.sourcepoint.com
+  path: /.well-known/oauth-authorization-server
+  status: 404
+  note: Zendesk help center 404 page
+- host: docs.sourcepoint.com
+  path: /.well-known/api-catalog
+  status: 404
+  note: Zendesk help center 404 page
+- host: docs.sourcepoint.com
+  path: /.well-known/ai-plugin.json
+  status: 404
+  note: Zendesk help center 404 page
+- host: docs.sourcepoint.com
+  path: /.well-known/agent-card.json
+  status: 404
+  note: Zendesk help center 404 page
+- host: docs.sourcepoint.com
+  path: /.well-known/agent.json
+  status: 404
+  note: Zendesk help center 404 page
+- host: sourcepoint-public-api.readme.io
+  path: /.well-known/security.txt
+  status: 404
+- host: sourcepoint-public-api.readme.io
+  path: /.well-known/openid-configuration
+  status: 404
+- host: sourcepoint-public-api.readme.io
+  path: /.well-known/oauth-authorization-server
+  status: 404
+- host: sourcepoint-public-api.readme.io
+  path: /.well-known/api-catalog
+  status: 200
+  file: sourcepoint-api-catalog.json
+  note: RFC 9727 linkset served by the ReadMe hub; 8 service-desc links to OpenAPI documents
+- host: sourcepoint-public-api.readme.io
+  path: /.well-known/ai-plugin.json
+  status: 404
+- host: sourcepoint-public-api.readme.io
+  path: /.well-known/agent-card.json
+  status: 404
+- host: sourcepoint-public-api.readme.io
+  path: /.well-known/agent.json
+  status: 404
+notes:
+- 'One real document was served: https://sourcepoint-public-api.readme.io/.well-known/api-catalog (RFC
+  9727 linkset, application/linkset+json, HTTP 200).'
+- The linkset advertises 8 service-desc OpenAPI documents. Seven resolve (HTTP 200, valid OpenAPI 3.0.2)
+  and are saved under openapi/. The eighth, /openapi/64a5a90b1d7442007944db72, returns HTTP 404 - the
+  catalog carries a dangling entry.
+- No /.well-known/security.txt on any Sourcepoint host, so no SecurityTxt pointer is emitted. The security
+  contact is published on the trust page instead (informationsecurity@sourcepoint.com).
+- portal.sourcepoint.com answers HTTP 200 with an SPA HTML shell for every /.well-known/ path; those are
+  recorded as misses, not documents.

@@ -1,0 +1,79 @@
+generated: '2026-08-12'
+method: searched
+source: https://sourcepoint-public-api.readme.io/reference/introduction, the seven harvested specs, and
+  live response headers observed 2026-08-12
+auth:
+  style: split
+  consent_apis: no security scheme declared; requests are identified by property (siteId/propertyId/accountId)
+    plus the end-user identifier (consentUUID / usnatUUID / globalcmpUUID / uuid, or authId for authenticated
+    consent)
+  reporting_apis: X-API-KEY request header
+  see: authentication/sourcepoint-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  scope: null
+  retention: null
+  note: No idempotency key is documented or accepted. The mutating operations are shaped idempotently
+    (DELETE consent, POST reject-all, POST tcstring merge) but Sourcepoint publishes no idempotency contract,
+    so no Idempotency pointer is emitted.
+pagination:
+  style: none
+  params: []
+  response_fields: []
+  evidence: '"Responses from the reporting API does not support pagination and there are no limits to
+    number of entries returned by the API." - https://sourcepoint-public-api.readme.io/reference/introduction'
+filtering:
+  consent: latest query parameter limits a consent history response to the most recent record; id/authId/uuid
+    select the end user
+  reporting: periodFilter path parameter selects the reporting window, with startDate, endDate and siteId
+    in the request body
+field_expansion:
+  supported: false
+metadata:
+  supported: false
+  note: No customer-defined metadata field on any resource.
+request_tracing:
+  request_id_header: null
+  observed: x-amz-cf-id and x-amz-cf-pop (CloudFront) on both production hosts; rndr-id on the docs host.
+    These are infrastructure identifiers, not a documented correlation id.
+versioning:
+  style: uri-path
+  see: lifecycle/sourcepoint-lifecycle.yml
+error_envelope:
+  format: plain text
+  example: no route access
+  see: errors/sourcepoint-problem-types.yml
+rate_limit_signaling:
+  headers: []
+  documented: false
+  see: rate-limits/sourcepoint-rate-limits.yml
+content_type:
+  request: application/json
+  response: application/json on success; text/html or application/xml on observed failures
+cors:
+  allow_origin: '*'
+  allow_methods: GET, PUT, POST, DELETE
+  allow_headers: Origin, X-Requested-With, Content-Type, Accept, Authorization
+  note: Both production hosts are wide-open CORS, consistent with the consent APIs being called from the
+    browser alongside the CMP wrapper.
+transport_security:
+  hsts:
+    cdn.privacy-mgmt.com: max-age=15552000; includeSubDomains
+    portal.sourcepoint.com: max-age=63072000; includeSubDomains; preload
+  see: security/sourcepoint-domain-security.yml
+events:
+  webhooks: false
+  asyncapi: false
+  note: Sourcepoint publishes event CALLBACKS (onConsentReady, onMessageReady, onMessageChoiceSelect,
+    onPrivacyManagerAction, onPMCancel, onMessageReceiveData, onSPPMObjectReady, onError) but these are
+    client-side JavaScript/native SDK hooks, not server-to-server webhooks. There is no event delivery
+    surface, so no AsyncAPI or Webhooks artifact is emitted.
+identifiers:
+  siteId: numeric property id in the Sourcepoint portal
+  propertyId: the same property id on the Preferences surface
+  accountId: Sourcepoint account id on the Preferences surface
+  consentUUID: GDPR TCF/Standard end-user id cookie
+  usnatUUID: U.S. Multi-State Privacy end-user id
+  globalcmpUUID: Global Enterprise end-user id
+  authId: customer-supplied authenticated-consent identifier that links consent across devices

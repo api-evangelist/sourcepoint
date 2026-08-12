@@ -1,0 +1,167 @@
+generated: '2026-08-12'
+method: derived
+source: components.schemas and components.parameters of the seven documents in openapi/, cross-read against
+  the hub object reference
+entities:
+- name: Property
+  aka:
+  - site
+  - app
+  id_field: siteId
+  also:
+  - propertyId (Preferences surface)
+  description: A website, app or CTV channel registered in the Sourcepoint portal. Every consent and reporting
+    call is scoped to one.
+  appears_in:
+  - all seven specs
+- name: Account
+  id_field: accountId
+  description: The Sourcepoint customer account that owns properties, vendor lists and preference configurations.
+  appears_in:
+  - preferences
+- name: EndUser
+  id_field: consentUUID | usnatUUID | globalcmpUUID | uuid
+  alt_id: authId
+  description: The consenting individual. Each regulatory surface mints its own UUID; authId is the customer-supplied
+    identifier that ties them together across devices (authenticated consent).
+  appears_in:
+  - gdpr-tcf
+  - gdpr-standard
+  - usnat
+  - global-enterprise
+  - preferences
+- name: ConsentRecord
+  description: A dated snapshot of an end-user consent state for a property. Returned as history (newest-first,
+    or a single record when latest=true).
+  schemas:
+  - getConsentResponse (gdpr-tcf, gdpr-standard)
+  - getConsentHistory (usnat, global-enterprise)
+  key_fields:
+  - consentDate
+  - euconsent / TCString
+  - grants
+  - categories
+  - vendors
+  - legIntCategories
+  - messageId
+  - vendorListId
+- name: TCString
+  description: IAB TCF v2.2 consent string carried as euconsent; also the input to the identity-provider
+    merge operation.
+  schemas:
+  - mergeConsent
+- name: GPPSection
+  description: IAB Global Privacy Platform section (U.S. National plus 15 state sections) that carries
+    the U.S. Multi-State Privacy choices.
+  appears_in:
+  - usnat
+- name: VendorList
+  description: The set of vendors and purposes configured for a property, with the legal basis chosen
+    for each.
+  schemas:
+  - vendors
+  - mapResponse
+- name: Vendor
+  description: A third party on the vendor list - IAB registered, custom, or Google ATP.
+  schemas:
+  - IABAndCustomVendors
+  - customVendors
+  - GoogleATPVendors
+  - vendors
+- name: Purpose
+  description: A processing purpose with a configured legal basis (Consent, Legitimate Interest, Disclosure
+    Only). Purposes with no configured basis are omitted from responses.
+  schemas:
+  - IABPurposes
+  - customPurposes
+- name: VendorURLMapping
+  description: A mapping from a content URL to the vendor/purpose it belongs to, used by CMS integrations.
+  schemas:
+  - vendorURLMappingResponse
+- name: PreferenceRecord
+  description: An end-user marketing/communication preference event for a property.
+  schemas:
+  - preferencesHistory
+  key_fields:
+  - system
+  - messageId
+  - propertyId
+  - vendorListId
+- name: ReportPeriod
+  id_field: periodFilter
+  description: The window selector on the reporting operations, combined with startDate/endDate/siteId
+    in the body.
+  schemas:
+  - gdprRequestBody
+  - usmspPvRequestBody
+  - usmspMsgRequestBody
+- name: PageviewMetric
+  description: Aggregated pageview/user counts for a property and period.
+  schemas:
+  - gdprPvResponse
+  - usmspPvResponse
+- name: MessageMetric
+  description: Aggregated consent-message impression and choice counts for a property and period.
+  schemas:
+  - gdprMsgResponse
+  - usmspMsgResponse
+relationships:
+- from: Account
+  to: Property
+  type: has_many
+  via: accountId
+- from: Property
+  to: VendorList
+  type: has_one
+  via: siteId
+  note: '"no active vl for siteId" is returned when a property has none'
+- from: VendorList
+  to: Vendor
+  type: has_many
+  via: vendors[]
+- from: Vendor
+  to: Purpose
+  type: has_many
+  via: mapResponse purpose mapping with legal basis
+- from: Vendor
+  to: VendorURLMapping
+  type: has_many
+  via: vendorUrls[]
+- from: Property
+  to: ConsentRecord
+  type: has_many
+  via: siteId
+- from: EndUser
+  to: ConsentRecord
+  type: has_many
+  via: consentUUID | usnatUUID | globalcmpUUID | authId
+- from: ConsentRecord
+  to: TCString
+  type: has_one
+  via: euconsent
+- from: ConsentRecord
+  to: GPPSection
+  type: has_many
+  via: GPP string sections (usnat)
+- from: EndUser
+  to: PreferenceRecord
+  type: has_many
+  via: uuid | authId
+- from: Property
+  to: PreferenceRecord
+  type: has_many
+  via: propertyId
+- from: Property
+  to: PageviewMetric
+  type: has_many
+  via: siteId + periodFilter
+- from: Property
+  to: MessageMetric
+  type: has_many
+  via: siteId + periodFilter
+notes:
+- 'The same logical entity is modelled four times, once per regulation: getConsentResponse (GDPR TCF and
+  GDPR Standard) versus getConsentHistory (USNAT and Global Enterprise), with a different end-user id
+  field in each. There is no shared components library across the seven documents.'
+- No entity carries an idempotency key, an ETag, or a server-assigned record id an agent could re-reference;
+  deletes are addressed by (property, end-user) rather than by record.

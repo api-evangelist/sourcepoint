@@ -1,0 +1,29 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Sourcepoint GDPR Standard API
+  version: 1.0.0
+extends: openapi/sourcepoint-gdpr-standard-openapi.yml
+x-generated: '2026-08-12'
+x-method: generated
+x-source: openapi/sourcepoint-gdpr-standard-openapi.yml
+x-note: Sourcepoint publishes these specs without operationIds; this overlay assigns stable operationIds
+  used by the repo derived artifacts (skills, crosswalk, error catalog, data model). The harvested spec
+  itself is never mutated.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-source: https://sourcepoint-public-api.readme.io/openapi/64650ec6196aba0072048dc1
+    x-apievangelist-harvested: '2026-08-12'
+    x-apievangelist-provider: sourcepoint
+- target: $.paths['/consent/v3/history/{siteId}'].get
+  update:
+    operationId: getGdprStandardConsentHistory
+- target: $.paths['/consent/v3/{siteId}'].delete
+  update:
+    operationId: deleteGdprStandardConsent
+- target: $.paths['/vendor-list/vendor-purpose-mapping'].get
+  update:
+    operationId: getGdprStandardVendorPurposeMapping
+- target: $.paths['/vendor-list/vendor-url-mapping'].post
+  update:
+    operationId: postGdprStandardVendorUrlMapping
