@@ -1,0 +1,228 @@
+{
+  "item": [
+    {
+      "id": "e06565fc-a119-4667-98e6-7dfe92b4016a",
+      "name": "Preferences end-user history",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fecf83cf-6b41-4bed-98f4-871577aca4c1",
+          "name": "Get end-user preferences history",
+          "request": {
+            "name": "Get end-user preferences history",
+            "description": {
+              "content": "Returns end-user preferences history. In addition to the `accountId`, you will also need to include <u>either</u> the end-user's `uuid` or `authId` in the `id` parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "user-preference",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountId",
+                  "value": "<number>",
+                  "description": "(Required) Your organization's Sourcepoint account ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) The end-user's uuid or authId"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6df95c8c-8e85-44ba-99d5-4a71962d1f74",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-preference",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"system\": \"SP\",\n    \"messageId\": 1326089,\n    \"propertyId\": 12345,\n    \"vendorListId\": \"677c0006b4aaddaae14c1234a\",\n    \"timestamp\": \"2025-07-15T18:53:13.907Z\",\n    \"categories\": [\n      {\n        \"id\": 0,\n        \"name\": \"AI Waiver\",\n        \"type\": \"LEGAL-TRANSACTION\",\n        \"subType\": \"AI-POLICY\",\n        \"legalDoc\": {\n          \"id\": \"abc123\",\n          \"name\": \"AI Policy 2025\"\n        }\n      },\n      {\n        \"id\": 4,\n        \"name\": \"Customer Service Communication\",\n        \"type\": \"MARKETING\"\n      }\n    ],\n    \"_id\": \"6877a0b70b23e3a5cbe11234\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "42f7532c-53c2-4ff0-b06b-30720dfba5ce",
+          "name": "Delete end-user preferences history",
+          "request": {
+            "name": "Delete end-user preferences history",
+            "description": {
+              "content": "Deletes end-user preferences history for a property. In addition to the `propertyId`, you will also need to include <u>either</u> the end-user's `uuid` or `authId`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "user-preference"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "propertyId",
+                  "value": "<integer>",
+                  "description": "(Required) The property ID for the property in the Sourcepoint portal."
+                },
+                {
+                  "disabled": false,
+                  "key": "uuid",
+                  "value": "<string>",
+                  "description": "Retrieved from preferences object in the `_sp_user_consent_{propertyId}` local storage item"
+                },
+                {
+                  "disabled": false,
+                  "key": "authId",
+                  "value": "<string>",
+                  "description": "Retrieved from the first-party cookie `authId`"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "62611c3d-5ef5-4d4f-b4dd-656d627d166c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user-preference"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "propertyId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deletedCount\": 4,\n  \"message\": \"Successfully deleted 4 user preference record(s)\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cdn.privacy-mgmt.com/preferences",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "331c7ac8-1203-4225-b58f-2b5f43d29577",
+    "name": "Preferences API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sourcepoint Technologies API for managing end-user Preferences data.",
+      "type": "text/plain"
+    }
+  }
+}

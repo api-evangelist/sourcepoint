@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Preferences API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Preferences end-user history",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get end-user preferences history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cdn.privacy-mgmt.com/preferences/user-preference/history",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "Your organization's Sourcepoint account ID."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The end-user's uuid or authId"
+              }
+            ]
+          },
+          "docs": "Returns end-user preferences history. In addition to the `accountId`, you will also need to include <u>either</u> the end-user's `uuid` or `authId` in the `id` parameter."
+        },
+        {
+          "info": {
+            "name": "Delete end-user preferences history",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cdn.privacy-mgmt.com/preferences/user-preference",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "query",
+                "description": "The property ID for the property in the Sourcepoint portal."
+              },
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "Retrieved from preferences object in the `_sp_user_consent_{propertyId}` local storage item"
+              },
+              {
+                "name": "authId",
+                "value": "",
+                "type": "query",
+                "description": "Retrieved from the first-party cookie `authId`"
+              }
+            ]
+          },
+          "docs": "Deletes end-user preferences history for a property. In addition to the `propertyId`, you will also need to include <u>either</u> the end-user's `uuid` or `authId`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

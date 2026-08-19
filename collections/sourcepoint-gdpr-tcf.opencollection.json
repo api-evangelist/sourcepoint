@@ -1,0 +1,184 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sourcepoint GDPR TCF API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GDPR TCF end-user consent status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get end-user consent status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cdn.privacy-mgmt.com/consent/tcfv2/consent/v3/history/:siteId",
+            "params": [
+              {
+                "name": "siteId",
+                "value": "",
+                "type": "path",
+                "description": "The property ID for the property in the Sourcepoint portal."
+              },
+              {
+                "name": "consentUUID",
+                "value": "",
+                "type": "query",
+                "description": "Retrieved from the first-party cookie consentUUID"
+              },
+              {
+                "name": "authId",
+                "value": "",
+                "type": "query",
+                "description": "Retrieved from the first-party cookie authId"
+              },
+              {
+                "name": "latest",
+                "value": "",
+                "type": "query",
+                "description": "(Optional) Only return the latest consent record for the end-user."
+              }
+            ]
+          },
+          "docs": "Returns end-user GDPR TCF consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `consentUUID` or `authId`."
+        },
+        {
+          "info": {
+            "name": "Merge end-user consent status with identity provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cdn.privacy-mgmt.com/consent/tcfv2/consent/v3/:siteId/tcstring",
+            "params": [
+              {
+                "name": "siteId",
+                "value": "",
+                "type": "path",
+                "description": "The property ID for the property in the Sourcepoint portal."
+              },
+              {
+                "name": "consentUUID",
+                "value": "",
+                "type": "query",
+                "description": "Retrieved from the first-party cookie consentUUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Merge an end-user's custom vendor consent profile with the information Sourcepoint has for IAB vendors taken from a TCString that is provided. Though originally planned for the German consortium *NetId*, it is available for any identity provider to confirm or revoke vendor consent in one place<br><br>*Your organization will require their own CMP ID to use this API. Please contact your Sourcepoint Client Support team if you require more information.*"
+        },
+        {
+          "info": {
+            "name": "Delete end-user consent status",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cdn.privacy-mgmt.com/consent/tcfv2/consent/v3/:siteId",
+            "params": [
+              {
+                "name": "siteId",
+                "value": "",
+                "type": "path",
+                "description": "The property ID for the property in the Sourcepoint portal."
+              },
+              {
+                "name": "consentUUID",
+                "value": "",
+                "type": "query",
+                "description": "Retrieved from the first-party cookie consentUUID"
+              },
+              {
+                "name": "authId",
+                "value": "",
+                "type": "query",
+                "description": "Retrieved from the first-party cookie authId"
+              }
+            ]
+          },
+          "docs": "Deletes end-user GDPR TCF consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `consentUUID` or `authId`.<br><br>This endpoint does not support mass deletions of end-user consent records. Please speak to your Sourcepoint representative to execute any mass deletions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "GDPR TCF vendor list",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Map vendors and purposes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cdn.privacy-mgmt.com/consent/tcfv2/vendor-list/vendor-purpose-mapping",
+            "params": [
+              {
+                "name": "siteId",
+                "value": "",
+                "type": "query",
+                "description": "The property ID for the property in the Sourcepoint portal."
+              }
+            ]
+          },
+          "docs": "Returns mapping of vendors and purposes with legal bases for the vendor list associated with the property.\n\n**Note**: *For each vendor, the response will only include purposes that have a configured legal basis (**Consent**, **Legitimate Interest**, **Disclosure Only**). Any purposes that are **Not Applicable** will not be returned in the response.*\n\n*Additionally, vendors will need at least one purpose with a configured legal basis to be returned in the response.*"
+        },
+        {
+          "info": {
+            "name": "Vendor URL mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cdn.privacy-mgmt.com/consent/tcfv2/vendor-list/vendor-url-mapping",
+            "params": [
+              {
+                "name": "allCategoryMapping",
+                "value": "",
+                "type": "query",
+                "description": "Will return `categoryMapping` array which details all vendors and their configured purposes for the property"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Intended to be used by publishing systems to help determine if a vendor URL has been defined appropriately in the Sourcepoint system. This API can help developers that are integrating with Content Management Systems (CMS) verify that a URL referenced in content can be related to vendor and purpose consent preferences which can be queried and set based on user actions.<br><br>Before utilizing this API, ensure [vendor URL mappings are configured for the vendor](https://docs.sourcepoint.com/hc/en-u"
+        },
+        {
+          "info": {
+            "name": "Retrieve vendors on vendor list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cdn.privacy-mgmt.com/consent/tcfv2/vendor-list/vendors",
+            "params": [
+              {
+                "name": "siteId",
+                "value": "",
+                "type": "query",
+                "description": "The property ID for the property in the Sourcepoint portal."
+              }
+            ]
+          },
+          "docs": "Returns a list of vendors for the GDPR TCF vendor list associated with the specified property."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

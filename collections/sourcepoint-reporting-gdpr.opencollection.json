@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sourcepoint Reporting GDPR API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GDPR reporting API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GDPR pageview data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://portal.sourcepoint.com/api/external/v1/reports/tcfv2/dashboard-v2-pv-users/:periodFilter",
+            "params": [
+              {
+                "name": "periodFilter",
+                "value": "",
+                "type": "path",
+                "description": "- **Daily**: The maximum duration of this period is 31 days between the `startDate` and `endDate`\n- **Weekly**: A week is a period of 7 days that starts on a Monday and ends on a Sunday. If the requested `startDate` is not a Monday, Sourcepoint will backdate the reporting period to the Monday for the week in its reporting aggregation.\n- **Monthly**: A month begins on the first day of that month. If the requested `startDate` is not the first day of the month, Sourcepoint will backdate the reporting period to the first day of the month in its reporting aggregation.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns pageview data for properties that have implemented GDPR.<br><br>Include your API key in the provided **Header** field under **AUTHORIZATION** in the right-hand pane before trying your request.<br><br>In addition to the API key, you will also need to include `startDate`, `endDate`, and `siteId` in your request."
+        },
+        {
+          "info": {
+            "name": "GDPR message data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://portal.sourcepoint.com/api/external/v1/reports/tcfv2/dashboard-v2-messages/:periodFilter",
+            "params": [
+              {
+                "name": "periodFilter",
+                "value": "",
+                "type": "path",
+                "description": "- **Daily**: The maximum duration of this period is 31 days between the `startDate` and `endDate`\n- **Weekly**: A week is a period of 7 days that starts on a Monday and ends on a Sunday. If the requested `startDate` is not a Monday, Sourcepoint will backdate the reporting period to the Monday for the week in its reporting aggregation.\n- **Monthly**: A month begins on the first day of that month. If the requested `startDate` is not the first day of the month, Sourcepoint will backdate the reporting period to the first day of the month in its reporting aggregation.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns message data for properties that have implemented GDPR.<br><br>Include your API key in the provided **Header** field under **AUTHORIZATION** in the right-hand pane before trying your request.<br><br>In addition to the API key, you will also need to include `startDate`, `endDate`, and `siteId` in your request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

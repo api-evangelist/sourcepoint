@@ -1,0 +1,468 @@
+{
+  "item": [
+    {
+      "id": "7293df1b-f354-4455-8b3a-91a9e95a56b8",
+      "name": "GDPR Standard end-user consent status",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c6fb80eb-fd20-47dc-865f-d296eb7f0d4b",
+          "name": "Get end-user consent status",
+          "request": {
+            "name": "Get end-user consent status",
+            "description": {
+              "content": "Returns end-user GDPR Standard consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `consentUUID` or `authId`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consent",
+                "v3",
+                "history",
+                ":siteId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "consentUUID",
+                  "value": "<string>",
+                  "description": "Retrieved from the first-party cookie consentUUID"
+                },
+                {
+                  "disabled": false,
+                  "key": "authId",
+                  "value": "<string>",
+                  "description": "Retrieved from the first-party cookie authId"
+                },
+                {
+                  "disabled": false,
+                  "key": "latest",
+                  "value": "<boolean>",
+                  "description": "(Optional) Only return latest consent record for the end-user"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "siteId",
+                  "description": "(Required) The property ID for the property in the Sourcepoint portal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "672e8337-9d8a-4136-be16-728826f2e1ac",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consent",
+                    "v3",
+                    "history",
+                    ":siteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consentUUID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latest",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "siteId",
+                      "description": "(Required) The property ID for the property in the Sourcepoint portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"6842d825666f5a1254fd263f\",\n    \"siteId\": 39470,\n    \"dateCreated\": \"2023-05-08T15:37:18.365Z\",\n    \"consentUUID\": \"1234f5a8-67c9-4a38-a7cd-6fe4f30a5678\",\n    \"messageId\": 123456,\n    \"vendorListId\": \"9876a560b8e05c06542b2a31\",\n    \"vendors\": [\n      {\n        \"id\": \"5f23e826b8e05c0c0abcdef\",\n        \"name\": \"Custom vendor example\",\n        \"vendorType\": \"CUSTOM\"\n      },\n      {\n        \"id\": \"5f23e826b8e05c0c0abcdef\",\n        \"name\": \"Custom vendor example\",\n        \"vendorType\": \"CUSTOM\"\n      }\n    ],\n    \"legIntVendors\": [\n      {\n        \"id\": \"5f23e826b8e05c0c0abcdef\",\n        \"name\": \"Custom vendor example\",\n        \"vendorType\": \"CUSTOM\"\n      },\n      {\n        \"id\": \"5f23e826b8e05c0c0abcdef\",\n        \"name\": \"Custom vendor example\",\n        \"vendorType\": \"CUSTOM\"\n      }\n    ],\n    \"categories\": [\n      {\n        \"id\": \"5fdbbcdf4f3f9789140e23a0\",\n        \"name\": \"Custom purpose example\"\n      },\n      {\n        \"id\": \"5fdbbcdf4f3f9789140e23a0\",\n        \"name\": \"Custom purpose example\"\n      }\n    ],\n    \"legIntCategories\": [\n      {\n        \"id\": \"5fdbbcdf4f3f9789140e23a0\",\n        \"name\": \"Custom purpose example\"\n      },\n      {\n        \"id\": \"5fdbbcdf4f3f9789140e23a0\",\n        \"name\": \"Custom purpose example\"\n      }\n    ]\n  },\n  {\n    \"_id\": \"6842d825666f5a1254fd263f\",\n    \"siteId\": 39470,\n    \"dateCreated\": \"2023-05-08T15:37:18.365Z\",\n    \"consentUUID\": \"1234f5a8-67c9-4a38-a7cd-6fe4f30a5678\",\n    \"messageId\": 123456,\n    \"vendorListId\": \"9876a560b8e05c06542b2a31\",\n    \"vendors\": [\n      {\n        \"id\": \"5f23e826b8e05c0c0abcdef\",\n        \"name\": \"Custom vendor example\",\n        \"vendorType\": \"CUSTOM\"\n      },\n      {\n        \"id\": \"5f23e826b8e05c0c0abcdef\",\n        \"name\": \"Custom vendor example\",\n        \"vendorType\": \"CUSTOM\"\n      }\n    ],\n    \"legIntVendors\": [\n      {\n        \"id\": \"5f23e826b8e05c0c0abcdef\",\n        \"name\": \"Custom vendor example\",\n        \"vendorType\": \"CUSTOM\"\n      },\n      {\n        \"id\": \"5f23e826b8e05c0c0abcdef\",\n        \"name\": \"Custom vendor example\",\n        \"vendorType\": \"CUSTOM\"\n      }\n    ],\n    \"categories\": [\n      {\n        \"id\": \"5fdbbcdf4f3f9789140e23a0\",\n        \"name\": \"Custom purpose example\"\n      },\n      {\n        \"id\": \"5fdbbcdf4f3f9789140e23a0\",\n        \"name\": \"Custom purpose example\"\n      }\n    ],\n    \"legIntCategories\": [\n      {\n        \"id\": \"5fdbbcdf4f3f9789140e23a0\",\n        \"name\": \"Custom purpose example\"\n      },\n      {\n        \"id\": \"5fdbbcdf4f3f9789140e23a0\",\n        \"name\": \"Custom purpose example\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "189b7f4b-e636-4d22-8651-8e8c62c8fc6a",
+          "name": "Delete end-user consent status",
+          "request": {
+            "name": "Delete end-user consent status",
+            "description": {
+              "content": "Deletes end-user GDPR Standard consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `consentUUID` or `authId`.<br><br>This endpoint does not support mass deletions of end-user consent records. Please speak to your Sourcepoint representative to execute any mass deletions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consent",
+                "v3",
+                ":siteId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "consentUUID",
+                  "value": "<string>",
+                  "description": "Retrieved from the first-party cookie consentUUID"
+                },
+                {
+                  "disabled": false,
+                  "key": "authId",
+                  "value": "<string>",
+                  "description": "Retrieved from the first-party cookie authId"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "siteId",
+                  "description": "(Required) The property ID for the property in the Sourcepoint portal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "70cb0e1b-dd32-4d2a-a6b7-06f9c3af61f8",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consent",
+                    "v3",
+                    ":siteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "consentUUID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "siteId",
+                      "description": "(Required) The property ID for the property in the Sourcepoint portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"n\": 1,\n    \"ok\": 1,\n    \"deletedCount\": 1\n  },\n  {\n    \"n\": 1,\n    \"ok\": 1,\n    \"deletedCount\": 1\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "1878a751-4520-457c-a2fb-c60f8df5521f",
+      "name": "GDPR Standard vendor list",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "721a9111-cf7b-42df-82c0-c5ffbdf0b752",
+          "name": "Map vendors and purposes",
+          "request": {
+            "name": "Map vendors and purposes",
+            "description": {
+              "content": "Returns mapping of vendors and purposes with legal bases on the vendor list associated with the property.\n\n**Note**: *For each vendor, the response will only include purposes that have a configured legal basis ( **Consent**, **Legitimate Interest**, **Disclosure Only**). Any purposes that are **Not Applicable** will not be returned in the response.*\n\n*Additionally, vendors will need at least one purpose with a configured legal basis to be returned in the response.*",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vendor-list",
+                "vendor-purpose-mapping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "siteId",
+                  "value": "<integer>",
+                  "description": "(Required) The property ID for the property in the Sourcepoint portal."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "41869adc-7bd0-45c0-8536-b8b244d689ba",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendor-list",
+                    "vendor-purpose-mapping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "siteId",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"vendorId\": \"abcd2fbeb8e05c306f2aefgh\",\n    \"categories\": [\n      {\n        \"id\": \"1234e01e32bd4d27654b5678\",\n        \"type\": \"CONSENT\"\n      },\n      {\n        \"id\": \"1234e01e32bd4d27654b5678\",\n        \"type\": \"CONSENT\"\n      }\n    ]\n  },\n  {\n    \"vendorId\": \"abcd2fbeb8e05c306f2aefgh\",\n    \"categories\": [\n      {\n        \"id\": \"1234e01e32bd4d27654b5678\",\n        \"type\": \"CONSENT\"\n      },\n      {\n        \"id\": \"1234e01e32bd4d27654b5678\",\n        \"type\": \"CONSENT\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ecfc293c-13ac-49c3-882b-a22adde22236",
+          "name": "Vendor URL mapping",
+          "request": {
+            "name": "Vendor URL mapping",
+            "description": {
+              "content": "Intended to be used by publishing systems to help determine if a vendor URL has been defined appropriately in the Sourcepoint system. This API can help developers that are integrating with Content Management Systems (CMS) verify that a URL referenced in content can be related to vendor and purpose consent preferences which can be queried and set based on user actions.<br><br>Before utilizing this API, ensure [vendor URL mappings are configured for the vendor](https://docs.sourcepoint.com/hc/en-us/articles/4403605574419#h_01H0N5Q7SC3ZPB47GMRNKR8PG0) in the Sourcepoint portal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vendor-list",
+                "vendor-url-mapping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "allCategoryMapping",
+                  "value": "<boolean>",
+                  "description": "Will return `categoryMapping` array which details all vendors and their configured purposes for the property"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"siteId\": \"<string>\",\n  \"vendorUrls\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2993c28f-7ed1-4234-87a6-cea4988e30f0",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendor-list",
+                    "vendor-url-mapping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "allCategoryMapping",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"siteId\": \"<string>\",\n  \"vendorUrls\": [\n    \"www.sourcepoint.com\",\n    \"www.sourcepoint.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"vendorUrlMapping\": [\n    {\n      \"url\": \"www.sourcepoint.com\",\n      \"matchPattern\": [\n        {\n          \"ruleBoolean\": true,\n          \"type\": \"CONTAINS\",\n          \"urlPattern\": \"sourcepoint.com\"\n        },\n        {\n          \"ruleBoolean\": true,\n          \"type\": \"CONTAINS\",\n          \"urlPattern\": \"sourcepoint.com\"\n        }\n      ],\n      \"rules\": [\n        {\n          \"patterns\": [\n            {\n              \"ruleBoolean\": true,\n              \"type\": \"CONTAINS\",\n              \"urlPattern\": \"sourcepoint.com\"\n            },\n            {\n              \"ruleBoolean\": true,\n              \"type\": \"CONTAINS\",\n              \"urlPattern\": \"sourcepoint.com\"\n            }\n          ]\n        },\n        {\n          \"patterns\": [\n            {\n              \"ruleBoolean\": true,\n              \"type\": \"CONTAINS\",\n              \"urlPattern\": \"sourcepoint.com\"\n            },\n            {\n              \"ruleBoolean\": true,\n              \"type\": \"CONTAINS\",\n              \"urlPattern\": \"sourcepoint.com\"\n            }\n          ]\n        }\n      ],\n      \"vendorId\": \"5f23e826b8e05c0c0d4fdb8f\",\n      \"vendorType\": \"CUSTOM\",\n      \"name\": \"Sourcepoint Technologies, Inc. (non-CMP)\",\n      \"description\": \"Description example for the vendor\",\n      \"policyUrl\": \"https://www.sourcepoint.com/privacy-notice/\",\n      \"purposes\": [\n        {\n          \"id\": \"5fdbbcdf4f3f9789140e23a0\",\n          \"type\": \"CONSENT\"\n        },\n        {\n          \"id\": \"5fdbbcdf4f3f9789140e23a0\",\n          \"type\": \"CONSENT\"\n        }\n      ]\n    },\n    {\n      \"url\": \"www.sourcepoint.com\",\n      \"matchPattern\": [\n        {\n          \"ruleBoolean\": true,\n          \"type\": \"CONTAINS\",\n          \"urlPattern\": \"sourcepoint.com\"\n        },\n        {\n          \"ruleBoolean\": true,\n          \"type\": \"CONTAINS\",\n          \"urlPattern\": \"sourcepoint.com\"\n        }\n      ],\n      \"rules\": [\n        {\n          \"patterns\": [\n            {\n              \"ruleBoolean\": true,\n              \"type\": \"CONTAINS\",\n              \"urlPattern\": \"sourcepoint.com\"\n            },\n            {\n              \"ruleBoolean\": true,\n              \"type\": \"CONTAINS\",\n              \"urlPattern\": \"sourcepoint.com\"\n            }\n          ]\n        },\n        {\n          \"patterns\": [\n            {\n              \"ruleBoolean\": true,\n              \"type\": \"CONTAINS\",\n              \"urlPattern\": \"sourcepoint.com\"\n            },\n            {\n              \"ruleBoolean\": true,\n              \"type\": \"CONTAINS\",\n              \"urlPattern\": \"sourcepoint.com\"\n            }\n          ]\n        }\n      ],\n      \"vendorId\": \"5f23e826b8e05c0c0d4fdb8f\",\n      \"vendorType\": \"CUSTOM\",\n      \"name\": \"Sourcepoint Technologies, Inc. (non-CMP)\",\n      \"description\": \"Description example for the vendor\",\n      \"policyUrl\": \"https://www.sourcepoint.com/privacy-notice/\",\n      \"purposes\": [\n        {\n          \"id\": \"5fdbbcdf4f3f9789140e23a0\",\n          \"type\": \"CONSENT\"\n        },\n        {\n          \"id\": \"5fdbbcdf4f3f9789140e23a0\",\n          \"type\": \"CONSENT\"\n        }\n      ]\n    }\n  ],\n  \"categoryMapping\": [\n    {\n      \"vendorId\": \"23452fbeb8e05c3057240f85\",\n      \"categories\": [\n        {\n          \"id\": \"5fd7e01e32bd4d27654ba1d5\",\n          \"type\": \"LEGITIMATE_INTEREST\"\n        },\n        {\n          \"id\": \"5fd7e01e32bd4d27654ba1d5\",\n          \"type\": \"LEGITIMATE_INTEREST\"\n        }\n      ]\n    },\n    {\n      \"vendorId\": \"23452fbeb8e05c3057240f85\",\n      \"categories\": [\n        {\n          \"id\": \"5fd7e01e32bd4d27654ba1d5\",\n          \"type\": \"LEGITIMATE_INTEREST\"\n        },\n        {\n          \"id\": \"5fd7e01e32bd4d27654ba1d5\",\n          \"type\": \"LEGITIMATE_INTEREST\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cdn.privacy-mgmt.com/consent/tcfv2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1cf90a14-6e8b-4d0e-b145-3a12e0b2eedd",
+    "name": "Sourcepoint GDPR Standard API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sourcepoint Technologies API for managing property and end-user GDPR Standard information.",
+      "type": "text/plain"
+    }
+  }
+}

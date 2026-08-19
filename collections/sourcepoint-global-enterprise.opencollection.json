@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sourcepoint Global Enterprise API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Global Enterprise end-user consent status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get end-user consent history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cdn.privacy-mgmt.com/global-cmp/consent/history/:siteId",
+            "params": [
+              {
+                "name": "siteId",
+                "value": "",
+                "type": "path",
+                "description": "The property ID for the property in the Sourcepoint portal."
+              },
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "Retrieved from`globalcmp` object in the `_sp_user_consent_{propertyId}` local storage item"
+              },
+              {
+                "name": "authId",
+                "value": "",
+                "type": "query",
+                "description": "Retrieved from the first-party cookie authId"
+              },
+              {
+                "name": "latest",
+                "value": "",
+                "type": "query",
+                "description": "(Optional) Only return latest consent record for the end-user"
+              }
+            ]
+          },
+          "docs": "Returns end-user consent history. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `globalcmpUUID` or `authId`."
+        },
+        {
+          "info": {
+            "name": "Delete end-user consent status",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cdn.privacy-mgmt.com/global-cmp/consent/:siteId",
+            "params": [
+              {
+                "name": "siteId",
+                "value": "",
+                "type": "path",
+                "description": "The property ID for the property in the Sourcepoint portal."
+              },
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "Retrieved from`globalcmp` object in the `_sp_user_consent_{propertyId}` local storage item"
+              },
+              {
+                "name": "authId",
+                "value": "",
+                "type": "query",
+                "description": "Retrieved from the first-party cookie authId"
+              }
+            ]
+          },
+          "docs": "Deletes end-user Global Enterprise consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `globalcmpUUID` or `authId`.<br><br>This endpoint does not support mass deletions of end-user consent records. Please speak to your Sourcepoint representative to execute any mass deletions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

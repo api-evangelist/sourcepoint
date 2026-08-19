@@ -1,0 +1,264 @@
+{
+  "item": [
+    {
+      "id": "fbd361ac-00d1-41b2-a5a7-90f3829961f7",
+      "name": "Global Enterprise end-user consent status",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ab807965-4793-4e63-9b06-2bf5c08c42aa",
+          "name": "Get end-user consent history",
+          "request": {
+            "name": "Get end-user consent history",
+            "description": {
+              "content": "Returns end-user consent history. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `globalcmpUUID` or `authId`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consent",
+                "history",
+                ":siteId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "uuid",
+                  "value": "<string>",
+                  "description": "Retrieved from`globalcmp` object in the `_sp_user_consent_{propertyId}` local storage item"
+                },
+                {
+                  "disabled": false,
+                  "key": "authId",
+                  "value": "<string>",
+                  "description": "Retrieved from the first-party cookie authId"
+                },
+                {
+                  "disabled": false,
+                  "key": "latest",
+                  "value": "<boolean>",
+                  "description": "(Optional) Only return latest consent record for the end-user"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "siteId",
+                  "description": "(Required) The property ID for the property in the Sourcepoint portal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ae9c677-cf2f-43a3-812f-4fed8325a0a8",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consent",
+                    "history",
+                    ":siteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latest",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "siteId",
+                      "description": "(Required) The property ID for the property in the Sourcepoint portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"6842d825666f5a1254fd263f\",\n    \"siteId\": 39470,\n    \"dateCreated\": \"2023-08-07T14:17:35.388Z\",\n    \"uuid\": \"abcd0c03-b8d6-49a4-a2e8-6bbcb8d0e1d7\",\n    \"messageId\": 123456,\n    \"privacyManagerId\": \"string\",\n    \"vendorListId\": \"656a2175e17a3c2f823f12345\",\n    \"vendors\": [\n      {\n        \"_id\": \"5e37fc3e56a5e60e0031234\",\n        \"name\": \"Demo vendor name\",\n        \"vendorType\": \"CUSTOM\"\n      },\n      {\n        \"_id\": \"5e37fc3e56a5e60e0031234\",\n        \"name\": \"Demo vendor name\",\n        \"vendorType\": \"CUSTOM\"\n      }\n    ],\n    \"categories\": [\n      {\n        \"_id\": \"656f28c517853af88460a54a\",\n        \"name\": \"Sell or share my personal information / opt into targeted advertising\",\n        \"systemId\": 3\n      },\n      {\n        \"_id\": \"656f28c517853af88460a54a\",\n        \"name\": \"Sell or share my personal information / opt into targeted advertising\",\n        \"systemId\": 3\n      }\n    ]\n  },\n  {\n    \"_id\": \"6842d825666f5a1254fd263f\",\n    \"siteId\": 39470,\n    \"dateCreated\": \"2023-08-07T14:17:35.388Z\",\n    \"uuid\": \"abcd0c03-b8d6-49a4-a2e8-6bbcb8d0e1d7\",\n    \"messageId\": 123456,\n    \"privacyManagerId\": \"string\",\n    \"vendorListId\": \"656a2175e17a3c2f823f12345\",\n    \"vendors\": [\n      {\n        \"_id\": \"5e37fc3e56a5e60e0031234\",\n        \"name\": \"Demo vendor name\",\n        \"vendorType\": \"CUSTOM\"\n      },\n      {\n        \"_id\": \"5e37fc3e56a5e60e0031234\",\n        \"name\": \"Demo vendor name\",\n        \"vendorType\": \"CUSTOM\"\n      }\n    ],\n    \"categories\": [\n      {\n        \"_id\": \"656f28c517853af88460a54a\",\n        \"name\": \"Sell or share my personal information / opt into targeted advertising\",\n        \"systemId\": 3\n      },\n      {\n        \"_id\": \"656f28c517853af88460a54a\",\n        \"name\": \"Sell or share my personal information / opt into targeted advertising\",\n        \"systemId\": 3\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56ffb35c-75b8-43cf-8ef9-711bbe4a9288",
+          "name": "Delete end-user consent status",
+          "request": {
+            "name": "Delete end-user consent status",
+            "description": {
+              "content": "Deletes end-user Global Enterprise consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `globalcmpUUID` or `authId`.<br><br>This endpoint does not support mass deletions of end-user consent records. Please speak to your Sourcepoint representative to execute any mass deletions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consent",
+                ":siteId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "uuid",
+                  "value": "<string>",
+                  "description": "Retrieved from`globalcmp` object in the `_sp_user_consent_{propertyId}` local storage item"
+                },
+                {
+                  "disabled": false,
+                  "key": "authId",
+                  "value": "<string>",
+                  "description": "Retrieved from the first-party cookie authId"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "siteId",
+                  "description": "(Required) The property ID for the property in the Sourcepoint portal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b18b4a69-5faf-4a3e-873e-258351018196",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consent",
+                    ":siteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "siteId",
+                      "description": "(Required) The property ID for the property in the Sourcepoint portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"acknowledged\": true,\n    \"deletedCount\": 1\n  },\n  {\n    \"acknowledged\": true,\n    \"deletedCount\": 1\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cdn.privacy-mgmt.com/global-cmp",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "86263ba6-7d1e-487a-850e-936a1ea5cc72",
+    "name": "Sourcepoint Global Enterprise API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sourcepoint Technologies API for managing property and end-user Global Enterprise information.",
+      "type": "text/plain"
+    }
+  }
+}

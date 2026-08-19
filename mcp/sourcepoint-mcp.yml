@@ -108,3 +108,10 @@ notes:
   list/get endpoints, execute-request) rather than one tool per Sourcepoint operation. See mcp/sourcepoint-tool-crosswalk.yml.
 - operationIds referenced above are assigned by overlays/sourcepoint-*-overlay.yaml; the published specs
   carry no operationIds.
+deployment:
+  mode: remote
+  endpoint: https://sourcepoint-public-api.readme.io/mcp
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census

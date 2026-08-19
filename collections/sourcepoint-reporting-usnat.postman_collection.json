@@ -1,0 +1,413 @@
+{
+  "item": [
+    {
+      "id": "e486e558-e344-407a-95f0-5e0749486cfd",
+      "name": "U.S. Multi-State Privacy reporting API",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "75d6cd85-3fcd-4849-82a3-65d1912097be",
+          "name": "U.S. Multi-State Privacy pageview data",
+          "request": {
+            "name": "U.S. Multi-State Privacy pageview data",
+            "description": {
+              "content": "Returns pageview data for properties that have implemented U.S. Multi-State Privacyy.<br><br>Include your API key in the provided **Header** field under **AUTHORIZATION** in the right-hand pane before trying your request.<br><br>In addition to the API key, you will also need to include 'startDate', 'endDate', and `siteId` in your request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "usnat",
+                "dashboard-v2-pv-users",
+                ":periodFilter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "periodFilter",
+                  "description": "(Required) - **Daily**: The maximum duration of this period is 31 days between the `startDate` and `endDate`\n- **Weekly**: A week is a period of 7 days that starts on a Monday and ends on a Sunday. If the requested `startDate` is not a Monday, Sourcepoint will backdate the reporting period to the Monday for the week in its reporting aggregation.\n- **Monthly**: A month begins on the first day of that month. If the requested `startDate` is not the first day of the month, Sourcepoint will backdate the reporting period to the first day of the month in its reporting aggregation.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"startDate\": \"<string>\",\n  \"endDate\": \"<string>\",\n  \"siteId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"geo\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"device\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"browser\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"os\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"breakdownBy\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "782c93f7-3012-491e-b224-60841fba18a2",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usnat",
+                    "dashboard-v2-pv-users",
+                    ":periodFilter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "periodFilter",
+                      "description": "(Required) - **Daily**: The maximum duration of this period is 31 days between the `startDate` and `endDate`\n- **Weekly**: A week is a period of 7 days that starts on a Monday and ends on a Sunday. If the requested `startDate` is not a Monday, Sourcepoint will backdate the reporting period to the Monday for the week in its reporting aggregation.\n- **Monthly**: A month begins on the first day of that month. If the requested `startDate` is not the first day of the month, Sourcepoint will backdate the reporting period to the first day of the month in its reporting aggregation.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"startDate\": \"YYYY-MM-DD\",\n  \"endDate\": \"YYYY-MM-DD\",\n  \"siteId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"geo\": [\n    \"US\"\n  ],\n  \"state\": [\n    \"CA\"\n  ],\n  \"device\": [\n    \"desktop\",\n    \"mobile\"\n  ],\n  \"browser\": [\n    \"Firefox\",\n    \"Chrome\"\n  ],\n  \"os\": [\n    \"Windows\",\n    \"MacOS\"\n  ],\n  \"breakdownBy\": [\n    \"state\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"performanceData\": {\n    \"total\": 6050,\n    \"messagesResults\": 2323\n  },\n  \"results\": [\n    {\n      \"ymd\": \"2023-09-02T00:00:00.000Z\",\n      \"geo\": \"US\",\n      \"state\": \"CA\",\n      \"ua_os\": \"macOS\",\n      \"ua_device\": \"desktop\",\n      \"ua_browser\": \"Chrome\",\n      \"site_id\": \"string\",\n      \"property_name\": \"\\\"www.sourcepoint.com\\\"\",\n      \"Page Views: Total\": 2,\n      \"Page Views: Sell Opted-in\": 2,\n      \"Page Views: Sell Opted-out\": 0,\n      \"Page Views: Share Opted-in\": 2,\n      \"Page Views: Share Opted-out\": 0,\n      \"Page Views: Sensitive Data Opted-in\": 0,\n      \"Page Views: Sensitive Data Opted-out\": 2,\n      \"Page Views: GPC Enabled\": 0,\n      \"Page Views: GPC Disabled\": 2,\n      \"Users: Total\": 1,\n      \"Users: Sell Opted-in\": 1,\n      \"Users: Sell Opted-out\": 0,\n      \"Users: Share Opted-in\": 1,\n      \"Users: Share Opted-out\": 0,\n      \"Users: Sensitive Data Opted-in\": 0,\n      \"Users: Sensitive Data Opted-out\": 1,\n      \"Users: GPC Enabled\": 0,\n      \"Users: GPC Disabled\": 1\n    },\n    {\n      \"ymd\": \"2023-09-02T00:00:00.000Z\",\n      \"geo\": \"US\",\n      \"state\": \"CA\",\n      \"ua_os\": \"macOS\",\n      \"ua_device\": \"desktop\",\n      \"ua_browser\": \"Chrome\",\n      \"site_id\": \"string\",\n      \"property_name\": \"\\\"www.sourcepoint.com\\\"\",\n      \"Page Views: Total\": 2,\n      \"Page Views: Sell Opted-in\": 2,\n      \"Page Views: Sell Opted-out\": 0,\n      \"Page Views: Share Opted-in\": 2,\n      \"Page Views: Share Opted-out\": 0,\n      \"Page Views: Sensitive Data Opted-in\": 0,\n      \"Page Views: Sensitive Data Opted-out\": 2,\n      \"Page Views: GPC Enabled\": 0,\n      \"Page Views: GPC Disabled\": 2,\n      \"Users: Total\": 1,\n      \"Users: Sell Opted-in\": 1,\n      \"Users: Sell Opted-out\": 0,\n      \"Users: Share Opted-in\": 1,\n      \"Users: Share Opted-out\": 0,\n      \"Users: Sensitive Data Opted-in\": 0,\n      \"Users: Sensitive Data Opted-out\": 1,\n      \"Users: GPC Enabled\": 0,\n      \"Users: GPC Disabled\": 1\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b25b177-b6f4-4020-99dc-c2b65e986895",
+              "name": "API key is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usnat",
+                    "dashboard-v2-pv-users",
+                    ":periodFilter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "periodFilter",
+                      "description": "(Required) - **Daily**: The maximum duration of this period is 31 days between the `startDate` and `endDate`\n- **Weekly**: A week is a period of 7 days that starts on a Monday and ends on a Sunday. If the requested `startDate` is not a Monday, Sourcepoint will backdate the reporting period to the Monday for the week in its reporting aggregation.\n- **Monthly**: A month begins on the first day of that month. If the requested `startDate` is not the first day of the month, Sourcepoint will backdate the reporting period to the first day of the month in its reporting aggregation.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"startDate\": \"YYYY-MM-DD\",\n  \"endDate\": \"YYYY-MM-DD\",\n  \"siteId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"geo\": [\n    \"US\"\n  ],\n  \"state\": [\n    \"CA\"\n  ],\n  \"device\": [\n    \"desktop\",\n    \"mobile\"\n  ],\n  \"browser\": [\n    \"Firefox\",\n    \"Chrome\"\n  ],\n  \"os\": [\n    \"Windows\",\n    \"MacOS\"\n  ],\n  \"breakdownBy\": [\n    \"state\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "WWW-Authenticate",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6b2e31e4-7199-4b4a-af92-2c0bd91899a5",
+          "name": "U.S. Multi-State Privacy message data",
+          "request": {
+            "name": "U.S. Multi-State Privacy message data",
+            "description": {
+              "content": "Returns message data for properties that have implemented U.S. Multi-State Privacy.<br><br>Include your API key in the provided **Header** field under **AUTHORIZATION** in the right-hand pane before trying your request.<br><br>In addition to the API key, you will also need to include `startDate`, `endDate`, and `siteId` in your request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "usnat",
+                "dashboard-v2-messages",
+                ":periodFilter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "periodFilter",
+                  "description": "(Required) - **Daily**: The maximum duration of this period is 31 days between the `startDate` and `endDate`\n- **Weekly**: A week is a period of 7 days that starts on a Monday and ends on a Sunday. If the requested `startDate` is not a Monday, Sourcepoint will backdate the reporting period to the Monday for the week in its reporting aggregation.\n- **Monthly**: A month begins on the first day of that month. If the requested `startDate` is not the first day of the month, Sourcepoint will backdate the reporting period to the first day of the month in its reporting aggregation.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"startDate\": \"<string>\",\n  \"endDate\": \"<string>\",\n  \"siteId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"geo\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"device\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"browser\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"os\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"breakdownBy\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "39eae310-4f45-4050-bcd4-f2a73741acd5",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usnat",
+                    "dashboard-v2-messages",
+                    ":periodFilter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "periodFilter",
+                      "description": "(Required) - **Daily**: The maximum duration of this period is 31 days between the `startDate` and `endDate`\n- **Weekly**: A week is a period of 7 days that starts on a Monday and ends on a Sunday. If the requested `startDate` is not a Monday, Sourcepoint will backdate the reporting period to the Monday for the week in its reporting aggregation.\n- **Monthly**: A month begins on the first day of that month. If the requested `startDate` is not the first day of the month, Sourcepoint will backdate the reporting period to the first day of the month in its reporting aggregation.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"startDate\": \"YYYY-MM-DD\",\n  \"endDate\": \"YYYY-MM-DD\",\n  \"siteId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"geo\": [\n    \"US\"\n  ],\n  \"state\": [\n    \"CA\"\n  ],\n  \"device\": [\n    \"desktop\",\n    \"mobile\"\n  ],\n  \"browser\": [\n    \"Firefox\",\n    \"Chrome\"\n  ],\n  \"os\": [\n    \"Windows\",\n    \"MacOS\"\n  ],\n  \"breakdownBy\": [\n    \"state\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"performanceData\": {\n    \"total\": 2374,\n    \"messagesResults\": 2980\n  },\n  \"results\": [\n    {\n      \"ymd\": \"2023-09-02T00:00:00.000Z\",\n      \"geo\": \"US\",\n      \"state\": \"CA\",\n      \"ua_os\": \"macOS\",\n      \"ua_device\": \"desktop\",\n      \"ua_browser\": \"Chrome\",\n      \"site_id\": \"string\",\n      \"property_name\": \"\\\"www.sourcepoint.com\\\"\",\n      \"Message Actions: Total\": 2,\n      \"Message Actions: Sell Opted-in\": 2,\n      \"Message Actions: Sell Opted-out\": 0,\n      \"Message Actions: Share Opted-in\": 2,\n      \"Message Actions: Share Opted-out\": 0,\n      \"Message Actions: Sensitive Data Opted-in\": 2,\n      \"Message Actions: Sensitive Data Opted-out\": 0,\n      \"Message Actions: GPC Enabled\": 0,\n      \"Message Actions: GPC Disabled\": 2\n    },\n    {\n      \"ymd\": \"2023-09-02T00:00:00.000Z\",\n      \"geo\": \"US\",\n      \"state\": \"CA\",\n      \"ua_os\": \"macOS\",\n      \"ua_device\": \"desktop\",\n      \"ua_browser\": \"Chrome\",\n      \"site_id\": \"string\",\n      \"property_name\": \"\\\"www.sourcepoint.com\\\"\",\n      \"Message Actions: Total\": 2,\n      \"Message Actions: Sell Opted-in\": 2,\n      \"Message Actions: Sell Opted-out\": 0,\n      \"Message Actions: Share Opted-in\": 2,\n      \"Message Actions: Share Opted-out\": 0,\n      \"Message Actions: Sensitive Data Opted-in\": 2,\n      \"Message Actions: Sensitive Data Opted-out\": 0,\n      \"Message Actions: GPC Enabled\": 0,\n      \"Message Actions: GPC Disabled\": 2\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "377d553c-df28-423a-b777-0b7abedcb150",
+              "name": "API key is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usnat",
+                    "dashboard-v2-messages",
+                    ":periodFilter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "periodFilter",
+                      "description": "(Required) - **Daily**: The maximum duration of this period is 31 days between the `startDate` and `endDate`\n- **Weekly**: A week is a period of 7 days that starts on a Monday and ends on a Sunday. If the requested `startDate` is not a Monday, Sourcepoint will backdate the reporting period to the Monday for the week in its reporting aggregation.\n- **Monthly**: A month begins on the first day of that month. If the requested `startDate` is not the first day of the month, Sourcepoint will backdate the reporting period to the first day of the month in its reporting aggregation.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"startDate\": \"YYYY-MM-DD\",\n  \"endDate\": \"YYYY-MM-DD\",\n  \"siteId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"geo\": [\n    \"US\"\n  ],\n  \"state\": [\n    \"CA\"\n  ],\n  \"device\": [\n    \"desktop\",\n    \"mobile\"\n  ],\n  \"browser\": [\n    \"Firefox\",\n    \"Chrome\"\n  ],\n  \"os\": [\n    \"Windows\",\n    \"MacOS\"\n  ],\n  \"breakdownBy\": [\n    \"state\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "WWW-Authenticate",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://portal.sourcepoint.com/api/external/v1/reports",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "449dc34c-f6cf-41d3-ba1e-7774ddfca354",
+    "name": "Sourcepoint Reporting U.S. Multi-State Privacy API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sourcepoint Technologies API for retrieving U.S. Multi-State Privacy dashboard report data.",
+      "type": "text/plain"
+    }
+  }
+}

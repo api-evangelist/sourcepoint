@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sourcepoint GDPR Standard API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GDPR Standard end-user consent status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get end-user consent status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cdn.privacy-mgmt.com/consent/tcfv2/consent/v3/history/:siteId",
+            "params": [
+              {
+                "name": "siteId",
+                "value": "",
+                "type": "path",
+                "description": "The property ID for the property in the Sourcepoint portal."
+              },
+              {
+                "name": "consentUUID",
+                "value": "",
+                "type": "query",
+                "description": "Retrieved from the first-party cookie consentUUID"
+              },
+              {
+                "name": "authId",
+                "value": "",
+                "type": "query",
+                "description": "Retrieved from the first-party cookie authId"
+              },
+              {
+                "name": "latest",
+                "value": "",
+                "type": "query",
+                "description": "(Optional) Only return latest consent record for the end-user"
+              }
+            ]
+          },
+          "docs": "Returns end-user GDPR Standard consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `consentUUID` or `authId`."
+        },
+        {
+          "info": {
+            "name": "Delete end-user consent status",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cdn.privacy-mgmt.com/consent/tcfv2/consent/v3/:siteId",
+            "params": [
+              {
+                "name": "siteId",
+                "value": "",
+                "type": "path",
+                "description": "The property ID for the property in the Sourcepoint portal."
+              },
+              {
+                "name": "consentUUID",
+                "value": "",
+                "type": "query",
+                "description": "Retrieved from the first-party cookie consentUUID"
+              },
+              {
+                "name": "authId",
+                "value": "",
+                "type": "query",
+                "description": "Retrieved from the first-party cookie authId"
+              }
+            ]
+          },
+          "docs": "Deletes end-user GDPR Standard consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `consentUUID` or `authId`.<br><br>This endpoint does not support mass deletions of end-user consent records. Please speak to your Sourcepoint representative to execute any mass deletions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "GDPR Standard vendor list",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Map vendors and purposes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cdn.privacy-mgmt.com/consent/tcfv2/vendor-list/vendor-purpose-mapping",
+            "params": [
+              {
+                "name": "siteId",
+                "value": "",
+                "type": "query",
+                "description": "The property ID for the property in the Sourcepoint portal."
+              }
+            ]
+          },
+          "docs": "Returns mapping of vendors and purposes with legal bases on the vendor list associated with the property.\n\n**Note**: *For each vendor, the response will only include purposes that have a configured legal basis ( **Consent**, **Legitimate Interest**, **Disclosure Only**). Any purposes that are **Not Applicable** will not be returned in the response.*\n\n*Additionally, vendors will need at least one purpose with a configured legal basis to be returned in the response.*"
+        },
+        {
+          "info": {
+            "name": "Vendor URL mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cdn.privacy-mgmt.com/consent/tcfv2/vendor-list/vendor-url-mapping",
+            "params": [
+              {
+                "name": "allCategoryMapping",
+                "value": "",
+                "type": "query",
+                "description": "Will return `categoryMapping` array which details all vendors and their configured purposes for the property"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Intended to be used by publishing systems to help determine if a vendor URL has been defined appropriately in the Sourcepoint system. This API can help developers that are integrating with Content Management Systems (CMS) verify that a URL referenced in content can be related to vendor and purpose consent preferences which can be queried and set based on user actions.<br><br>Before utilizing this API, ensure [vendor URL mappings are configured for the vendor](https://docs.sourcepoint.com/hc/en-u"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
