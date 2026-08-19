@@ -61,7 +61,7 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/sourcepoint/refs/heads/main/apis.yml
 created: '2026-05-25'
 modified: '2026-08-12'
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 apis:
   - aid: sourcepoint:sourcepoint-gdpr-tcf-api
     name: Sourcepoint GDPR TCF API
