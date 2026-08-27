@@ -63,174 +63,420 @@ created: '2026-05-25'
 modified: '2026-08-12'
 specificationVersion: '0.23'
 apis:
-  - aid: sourcepoint:sourcepoint-gdpr-tcf-api
-    name: Sourcepoint GDPR TCF API
-    description: >-
-      REST API surfacing end-user consent operations under the GDPR using the
-      IAB Transparency & Consent Framework (TCF v2.2). Supports retrieving
-      end-user consent status and history by site, merging an end-user's
-      custom vendor consent profile with the IAB vendor list derived from a
-      provided TCString, deleting consent records (DSAR-style erasure), and
-      mapping vendor purposes and URLs. The GDPR TCF web layer also exposes
-      __tcfapi command surface (ping, getTCData, addEventListener,
-      removeEventListener, getCustomVendorConsents, getVendorPurposeMapping,
-      postRejectAll, postCustomConsent) plus the tcData object and
-      euconsentWithDisclosedVendors helper.
-    humanURL: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
-    baseURL: https://cdn.privacy-mgmt.com/consent/tcfv2
-    tags:
-      - Consent
-      - GDPR
-      - IAB TCF
-      - TCF v2.2
-      - Privacy
-    properties:
-      - type: Documentation
-        url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
-      - type: Documentation
-        url: https://docs.sourcepoint.com/hc/en-us/articles/4416092045587-GDPR-TCF-implementation-guide-web
-      - type: Documentation
-        url: https://docs.sourcepoint.com/hc/en-us/articles/4405890450323-Update-end-user-consent-profile-with-Sourcepoint-API-GDPR-TCF-
-      - type: Documentation
-        url: https://docs.sourcepoint.com/hc/en-us/articles/4405613823123-Retrieve-end-user-consent-data-history
-      - type: OpenAPI
-        url: openapi/sourcepoint-gdpr-tcf-openapi.yml
-      - type: Overlay
-        url: overlays/sourcepoint-gdpr-tcf-overlay.yaml
-      - type: APIReference
-        url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
-  - aid: sourcepoint:sourcepoint-gdpr-standard-api
-    name: Sourcepoint GDPR Standard API
-    description: >-
-      REST API exposing GDPR consent operations outside of the IAB TCF
-      framework for organizations that need GDPR compliance with custom vendor
-      lists. Operations include retrieving end-user consent status, deleting
-      consent status, mapping vendors and purposes, vendor URL mapping, and
-      web command surface for getCustomVendorConsents, getVendorPurposeMapping,
-      postRejectAll, postCustomConsent, and addEventListener.
-    humanURL: https://sourcepoint-public-api.readme.io/reference
-    baseURL: https://cdn.privacy-mgmt.com/consent/tcfv2
-    tags:
-      - Consent
-      - GDPR
-      - Privacy
-    properties:
-      - type: Documentation
-        url: https://sourcepoint-public-api.readme.io/reference
-      - type: OpenAPI
-        url: openapi/sourcepoint-gdpr-standard-openapi.yml
-      - type: Overlay
-        url: overlays/sourcepoint-gdpr-standard-overlay.yaml
-      - type: APIReference
-        url: https://sourcepoint-public-api.readme.io/reference/gdpr-standard-end-user-consent-status
-  - aid: sourcepoint:sourcepoint-usnat-multi-state-privacy-api
-    name: Sourcepoint U.S. Multi-State Privacy API
-    description: >-
-      REST API for U.S. Multi-State Privacy (USNAT) end-user consent handling,
-      built on the IAB Global Privacy Platform (GPP) string. Supports
-      retrieving end-user consent history, deleting consent status, opt-out
-      across all privacy choices and vendors, and a web command surface
-      including hasSection, getSection, getField, getUserConsents,
-      postRejectAll, ping, addEventListener, and removeEventListener. Covers
-      U.S. National and per-state privacy sections (CA, VA, CO, CT, UT, and
-      newer state regimes).
-    humanURL: https://sourcepoint-public-api.readme.io/reference
-    baseURL: https://cdn.privacy-mgmt.com/usnat
-    tags:
-      - Consent
-      - U.S. Multi-State Privacy
-      - USNAT
-      - CCPA
-      - GPP
-      - Privacy
-    properties:
-      - type: Documentation
-        url: https://sourcepoint-public-api.readme.io/reference
-      - type: OpenAPI
-        url: openapi/sourcepoint-usnat-openapi.yml
-      - type: Overlay
-        url: overlays/sourcepoint-usnat-overlay.yaml
-      - type: APIReference
-        url: https://sourcepoint-public-api.readme.io/reference/us-multi-state-privacy-end-user-consent-status-1
-  - aid: sourcepoint:sourcepoint-global-enterprise-api
-    name: Sourcepoint Global Enterprise API
-    description: >-
-      REST API for the Global Enterprise consent product, providing a single
-      multi-regulation consent surface across global properties. Supports
-      retrieving end-user consent history, deleting consent status, and web
-      methods including getUserConsents and postRejectAll for cross-regulation
-      consent orchestration.
-    humanURL: https://sourcepoint-public-api.readme.io/reference
-    baseURL: https://cdn.privacy-mgmt.com/global-cmp
-    tags:
-      - Consent
-      - Global Privacy
-      - Enterprise
-    properties:
-      - type: Documentation
-        url: https://sourcepoint-public-api.readme.io/reference
-      - type: Documentation
-        url: https://docs.sourcepoint.com/hc/en-us/articles/41919922996243-Global-Enterprise-implementation-guide
-      - type: OpenAPI
-        url: openapi/sourcepoint-global-enterprise-openapi.yml
-      - type: Overlay
-        url: overlays/sourcepoint-global-enterprise-overlay.yaml
-      - type: APIReference
-        url: https://sourcepoint-public-api.readme.io/reference/global-enterprise-end-user-consent-status
-  - aid: sourcepoint:sourcepoint-preferences-api
-    name: Sourcepoint Preferences API
-    description: >-
-      REST API for Universal Consent & Preferences and Marketing Preferences,
-      letting organizations retrieve and delete an end-user's preferences
-      history and read getUserPreferences on the web surface. Enables a unified
-      first-party preference profile across channels alongside the regulatory
-      consent surface.
-    humanURL: https://sourcepoint-public-api.readme.io/reference
-    baseURL: https://cdn.privacy-mgmt.com/preferences
-    tags:
-      - Preferences
-      - Marketing Preferences
-      - Universal Consent
-      - First-Party Data
-    properties:
-      - type: Documentation
-        url: https://sourcepoint-public-api.readme.io/reference
-      - type: Documentation
-        url: https://docs.sourcepoint.com/hc/en-us/articles/30557096773139-Preferences-implementation-guide-web
-      - type: OpenAPI
-        url: openapi/sourcepoint-preferences-openapi.yml
-      - type: Overlay
-        url: overlays/sourcepoint-preferences-overlay.yaml
-      - type: APIReference
-        url: https://sourcepoint-public-api.readme.io/reference/get_user-preference-history-1
-  - aid: sourcepoint:sourcepoint-reporting-api
-    name: Sourcepoint Reporting API
-    description: >-
-      REST API exposing aggregated dashboard data for GDPR and U.S.
-      Multi-State Privacy campaigns, including pageview and message data
-      filtered by period for dashboard and BI integration. Powers the
-      Sourcepoint portal's analytics views.
-    humanURL: https://sourcepoint-public-api.readme.io/reference
-    baseURL: https://portal.sourcepoint.com/api/external/v1/reports
-    tags:
-      - Reporting
-      - Analytics
-      - Consent
-      - Dashboards
-    properties:
-      - type: Documentation
-        url: https://sourcepoint-public-api.readme.io/reference
-      - type: OpenAPI
-        url: openapi/sourcepoint-reporting-gdpr-openapi.yml
-      - type: OpenAPI
-        url: openapi/sourcepoint-reporting-usnat-openapi.yml
-      - type: Overlay
-        url: overlays/sourcepoint-reporting-gdpr-overlay.yaml
-      - type: Overlay
-        url: overlays/sourcepoint-reporting-usnat-overlay.yaml
-      - type: APIReference
-        url: https://sourcepoint-public-api.readme.io/reference/gdpr-reporting-api
+- aid: sourcepoint:sourcepoint-gdpr-reporting-api-api
+  name: Sourcepoint GDPR reporting API
+  description: The GDPR reporting API API from Sourcepoint — 2 operation(s) for gdpr reporting api.
+  humanURL: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  baseURL: https://cdn.privacy-mgmt.com/consent/tcfv2
+  tags:
+  - GDPR reporting API
+  properties:
+  - type: OpenAPI
+    url: openapi/sourcepoint-gdpr-reporting-api-api-openapi.yml
+  - type: Documentation
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4416092045587-GDPR-TCF-implementation-guide-web
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4405890450323-Update-end-user-consent-profile-with-Sourcepoint-API-GDPR-TCF-
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4405613823123-Retrieve-end-user-consent-data-history
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  - type: Documentation
+    url: https://sourcepoint-public-api.readme.io/reference
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-standard-end-user-consent-status
+  - type: APIReference
+    url: >-
+      https://sourcepoint-public-api.readme.io/reference/us-multi-state-privacy-end-user-consent-status-1
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/41919922996243-Global-Enterprise-implementation-guide
+  - type: APIReference
+    url: >-
+      https://sourcepoint-public-api.readme.io/reference/global-enterprise-end-user-consent-status
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/30557096773139-Preferences-implementation-guide-web
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/get_user-preference-history-1
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-reporting-api
+- aid: sourcepoint:sourcepoint-gdpr-standard-end-user-consent-status-api
+  name: Sourcepoint GDPR Standard end-user consent status API
+  description: >-
+    The GDPR Standard end-user consent status API from Sourcepoint — 2 operation(s) for gdpr standard
+    end-user consent status.
+  humanURL: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  baseURL: https://cdn.privacy-mgmt.com/consent/tcfv2
+  tags:
+  - GDPR Standard end-user consent status
+  properties:
+  - type: OpenAPI
+    url: openapi/sourcepoint-gdpr-standard-end-user-consent-status-api-openapi.yml
+  - type: Documentation
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4416092045587-GDPR-TCF-implementation-guide-web
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4405890450323-Update-end-user-consent-profile-with-Sourcepoint-API-GDPR-TCF-
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4405613823123-Retrieve-end-user-consent-data-history
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  - type: Documentation
+    url: https://sourcepoint-public-api.readme.io/reference
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-standard-end-user-consent-status
+  - type: APIReference
+    url: >-
+      https://sourcepoint-public-api.readme.io/reference/us-multi-state-privacy-end-user-consent-status-1
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/41919922996243-Global-Enterprise-implementation-guide
+  - type: APIReference
+    url: >-
+      https://sourcepoint-public-api.readme.io/reference/global-enterprise-end-user-consent-status
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/30557096773139-Preferences-implementation-guide-web
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/get_user-preference-history-1
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-reporting-api
+- aid: sourcepoint:sourcepoint-gdpr-standard-vendor-list-api
+  name: Sourcepoint GDPR Standard vendor list API
+  description: >-
+    The GDPR Standard vendor list API from Sourcepoint — 2 operation(s) for gdpr standard vendor list.
+  humanURL: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  baseURL: https://cdn.privacy-mgmt.com/consent/tcfv2
+  tags:
+  - GDPR Standard vendor list
+  properties:
+  - type: OpenAPI
+    url: openapi/sourcepoint-gdpr-standard-vendor-list-api-openapi.yml
+  - type: Documentation
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4416092045587-GDPR-TCF-implementation-guide-web
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4405890450323-Update-end-user-consent-profile-with-Sourcepoint-API-GDPR-TCF-
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4405613823123-Retrieve-end-user-consent-data-history
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  - type: Documentation
+    url: https://sourcepoint-public-api.readme.io/reference
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-standard-end-user-consent-status
+  - type: APIReference
+    url: >-
+      https://sourcepoint-public-api.readme.io/reference/us-multi-state-privacy-end-user-consent-status-1
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/41919922996243-Global-Enterprise-implementation-guide
+  - type: APIReference
+    url: >-
+      https://sourcepoint-public-api.readme.io/reference/global-enterprise-end-user-consent-status
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/30557096773139-Preferences-implementation-guide-web
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/get_user-preference-history-1
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-reporting-api
+- aid: sourcepoint:sourcepoint-gdpr-tcf-end-user-consent-status-api
+  name: Sourcepoint GDPR TCF end-user consent status API
+  description: >-
+    The GDPR TCF end-user consent status API from Sourcepoint — 3 operation(s) for gdpr tcf end-user consent
+    status.
+  humanURL: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  baseURL: https://cdn.privacy-mgmt.com/consent/tcfv2
+  tags:
+  - GDPR TCF end-user consent status
+  properties:
+  - type: OpenAPI
+    url: openapi/sourcepoint-gdpr-tcf-end-user-consent-status-api-openapi.yml
+  - type: Documentation
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4416092045587-GDPR-TCF-implementation-guide-web
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4405890450323-Update-end-user-consent-profile-with-Sourcepoint-API-GDPR-TCF-
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4405613823123-Retrieve-end-user-consent-data-history
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  - type: Documentation
+    url: https://sourcepoint-public-api.readme.io/reference
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-standard-end-user-consent-status
+  - type: APIReference
+    url: >-
+      https://sourcepoint-public-api.readme.io/reference/us-multi-state-privacy-end-user-consent-status-1
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/41919922996243-Global-Enterprise-implementation-guide
+  - type: APIReference
+    url: >-
+      https://sourcepoint-public-api.readme.io/reference/global-enterprise-end-user-consent-status
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/30557096773139-Preferences-implementation-guide-web
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/get_user-preference-history-1
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-reporting-api
+- aid: sourcepoint:sourcepoint-gdpr-tcf-vendor-list-api
+  name: Sourcepoint GDPR TCF vendor list API
+  description: The GDPR TCF vendor list API from Sourcepoint — 3 operation(s) for gdpr tcf vendor list.
+  humanURL: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  baseURL: https://cdn.privacy-mgmt.com/consent/tcfv2
+  tags:
+  - GDPR TCF vendor list
+  properties:
+  - type: OpenAPI
+    url: openapi/sourcepoint-gdpr-tcf-vendor-list-api-openapi.yml
+  - type: Documentation
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4416092045587-GDPR-TCF-implementation-guide-web
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4405890450323-Update-end-user-consent-profile-with-Sourcepoint-API-GDPR-TCF-
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4405613823123-Retrieve-end-user-consent-data-history
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  - type: Documentation
+    url: https://sourcepoint-public-api.readme.io/reference
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-standard-end-user-consent-status
+  - type: APIReference
+    url: >-
+      https://sourcepoint-public-api.readme.io/reference/us-multi-state-privacy-end-user-consent-status-1
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/41919922996243-Global-Enterprise-implementation-guide
+  - type: APIReference
+    url: >-
+      https://sourcepoint-public-api.readme.io/reference/global-enterprise-end-user-consent-status
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/30557096773139-Preferences-implementation-guide-web
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/get_user-preference-history-1
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-reporting-api
+- aid: sourcepoint:sourcepoint-global-enterprise-end-user-consent-status-api
+  name: Sourcepoint Global Enterprise end-user consent status API
+  description: >-
+    The Global Enterprise end-user consent status API from Sourcepoint — 2 operation(s) for global enterprise
+    end-user consent status.
+  humanURL: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  baseURL: https://cdn.privacy-mgmt.com/consent/tcfv2
+  tags:
+  - Global Enterprise end-user consent status
+  properties:
+  - type: OpenAPI
+    url: openapi/sourcepoint-global-enterprise-end-user-consent-status-api-openapi.yml
+  - type: Documentation
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4416092045587-GDPR-TCF-implementation-guide-web
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4405890450323-Update-end-user-consent-profile-with-Sourcepoint-API-GDPR-TCF-
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4405613823123-Retrieve-end-user-consent-data-history
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  - type: Documentation
+    url: https://sourcepoint-public-api.readme.io/reference
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-standard-end-user-consent-status
+  - type: APIReference
+    url: >-
+      https://sourcepoint-public-api.readme.io/reference/us-multi-state-privacy-end-user-consent-status-1
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/41919922996243-Global-Enterprise-implementation-guide
+  - type: APIReference
+    url: >-
+      https://sourcepoint-public-api.readme.io/reference/global-enterprise-end-user-consent-status
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/30557096773139-Preferences-implementation-guide-web
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/get_user-preference-history-1
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-reporting-api
+- aid: sourcepoint:sourcepoint-preferences-end-user-history-api
+  name: Sourcepoint Preferences end-user history API
+  description: >-
+    The Preferences end-user history API from Sourcepoint — 2 operation(s) for preferences end-user history.
+  humanURL: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  baseURL: https://cdn.privacy-mgmt.com/consent/tcfv2
+  tags:
+  - Preferences end-user history
+  properties:
+  - type: OpenAPI
+    url: openapi/sourcepoint-preferences-end-user-history-api-openapi.yml
+  - type: Documentation
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4416092045587-GDPR-TCF-implementation-guide-web
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4405890450323-Update-end-user-consent-profile-with-Sourcepoint-API-GDPR-TCF-
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4405613823123-Retrieve-end-user-consent-data-history
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  - type: Documentation
+    url: https://sourcepoint-public-api.readme.io/reference
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-standard-end-user-consent-status
+  - type: APIReference
+    url: >-
+      https://sourcepoint-public-api.readme.io/reference/us-multi-state-privacy-end-user-consent-status-1
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/41919922996243-Global-Enterprise-implementation-guide
+  - type: APIReference
+    url: >-
+      https://sourcepoint-public-api.readme.io/reference/global-enterprise-end-user-consent-status
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/30557096773139-Preferences-implementation-guide-web
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/get_user-preference-history-1
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-reporting-api
+- aid: sourcepoint:sourcepoint-u-s-multi-state-privacy-end-user-consent-status-api
+  name: Sourcepoint U.S. Multi-State Privacy end-user consent status API
+  description: >-
+    The U.S. Multi-State Privacy end-user consent status API from Sourcepoint — 3 operation(s) for u.s.
+    multi-state privacy end-user consent status.
+  humanURL: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  baseURL: https://cdn.privacy-mgmt.com/consent/tcfv2
+  tags:
+  - U.S. Multi-State Privacy end-user consent status
+  properties:
+  - type: OpenAPI
+    url: openapi/sourcepoint-u-s-multi-state-privacy-end-user-consent-status-api-openapi.yml
+  - type: Documentation
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4416092045587-GDPR-TCF-implementation-guide-web
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4405890450323-Update-end-user-consent-profile-with-Sourcepoint-API-GDPR-TCF-
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4405613823123-Retrieve-end-user-consent-data-history
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  - type: Documentation
+    url: https://sourcepoint-public-api.readme.io/reference
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-standard-end-user-consent-status
+  - type: APIReference
+    url: >-
+      https://sourcepoint-public-api.readme.io/reference/us-multi-state-privacy-end-user-consent-status-1
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/41919922996243-Global-Enterprise-implementation-guide
+  - type: APIReference
+    url: >-
+      https://sourcepoint-public-api.readme.io/reference/global-enterprise-end-user-consent-status
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/30557096773139-Preferences-implementation-guide-web
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/get_user-preference-history-1
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-reporting-api
+- aid: sourcepoint:sourcepoint-u-s-multi-state-privacy-reporting-api-api
+  name: Sourcepoint U.S. Multi-State Privacy reporting API
+  description: >-
+    The U.S. Multi-State Privacy reporting API API from Sourcepoint — 2 operation(s) for u.s. multi-state
+    privacy reporting api.
+  humanURL: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  baseURL: https://cdn.privacy-mgmt.com/consent/tcfv2
+  tags:
+  - U.S. Multi-State Privacy reporting API
+  properties:
+  - type: OpenAPI
+    url: openapi/sourcepoint-u-s-multi-state-privacy-reporting-api-api-openapi.yml
+  - type: Documentation
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4416092045587-GDPR-TCF-implementation-guide-web
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4405890450323-Update-end-user-consent-profile-with-Sourcepoint-API-GDPR-TCF-
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/4405613823123-Retrieve-end-user-consent-data-history
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-tcf-end-user-consent-status
+  - type: Documentation
+    url: https://sourcepoint-public-api.readme.io/reference
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-standard-end-user-consent-status
+  - type: APIReference
+    url: >-
+      https://sourcepoint-public-api.readme.io/reference/us-multi-state-privacy-end-user-consent-status-1
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/41919922996243-Global-Enterprise-implementation-guide
+  - type: APIReference
+    url: >-
+      https://sourcepoint-public-api.readme.io/reference/global-enterprise-end-user-consent-status
+  - type: Documentation
+    url: >-
+      https://docs.sourcepoint.com/hc/en-us/articles/30557096773139-Preferences-implementation-guide-web
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/get_user-preference-history-1
+  - type: APIReference
+    url: https://sourcepoint-public-api.readme.io/reference/gdpr-reporting-api
 common:
+  - type: Overlay
+    url: overlays/sourcepoint-gdpr-tcf-overlay.yaml
+  - type: Overlay
+    url: overlays/sourcepoint-gdpr-standard-overlay.yaml
+  - type: Overlay
+    url: overlays/sourcepoint-usnat-overlay.yaml
+  - type: Overlay
+    url: overlays/sourcepoint-global-enterprise-overlay.yaml
+  - type: Overlay
+    url: overlays/sourcepoint-preferences-overlay.yaml
+  - type: Overlay
+    url: overlays/sourcepoint-reporting-gdpr-overlay.yaml
+  - type: Overlay
+    url: overlays/sourcepoint-reporting-usnat-overlay.yaml
   - type: Authentication
     url: authentication/sourcepoint-authentication.yml
   - type: DomainSecurity
