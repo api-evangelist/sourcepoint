@@ -1,0 +1,414 @@
+openapi: 3.2.0
+info:
+  title: Sourcepoint Reporting GDPR GDPR reporting API
+  version: 1.0.0
+  description: Sourcepoint Technologies API for retrieving GDPR TCF dashboard report data.
+servers:
+- url: https://portal.sourcepoint.com/api/external/v1/reports
+security:
+- ApiKeyAuth: []
+tags:
+- name: GDPR reporting API
+paths:
+  /tcfv2/dashboard-v2-pv-users/{periodFilter}:
+    post:
+      tags:
+      - GDPR reporting API
+      description: Returns pageview data for properties that have implemented GDPR.<br><br>Include your API key in the provided **Header** field under **AUTHORIZATION** in the right-hand pane before trying your request.<br><br>In addition to the API key, you will also need to include `startDate`, `endDate`, and `siteId` in your request.
+      summary: GDPR pageview data
+      parameters:
+      - $ref: '#/components/parameters/periodFilter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/gdprRequestBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/gdprPvResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /tcfv2/dashboard-v2-messages/{periodFilter}:
+    post:
+      tags:
+      - GDPR reporting API
+      description: Returns message data for properties that have implemented GDPR.<br><br>Include your API key in the provided **Header** field under **AUTHORIZATION** in the right-hand pane before trying your request.<br><br>In addition to the API key, you will also need to include `startDate`, `endDate`, and `siteId` in your request.
+      summary: GDPR message data
+      parameters:
+      - $ref: '#/components/parameters/periodFilter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/gdprRequestBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/gdprMsgResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+components:
+  responses:
+    UnauthorizedError:
+      description: API key is missing or invalid
+      headers:
+        WWW-Authenticate:
+          schema:
+            type: string
+  schemas:
+    gdprMsgResponse:
+      type: object
+      description: Successful response for GDPR message report request
+      properties:
+        performanceData:
+          type: object
+          description: Ignore. For internal troubleshooting.
+          properties:
+            total:
+              type: integer
+            messagesResults:
+              type: integer
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              ymd:
+                type: string
+                description: Year, month and day. Returned only for Daily periodization
+                example: '2023-09-02T00:00:00.000Z'
+              geo:
+                type: string
+                description: Geographic region to which the results pertain. Returned when request uses geo in the breakdownBy parameter
+                example: DE
+              ua_os:
+                type: string
+                description: Operating system type to which the results pertain. Returned when request uses ua_os in the breakdownBy parameter
+                example: macOS
+              ua_device:
+                type: string
+                description: Device type to which the results pertain. Returned when request uses ua_device in the breakdownBy parameter
+                example: desktop
+              ua_browser:
+                type: string
+                description: Browser type to which the results pertain. Returned when request uses ua_browser in the breakdownBy parameter
+                example: Chrome
+              site_id:
+                type: string
+                description: Property ID within the Sourcepoint portal
+                example: 12345
+              domain:
+                type: string
+                description: Domain reported upon
+                example: '"www.sourcepoint.com"'
+              messaged_users:
+                type: string
+                description: Unique users within the periodization who received a message.
+                example: 3
+              message_id:
+                type: string
+                description: Message ID. Typically will be the ID for the first layer message but can be the ID of a privacy manager if consent action was given from a privacy manager without viewing first layer message first.
+                example: 987654
+              privacy_manager_id:
+                type: string
+                description: Returned only when consent action was given from a privacy manager. If consent action was given from a privacy manager without viewing a first layer message first then message_id and privacy_manager_id will be the same.
+                example: 123456
+              msg_name:
+                type: string
+                description: Message name
+                example: '"2.20.21 Desktop TCF v2 Notice"'
+              msg_type:
+                type: string
+                description: 'Possible values: message-v1 | message-v2 | privacy-manager. message-v1 response is a legacy response while message-v2 is the first layer message'
+                example: '"message-v2"'
+              msg_category_type:
+                type: string
+                description: The campaign type
+                example: '"gdpr"'
+              msg_sub_category_type:
+                type: string
+                description: 'The type of message delivered. Possible values: notice | privacy_manager | subject_access_request | dsar | notice-tcf-v2 | notice-native | privacy_manager_ott | notice_non_iab | privacy_manager_non_iab | ios | ccpa_ott | ccpa_pm | custom | native-ott'
+                example: '"notice-tcf-v2"'
+              total_actions:
+                type: string
+                description: Total number of end-user actions
+                example: 3
+              adjusted_actions:
+                type: string
+                description: Special processing to fix an issue
+                example: 3
+              message_opt_in_all:
+                type: string
+                description: Unique users within the periodization who received a message and then accepted all vendors and purposes.
+                example: 3
+              message_opt_out_all:
+                type: string
+                description: Unique users within the periodization who received a message and then rejected all vendors and purposes.
+                example: 0
+              message_li_only:
+                type: string
+                description: Unique users within the periodization who received a message and then clicked Save and Exit on the privacy manager if you have legitimate interest as a legal basis for at least one of your purposes.
+                example: 0
+              message_other:
+                type: string
+                description: Unique users within the periodization who received a message and then made choices on the privacy manager that do not fall into the categories Accept All, Reject All, Previous Accept All or, Legitimate Interest Only.
+                example: 0
+              message_previous_optin_to_all:
+                type: string
+                description: Unique users within the periodization who received a message and then made choices on the privacy manager that do not fall into the categories Accept All, Reject All, Previous Accept All or, Legitimate Interest Only. Property should always return 0.
+                example: 0
+    gdprRequestBody:
+      description: Request body for GDPR reporting data request
+      type: object
+      properties:
+        startDate:
+          type: string
+          description: Start date for the periodization. Format YYYY-MM-DD
+          example: YYYY-MM-DD
+        endDate:
+          type: string
+          description: End date for the periodization. Format YYYY-MM-DD
+          example: YYYY-MM-DD
+        siteId:
+          type: array
+          description: Array of property IDs in the Sourcepoint portal that will be included in the report data.
+          items:
+            type: string
+          example:
+          - 22
+          - 1584
+        geo:
+          type: array
+          description: Array of alpha-2 country codes (ISO 3166-1) that will be included in the report data. Preset regions (EU, EEA, etc...) is *not* permitted. If geo property is omitted then *all* countries and regions will be included in the report data.
+          items:
+            type: string
+          example:
+          - DE
+          - FR
+        device:
+          type: array
+          items:
+            type: string
+            enum:
+            - desktop
+            - mobile
+            - tablet
+            - tv
+          description: Array of devices that will be included in the report data. If device property is omitted then *all* devices will be included in report data.
+          example:
+          - desktop
+          - mobile
+        browser:
+          type: array
+          description: Array of browsers that will be included in the report data. If browser property is omitted then *all* browsers will be included in report data.
+          items:
+            type: string
+            enum:
+            - Amazon Silk
+            - Android Browser
+            - Bada
+            - BlackBerry
+            - Chrome
+            - Chromium
+            - Epiphany
+            - Firefox
+            - Focus
+            - Generic
+            - Googlebot
+            - Internet Explorer
+            - K-Meleon
+            - Maxthon
+            - Microsoft Edge
+            - MZ Browser
+            - NAVER Whale Browser
+            - Opera
+            - Opera Coast
+            - PhantomJS
+            - Puffin
+            - QupZilla
+            - Safari
+            - Sailfish
+            - Samsung Internet for Android
+            - SeaMonkey
+            - Sleipnir
+            - Swing
+            - Tizen
+            - UC Browser
+            - WebOS Browser
+            - WeChat
+            - Yandex Browser
+          example:
+          - Firefox
+          - Chrome
+        os:
+          type: array
+          description: Array of operating systems that will be included in the report data. If os property is omitted then *all* operating systems will be included in report data.
+          items:
+            type: string
+            enum:
+            - Windows
+            - iOS
+            - Windows Phone
+            - MacOS
+            - Android
+            - WebOS
+            - BlackBerry
+            - Bada
+            - Tizen
+            - Linux
+            - Chrome OS
+            - Playstation 4
+            - Roku
+          example:
+          - Windows
+          - MacOS
+        breakdownBy:
+          type: array
+          description: Array of different parameters that can be selected to breakdown/organize the returned results. Options include geo, operating system (ua_os), device (ua_device), browser (ua_browser)
+          items:
+            type: string
+            enum:
+            - geo
+            - ua_os
+            - ua_device
+            - ua_browser
+          example:
+          - geo
+      required:
+      - startDate
+      - endDate
+      - siteId
+    gdprPvResponse:
+      type: object
+      description: Successful response for GDPR pageview report request
+      properties:
+        performanceData:
+          type: object
+          description: Ignore. For internal troubleshooting.
+          properties:
+            total:
+              type: integer
+            propertiesResults:
+              type: integer
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              ymd:
+                type: string
+                description: Year, month and day. Returned only for Daily periodization
+                example: '2023-09-02T00:00:00.000Z'
+              geo:
+                type: string
+                description: Geographic region to which the results pertain. Returned when request uses geo in the breakdownBy parameter
+                example: DE
+              ua_os:
+                type: string
+                description: Operating system type to which the results pertain. Returned when request uses ua_os in the breakdownBy parameter
+                example: macOS
+              ua_device:
+                type: string
+                description: Device type to which the results pertain. Returned when request uses ua_device in the breakdownBy parameter
+                example: desktop
+              ua_browser:
+                type: string
+                description: Browser type to which the results pertain. Returned when request uses ua_browser in the breakdownBy parameter
+                example: Chrome
+              site_id:
+                type: string
+                description: Property ID within the Sourcepoint portal
+                example: 12345
+              domain:
+                type: string
+                description: Domain reported upon
+                example: '"www.sourcepoint.com"'
+              pv:
+                type: string
+                description: Number of pageviews for the given periodization
+                example: 784
+              pv_status_opt_in_all:
+                type: string
+                description: Page views across users who have accepted all purposes and vendors on the most recent version of the vendor list.
+                example: 218
+              pv_status_opt_out_all:
+                type: string
+                description: Page views across users who have rejected all purposes and vendors across any version of the vendor list.
+                example: 51
+              pv_status_li_only:
+                type: string
+                description: Page views across users who selected Save and Exit across any version of the vendor list if legitimate interest is a legal basis for at least one of your purposes.
+                example: 0
+              pv_status_other:
+                type: string
+                description: Page views across users who have made choices on the privacy manager that do not fall into the categories Accept All, Reject All, Previous Accept All or, Legitimate Interest Only on any version of the vendor list.
+                example: 0
+              pv_default_consent_only:
+                type: string
+                description: Page views across users who have not made any choices on the consent banner on any version of the vendor list.
+                example: 496
+              pv_status_previous_optin_all:
+                type: string
+                description: Page views across users who have accepted all purposes and vendors on a previous version of the vendor list. These users may be eligible to receive a re-consent experience.
+                example: 0
+              unique_users:
+                type: string
+                description: Total number of users for the selected properties in the configured periodization.
+                example: 372
+              user_status_opt_in_all:
+                type: string
+                description: Unique users who have accepted all purposes and vendors on the most recent version of the vendor list.
+                example: 68
+              user_status_opt_out_all:
+                type: string
+                description: Unique users who have rejected all purposes and vendors across any version of the vendor list.
+                example: 33
+              user_status_li_only:
+                type: string
+                description: Unique users who have clicked Save and Exit across any version of the vendor list if you have legitimate interest as a legal basis for at least one of your purposes.
+                example: 0
+              user_status_other:
+                type: string
+                description: Unique users who have made choices on the privacy manager that do not fall into the categories Accept All, Reject All, Previous Accept All or, Legitimate Interest Only on any version of the vendor list.
+                example: 0
+              user_default_consent_only:
+                type: string
+                description: Unique users who have not made any choices on the consent banner on any version of the vendor list.
+                example: 273
+              user_status_previous_optin_all:
+                type: string
+                description: Unique users who have accepted all purposes and vendors on a previous version of the vendor list. These users may be eligible to receive a re-consent experience.
+                example: 0
+  parameters:
+    periodFilter:
+      name: periodFilter
+      in: path
+      description: '- **Daily**: The maximum duration of this period is 31 days between the `startDate` and `endDate`
+
+        - **Weekly**: A week is a period of 7 days that starts on a Monday and ends on a Sunday. If the requested `startDate` is not a Monday, Sourcepoint will backdate the reporting period to the Monday for the week in its reporting aggregation.
+
+        - **Monthly**: A month begins on the first day of that month. If the requested `startDate` is not the first day of the month, Sourcepoint will backdate the reporting period to the first day of the month in its reporting aggregation.
+
+        '
+      required: true
+      schema:
+        type: string
+        enum:
+        - daily
+        - weekly
+        - monthly
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

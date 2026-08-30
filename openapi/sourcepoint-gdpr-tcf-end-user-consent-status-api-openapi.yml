@@ -1,0 +1,322 @@
+openapi: 3.2.0
+info:
+  title: Sourcepoint GDPR TCF GDPR TCF end-user consent status API
+  version: 1.0.0
+  description: Sourcepoint Technologies API for managing property and end-user GDPR TCF information.
+servers:
+- url: https://cdn.privacy-mgmt.com/consent/tcfv2
+tags:
+- name: GDPR TCF end-user consent status
+paths:
+  /consent/v3/history/{siteId}:
+    get:
+      tags:
+      - GDPR TCF end-user consent status
+      summary: Get end-user consent status
+      description: Returns end-user GDPR TCF consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `consentUUID` or `authId`.
+      parameters:
+      - name: siteId
+        in: path
+        required: true
+        description: The property ID for the property in the Sourcepoint portal.
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/consentUUID'
+      - $ref: '#/components/parameters/authId'
+      - $ref: '#/components/parameters/latest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getConsentResponse'
+  /consent/v3/{siteId}/tcstring:
+    post:
+      tags:
+      - GDPR TCF end-user consent status
+      summary: Merge end-user consent status with identity provider
+      description: Merge an end-user's custom vendor consent profile with the information Sourcepoint has for IAB vendors taken from a TCString that is provided. Though originally planned for the German consortium *NetId*, it is available for any identity provider to confirm or revoke vendor consent in one place<br><br>*Your organization will require their own CMP ID to use this API. Please contact your Sourcepoint Client Support team if you require more information.*
+      parameters:
+      - name: siteId
+        in: path
+        required: true
+        description: The property ID for the property in the Sourcepoint portal.
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/consentUUID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                euconsent:
+                  type: string
+                  description: tcString for end-user
+                  example: CPOA6HgPOA6HgFZABCDEBwCgAP_AAEwAAAYgIDpb_T7VbWFCWf59fvsgOYxXVMCeA
+              required:
+              - euconsent
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mergeConsent'
+  /consent/v3/{siteId}:
+    delete:
+      tags:
+      - GDPR TCF end-user consent status
+      summary: Delete end-user consent status
+      description: Deletes end-user GDPR TCF consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `consentUUID` or `authId`.<br><br>This endpoint does not support mass deletions of end-user consent records. Please speak to your Sourcepoint representative to execute any mass deletions.
+      parameters:
+      - name: siteId
+        in: path
+        required: true
+        description: The property ID for the property in the Sourcepoint portal.
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/consentUUID'
+      - $ref: '#/components/parameters/authId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    n:
+                      type: integer
+                      example: 1
+                    ok:
+                      type: integer
+                      example: 1
+                    deletedCount:
+                      type: integer
+                      example: 1
+components:
+  schemas:
+    mergeConsent:
+      description: Returns end-user consent after merging consent profile
+      properties:
+        userConsentRecord:
+          type: object
+          properties:
+            categories:
+              type: array
+              description: Purposes consented to by end-user
+              items:
+                type: string
+                description: Sourcepoint's purpose ID
+                example: 5f9aa28f7ab71b20a1b12345
+            legIntCategories:
+              type: array
+              description: Purposes consented to who use legitimate interest as a legal basis.
+              items:
+                type: string
+                description: Sourcepoint's purpose ID
+                example: 5f9aa28fabcd1b20a1babcde
+            vendors:
+              type: array
+              description: Vendors consented to by end-user
+              items:
+                type: string
+                description: Sourcepoint's vendor ID
+                example: 12343c6c091a5047885cf964
+            legIntVendors:
+              type: array
+              description: Vendors consented to by end-user who use legitimate interest as a legal basis for at least one purpose
+              items:
+                type: string
+                description: Sourcepoint's vendor ID
+                example: abcd3c6c12345047885cf964
+            id:
+              type: string
+              description: Request ID
+              example: 645b8e5f19a120048b8d24f8
+            consentUUID:
+              type: string
+              description: consentUUID for end-user
+              example: ab126231-e899-4fbb-b7e2-e8f762f080e6_14
+            siteId:
+              type: integer
+              description: Property ID for the property in the Sourcepoint portal.
+              example: 1234
+            euconsent:
+              type: string
+              description: tcString for end-user
+              example: 12344IAPrf4IAAjABCENDDCgAP_AAAAAACiQI5hV5DrMTWFAUXxZQNsgOYgU1sATIGQCCBCAAyABAAGA8AQA0WESEASAAAACAAAAowIBAAAEGAFEAAAAAAAEABEAAAQAgAAIIABAAAEQAAIAAAgIAAAAAAAAAAABAAAAmAAQIcKAREAAAIAQIgAAAAABAAAAAgIABAAAAAAAAAAAAgAAAAAAAAAAAAACARAAgAAAPCQKQAEAALAAqABkADkAHwAgABkADQAHkARABFACYAE8AN4AcwA_ACEAENAIgAiQBLACaAFKALcAYcA-wD9AIoARoAjgBJgCUgFzAMUAbQA3ACRAFDgLzAYMAw0AAMgAaAA8gCIAIoATAAngBSADEAHMAPwAhoBEAESAKUAWIAtwBowD7AP0Ai0BHAEdAJSAXMAvIBigDaAG4APsAi8BIgChwF5gMNAZIAywBrIDgigAUAC4AJAA2gEiALqAAA.YAAAAAAAAAAA
+            vendorListId:
+              type: string
+              description: Vendor list ID
+              example: 5f9aa290a228638af82db511
+            fromNetId:
+              type: boolean
+              description: Is the consent profile from an end-user using the netID single sign-on?
+              example: true
+            dateCreated:
+              type: string
+              description: Timestamp on the request
+              example: '2023-05-10T12:30:23.918Z'
+            __v:
+              type: integer
+              description: WIP
+              example: 0
+        appendedConsentUUID:
+          type: string
+          description: consentUUID for end-user after request
+          example: ab126231-e899-4fbb-b7e2-e8f762f080e6_14_19
+    getConsentResponse:
+      description: Returned response to get consent request
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: Unique identifier for the consent record
+            example: 6842d825666f5a1254fd263f
+          siteId:
+            type: number
+            description: Sourcepoint ID for property.
+            example: 39470
+          dateCreated:
+            type: string
+            description: Date consent status was created
+            example: '2023-05-08T15:37:18.365Z'
+          consentUUID:
+            type: string
+            description: Consent UUID for end-user
+            example: 1234f5a8-67c9-4a38-a7cd-6fe4f30a5678
+          messageId:
+            type: integer
+            description: ID of the first layer message shown to end-user
+            example: 123456
+          vendorListId:
+            type: string
+            description: ID of the vendor list
+            example: 9876a560b8e05c06542b2a31
+          vendors:
+            type: array
+            description: Vendors consented to
+            items:
+              anyOf:
+              - $ref: '#/components/schemas/IABAndCustomVendors'
+              - $ref: '#/components/schemas/GoogleATPVendors'
+          legIntVendors:
+            type: array
+            description: Vendors consented to who use legitimate interest as a legal basis for at least one purpose.
+            items:
+              anyOf:
+              - $ref: '#/components/schemas/IABAndCustomVendors'
+              - $ref: '#/components/schemas/GoogleATPVendors'
+          categories:
+            type: array
+            description: Purposes consented to
+            items:
+              anyOf:
+              - $ref: '#/components/schemas/IABPurposes'
+              - $ref: '#/components/schemas/customPurposes'
+          legIntCategories:
+            type: array
+            description: Purposes consented to who use legitimate interest as a legal basis.
+            items:
+              anyOf:
+              - $ref: '#/components/schemas/IABPurposes'
+              - $ref: '#/components/schemas/customPurposes'
+    customPurposes:
+      description: Returns custom purpose information
+      properties:
+        id:
+          type: string
+          description: Sourcepoint purpose ID
+          example: 5fdbbcdf4f3f9789140e23a0
+        name:
+          type: string
+          description: Purpose name
+          example: Custom purpose example
+    IABAndCustomVendors:
+      description: Returns IAB and Custom vendor information
+      properties:
+        id:
+          type: string
+          description: Sourcepoint vendor ID
+          example: 5f23e826b8e05c0c0abcdef
+        name:
+          type: string
+          description: Vendor name
+          example: IAB vendor example
+        vendorType:
+          type: string
+          description: Vendor type
+          example: IAB
+    GoogleATPVendors:
+      description: Returns Google ATP vendor information
+      properties:
+        id:
+          type: string
+          description: Sourcepoint vendor ID
+          example: 1234abcd5678efgh0d4fdb8f
+        name:
+          type: string
+          description: Vendor name
+          example: Google ATP vendor
+        vendorType:
+          type: string
+          description: Vendor type
+          example: CUSTOM
+        googleId:
+          type: integer
+          description: Google vendor ID
+          example: 1234
+    IABPurposes:
+      description: Returns IAB purpose information
+      properties:
+        id:
+          type: string
+          description: Sourcepoint purpose ID
+          example: 5fd7e01e32bd4d27654ba1d5
+        name:
+          type: string
+          description: Purpose name
+          example: Store and/or access information on a device
+        iabPurposeRef:
+          properties:
+            name:
+              type: string
+              description: Purpose name
+              example: Store and/or access information on a device
+            iabId:
+              type: integer
+              description: IAB purpose id
+              example: 1
+  parameters:
+    latest:
+      name: latest
+      in: query
+      description: (Optional) Only return the latest consent record for the end-user.
+      required: false
+      schema:
+        type: boolean
+    authId:
+      name: authId
+      in: query
+      description: Retrieved from the first-party cookie authId
+      required: false
+      schema:
+        type: string
+    consentUUID:
+      name: consentUUID
+      in: query
+      description: Retrieved from the first-party cookie consentUUID
+      required: false
+      schema:
+        type: string
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

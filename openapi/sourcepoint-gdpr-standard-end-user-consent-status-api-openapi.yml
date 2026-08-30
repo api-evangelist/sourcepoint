@@ -1,0 +1,193 @@
+openapi: 3.2.0
+info:
+  title: Sourcepoint GDPR Standard GDPR Standard end-user consent status API
+  version: 1.0.0
+  description: Sourcepoint Technologies API for managing property and end-user GDPR Standard information.
+servers:
+- url: https://cdn.privacy-mgmt.com/consent/tcfv2
+tags:
+- name: GDPR Standard end-user consent status
+paths:
+  /consent/v3/history/{siteId}:
+    get:
+      tags:
+      - GDPR Standard end-user consent status
+      summary: Get end-user consent status
+      description: Returns end-user GDPR Standard consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `consentUUID` or `authId`.
+      parameters:
+      - name: siteId
+        in: path
+        required: true
+        description: The property ID for the property in the Sourcepoint portal.
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/consentUUID'
+      - $ref: '#/components/parameters/authId'
+      - $ref: '#/components/parameters/latest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getConsentResponse'
+  /consent/v3/{siteId}:
+    delete:
+      tags:
+      - GDPR Standard end-user consent status
+      summary: Delete end-user consent status
+      description: Deletes end-user GDPR Standard consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `consentUUID` or `authId`.<br><br>This endpoint does not support mass deletions of end-user consent records. Please speak to your Sourcepoint representative to execute any mass deletions.
+      parameters:
+      - name: siteId
+        in: path
+        required: true
+        description: The property ID for the property in the Sourcepoint portal.
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/consentUUID'
+      - $ref: '#/components/parameters/authId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    n:
+                      type: integer
+                      example: 1
+                    ok:
+                      type: integer
+                      example: 1
+                    deletedCount:
+                      type: integer
+                      example: 1
+components:
+  schemas:
+    getConsentResponse:
+      description: Returned response to get consent request
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: Unique identifier for the consent record
+            example: 6842d825666f5a1254fd263f
+          siteId:
+            type: number
+            description: Sourcepoint ID for property.
+            example: 39470
+          dateCreated:
+            type: string
+            description: Date consent status was created
+            example: '2023-05-08T15:37:18.365Z'
+          consentUUID:
+            type: string
+            description: Consent UUID for end-user
+            example: 1234f5a8-67c9-4a38-a7cd-6fe4f30a5678
+          messageId:
+            type: integer
+            description: ID of the first layer message shown to end-user
+            example: 123456
+          vendorListId:
+            type: string
+            description: ID of the vendor list
+            example: 9876a560b8e05c06542b2a31
+          vendors:
+            type: array
+            description: Vendors consented to
+            items:
+              anyOf:
+              - $ref: '#/components/schemas/customVendors'
+              - $ref: '#/components/schemas/GoogleATPVendors'
+          legIntVendors:
+            type: array
+            description: Vendors consented to who use legitimate interest as a legal basis for at least one purpose.
+            items:
+              anyOf:
+              - $ref: '#/components/schemas/customVendors'
+              - $ref: '#/components/schemas/GoogleATPVendors'
+          categories:
+            type: array
+            description: Purposes consented to
+            items:
+              $ref: '#/components/schemas/customPurposes'
+          legIntCategories:
+            type: array
+            description: Purposes consented to who use legitimate interest as a legal basis.
+            items:
+              $ref: '#/components/schemas/customPurposes'
+    customPurposes:
+      description: Returns custom purpose information
+      properties:
+        id:
+          type: string
+          description: Sourcepoint purpose ID
+          example: 5fdbbcdf4f3f9789140e23a0
+        name:
+          type: string
+          description: Purpose name
+          example: Custom purpose example
+    customVendors:
+      description: Returns custom vendor information
+      properties:
+        id:
+          type: string
+          description: Sourcepoint vendor ID
+          example: 5f23e826b8e05c0c0abcdef
+        name:
+          type: string
+          description: Vendor name
+          example: Custom vendor example
+        vendorType:
+          type: string
+          description: Vendor type
+          example: CUSTOM
+    GoogleATPVendors:
+      description: Returns Google ATP vendor information
+      properties:
+        id:
+          type: string
+          description: Sourcepoint vendor ID
+          example: 1234abcd5678efgh0d4fdb8f
+        name:
+          type: string
+          description: Vendor name
+          example: Google ATP vendor
+        vendorType:
+          type: string
+          description: Vendor type
+          example: CUSTOM
+        googleId:
+          type: integer
+          description: Google vendor ID
+          example: 1234
+  parameters:
+    latest:
+      name: latest
+      in: query
+      description: (Optional) Only return latest consent record for the end-user
+      required: false
+      schema:
+        type: boolean
+    authId:
+      name: authId
+      in: query
+      description: Retrieved from the first-party cookie authId
+      required: false
+      schema:
+        type: string
+    consentUUID:
+      name: consentUUID
+      in: query
+      description: Retrieved from the first-party cookie consentUUID
+      required: false
+      schema:
+        type: string
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
