@@ -1,0 +1,54 @@
+{
+  "provider": "sourcepoint",
+  "sources": [
+    "_original/sourcepoint-gdpr-tcf-openapi.json",
+    "_original/sourcepoint-preferences-openapi.json",
+    "_original/sourcepoint-reporting-gdpr-openapi.json",
+    "_original/sourcepoint-reporting-usnat-openapi.json",
+    "_original/sourcepoint-usnat-openapi.json"
+  ],
+  "outputs": [
+    "sourcepoint-gdpr-tcf-end-user-consent-status-api-openapi.yml",
+    "sourcepoint-gdpr-tcf-vendor-list-api-openapi.yml",
+    "sourcepoint-preferences-end-user-history-api-openapi.yml",
+    "sourcepoint-gdpr-reporting-api-api-openapi.yml",
+    "sourcepoint-u-s-multi-state-privacy-reporting-api-api-openapi.yml",
+    "sourcepoint-u-s-multi-state-privacy-end-user-consent-status-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "9 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (5 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sourcepoint-gdpr-tcf-openapi.json: upgraded openapi 3.0.2 -> OpenAPI 3.2.0",
+    "sourcepoint-gdpr-tcf-openapi.json: declared missing tag: GDPR TCF end-user consent status",
+    "sourcepoint-gdpr-tcf-openapi.json: declared missing tag: GDPR TCF vendor list",
+    "sourcepoint-preferences-openapi.json: upgraded openapi 3.0.2 -> OpenAPI 3.2.0",
+    "sourcepoint-preferences-openapi.json: declared missing tag: Preferences end-user history",
+    "sourcepoint-reporting-gdpr-openapi.json: upgraded openapi 3.0.2 -> OpenAPI 3.2.0",
+    "sourcepoint-reporting-gdpr-openapi.json: declared missing tag: GDPR reporting API",
+    "sourcepoint-reporting-usnat-openapi.json: upgraded openapi 3.0.2 -> OpenAPI 3.2.0",
+    "sourcepoint-reporting-usnat-openapi.json: declared missing tag: U.S. Multi-State Privacy reporting API",
+    "sourcepoint-usnat-openapi.json: upgraded openapi 3.0.2 -> OpenAPI 3.2.0",
+    "sourcepoint-usnat-openapi.json: declared missing tag: U.S. Multi-State Privacy end-user consent status",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/sourcepoint-usnat-openapi.yml: archived document superseded by a larger archived document",
+    "_original/sourcepoint-reporting-usnat-openapi.yml: archived document superseded by a larger archived document",
+    "_original/sourcepoint-reporting-gdpr-openapi.yml: archived document superseded by a larger archived document",
+    "_original/sourcepoint-preferences-openapi.yml: archived document superseded by a larger archived document",
+    "_original/sourcepoint-global-enterprise-openapi.yml: archived document superseded by a larger archived document",
+    "_original/sourcepoint-global-enterprise-openapi.json: archived document superseded by a larger archived document",
+    "_original/sourcepoint-gdpr-tcf-openapi.yml: archived document superseded by a larger archived document",
+    "_original/sourcepoint-gdpr-standard-openapi.yml: archived document superseded by a larger archived document",
+    "_original/sourcepoint-gdpr-standard-openapi.json: archived document superseded by a larger archived document",
+    "sourcepoint-gdpr-reporting-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sourcepoint-gdpr-tcf-end-user-consent-status-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sourcepoint-gdpr-tcf-vendor-list-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sourcepoint-preferences-end-user-history-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sourcepoint-u-s-multi-state-privacy-end-user-consent-status-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sourcepoint-u-s-multi-state-privacy-reporting-api-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

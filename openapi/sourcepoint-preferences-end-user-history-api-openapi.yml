@@ -13,7 +13,7 @@ paths:
       tags:
       - Preferences end-user history
       summary: Get end-user preferences history
-      description: Returns end-user preferences history. In addition to the `accountId`, you will also need to include <u>either</u> the end-user's `uuid` or `authId` in the `id` parameter.
+      description: Returns end-user preferences history. In addition to the `accountId`, you will also need to include either the end-user's `uuid` or `authId` in the `id` parameter.
       parameters:
       - $ref: '#/components/parameters/accountId'
       - $ref: '#/components/parameters/id'
@@ -42,12 +42,14 @@ paths:
                   name: Customer Service Communication
                   type: MARKETING
                 _id: 6877a0b70b23e3a5cbe11234
+      operationId: getUserPreferenceHistory
+      x-operation-id-source: derived
   /user-preference:
     delete:
       tags:
       - Preferences end-user history
       summary: Delete end-user preferences history
-      description: Deletes end-user preferences history for a property. In addition to the `propertyId`, you will also need to include <u>either</u> the end-user's `uuid` or `authId`.
+      description: Deletes end-user preferences history for a property. In addition to the `propertyId`, you will also need to include either the end-user's `uuid` or `authId`.
       parameters:
       - name: propertyId
         in: query
@@ -64,8 +66,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/deletePreferencesHistory'
+      operationId: deleteUserPreference
+      x-operation-id-source: derived
 components:
   parameters:
+    uuid:
+      name: uuid
+      in: query
+      description: Retrieved from preferences object in the `_sp_user_consent_{propertyId}` local storage item
+      required: false
+      schema:
+        type: string
     accountId:
       name: accountId
       in: query
@@ -80,13 +91,6 @@ components:
       required: true
       schema:
         type: string
-    uuid:
-      name: uuid
-      in: query
-      description: Retrieved from preferences object in the `_sp_user_consent_{propertyId}` local storage item
-      required: false
-      schema:
-        type: string
     authId:
       name: authId
       in: query
@@ -95,18 +99,6 @@ components:
       schema:
         type: string
   schemas:
-    deletePreferencesHistory:
-      description: Returned response for successful delete end-user preferences history request.
-      type: object
-      properties:
-        deletedCount:
-          type: number
-          description: Number of preference records associated with the uuid or authId that was deleted.
-          example: 4
-        message:
-          type: string
-          description: Confirmation message.
-          example: Successfully deleted 4 user preference record(s)
     preferencesHistory:
       description: Returned response for successful get end-user preferences history.
       type: array
@@ -159,6 +151,18 @@ components:
             type: string
             description: ID of the end-user transaction where they made their preferences choice.
             example: 6877a0b70b23e3a5cbe11234
+    deletePreferencesHistory:
+      description: Returned response for successful delete end-user preferences history request.
+      type: object
+      properties:
+        deletedCount:
+          type: number
+          description: Number of preference records associated with the uuid or authId that was deleted.
+          example: 4
+        message:
+          type: string
+          description: Confirmation message.
+          example: Successfully deleted 4 user preference record(s)
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

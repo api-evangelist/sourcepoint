@@ -14,7 +14,13 @@ paths:
     post:
       tags:
       - GDPR reporting API
-      description: Returns pageview data for properties that have implemented GDPR.<br><br>Include your API key in the provided **Header** field under **AUTHORIZATION** in the right-hand pane before trying your request.<br><br>In addition to the API key, you will also need to include `startDate`, `endDate`, and `siteId` in your request.
+      description: 'Returns pageview data for properties that have implemented GDPR.
+
+
+        Include your API key in the provided **Header** field under **AUTHORIZATION** in the right-hand pane before trying your request.
+
+
+        In addition to the API key, you will also need to include `startDate`, `endDate`, and `siteId` in your request.'
       summary: GDPR pageview data
       parameters:
       - $ref: '#/components/parameters/periodFilter'
@@ -32,11 +38,19 @@ paths:
                 $ref: '#/components/schemas/gdprPvResponse'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: postTcfv2DashboardV2PvUsersByPeriodFilter
+      x-operation-id-source: derived
   /tcfv2/dashboard-v2-messages/{periodFilter}:
     post:
       tags:
       - GDPR reporting API
-      description: Returns message data for properties that have implemented GDPR.<br><br>Include your API key in the provided **Header** field under **AUTHORIZATION** in the right-hand pane before trying your request.<br><br>In addition to the API key, you will also need to include `startDate`, `endDate`, and `siteId` in your request.
+      description: 'Returns message data for properties that have implemented GDPR.
+
+
+        Include your API key in the provided **Header** field under **AUTHORIZATION** in the right-hand pane before trying your request.
+
+
+        In addition to the API key, you will also need to include `startDate`, `endDate`, and `siteId` in your request.'
       summary: GDPR message data
       parameters:
       - $ref: '#/components/parameters/periodFilter'
@@ -54,18 +68,13 @@ paths:
                 $ref: '#/components/schemas/gdprMsgResponse'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: postTcfv2DashboardV2MessagesByPeriodFilter
+      x-operation-id-source: derived
 components:
-  responses:
-    UnauthorizedError:
-      description: API key is missing or invalid
-      headers:
-        WWW-Authenticate:
-          schema:
-            type: string
   schemas:
-    gdprMsgResponse:
+    gdprPvResponse:
       type: object
-      description: Successful response for GDPR message report request
+      description: Successful response for GDPR pageview report request
       properties:
         performanceData:
           type: object
@@ -73,7 +82,7 @@ components:
           properties:
             total:
               type: integer
-            messagesResults:
+            propertiesResults:
               type: integer
         results:
           type: array
@@ -108,61 +117,61 @@ components:
                 type: string
                 description: Domain reported upon
                 example: '"www.sourcepoint.com"'
-              messaged_users:
+              pv:
                 type: string
-                description: Unique users within the periodization who received a message.
-                example: 3
-              message_id:
+                description: Number of pageviews for the given periodization
+                example: 784
+              pv_status_opt_in_all:
                 type: string
-                description: Message ID. Typically will be the ID for the first layer message but can be the ID of a privacy manager if consent action was given from a privacy manager without viewing first layer message first.
-                example: 987654
-              privacy_manager_id:
+                description: Page views across users who have accepted all purposes and vendors on the most recent version of the vendor list.
+                example: 218
+              pv_status_opt_out_all:
                 type: string
-                description: Returned only when consent action was given from a privacy manager. If consent action was given from a privacy manager without viewing a first layer message first then message_id and privacy_manager_id will be the same.
-                example: 123456
-              msg_name:
+                description: Page views across users who have rejected all purposes and vendors across any version of the vendor list.
+                example: 51
+              pv_status_li_only:
                 type: string
-                description: Message name
-                example: '"2.20.21 Desktop TCF v2 Notice"'
-              msg_type:
-                type: string
-                description: 'Possible values: message-v1 | message-v2 | privacy-manager. message-v1 response is a legacy response while message-v2 is the first layer message'
-                example: '"message-v2"'
-              msg_category_type:
-                type: string
-                description: The campaign type
-                example: '"gdpr"'
-              msg_sub_category_type:
-                type: string
-                description: 'The type of message delivered. Possible values: notice | privacy_manager | subject_access_request | dsar | notice-tcf-v2 | notice-native | privacy_manager_ott | notice_non_iab | privacy_manager_non_iab | ios | ccpa_ott | ccpa_pm | custom | native-ott'
-                example: '"notice-tcf-v2"'
-              total_actions:
-                type: string
-                description: Total number of end-user actions
-                example: 3
-              adjusted_actions:
-                type: string
-                description: Special processing to fix an issue
-                example: 3
-              message_opt_in_all:
-                type: string
-                description: Unique users within the periodization who received a message and then accepted all vendors and purposes.
-                example: 3
-              message_opt_out_all:
-                type: string
-                description: Unique users within the periodization who received a message and then rejected all vendors and purposes.
+                description: Page views across users who selected Save and Exit across any version of the vendor list if legitimate interest is a legal basis for at least one of your purposes.
                 example: 0
-              message_li_only:
+              pv_status_other:
                 type: string
-                description: Unique users within the periodization who received a message and then clicked Save and Exit on the privacy manager if you have legitimate interest as a legal basis for at least one of your purposes.
+                description: Page views across users who have made choices on the privacy manager that do not fall into the categories Accept All, Reject All, Previous Accept All or, Legitimate Interest Only on any version of the vendor list.
                 example: 0
-              message_other:
+              pv_default_consent_only:
                 type: string
-                description: Unique users within the periodization who received a message and then made choices on the privacy manager that do not fall into the categories Accept All, Reject All, Previous Accept All or, Legitimate Interest Only.
+                description: Page views across users who have not made any choices on the consent banner on any version of the vendor list.
+                example: 496
+              pv_status_previous_optin_all:
+                type: string
+                description: Page views across users who have accepted all purposes and vendors on a previous version of the vendor list. These users may be eligible to receive a re-consent experience.
                 example: 0
-              message_previous_optin_to_all:
+              unique_users:
                 type: string
-                description: Unique users within the periodization who received a message and then made choices on the privacy manager that do not fall into the categories Accept All, Reject All, Previous Accept All or, Legitimate Interest Only. Property should always return 0.
+                description: Total number of users for the selected properties in the configured periodization.
+                example: 372
+              user_status_opt_in_all:
+                type: string
+                description: Unique users who have accepted all purposes and vendors on the most recent version of the vendor list.
+                example: 68
+              user_status_opt_out_all:
+                type: string
+                description: Unique users who have rejected all purposes and vendors across any version of the vendor list.
+                example: 33
+              user_status_li_only:
+                type: string
+                description: Unique users who have clicked Save and Exit across any version of the vendor list if you have legitimate interest as a legal basis for at least one of your purposes.
+                example: 0
+              user_status_other:
+                type: string
+                description: Unique users who have made choices on the privacy manager that do not fall into the categories Accept All, Reject All, Previous Accept All or, Legitimate Interest Only on any version of the vendor list.
+                example: 0
+              user_default_consent_only:
+                type: string
+                description: Unique users who have not made any choices on the consent banner on any version of the vendor list.
+                example: 273
+              user_status_previous_optin_all:
+                type: string
+                description: Unique users who have accepted all purposes and vendors on a previous version of the vendor list. These users may be eligible to receive a re-consent experience.
                 example: 0
     gdprRequestBody:
       description: Request body for GDPR reporting data request
@@ -285,9 +294,9 @@ components:
       - startDate
       - endDate
       - siteId
-    gdprPvResponse:
+    gdprMsgResponse:
       type: object
-      description: Successful response for GDPR pageview report request
+      description: Successful response for GDPR message report request
       properties:
         performanceData:
           type: object
@@ -295,7 +304,7 @@ components:
           properties:
             total:
               type: integer
-            propertiesResults:
+            messagesResults:
               type: integer
         results:
           type: array
@@ -330,61 +339,61 @@ components:
                 type: string
                 description: Domain reported upon
                 example: '"www.sourcepoint.com"'
-              pv:
+              messaged_users:
                 type: string
-                description: Number of pageviews for the given periodization
-                example: 784
-              pv_status_opt_in_all:
+                description: Unique users within the periodization who received a message.
+                example: 3
+              message_id:
                 type: string
-                description: Page views across users who have accepted all purposes and vendors on the most recent version of the vendor list.
-                example: 218
-              pv_status_opt_out_all:
+                description: Message ID. Typically will be the ID for the first layer message but can be the ID of a privacy manager if consent action was given from a privacy manager without viewing first layer message first.
+                example: 987654
+              privacy_manager_id:
                 type: string
-                description: Page views across users who have rejected all purposes and vendors across any version of the vendor list.
-                example: 51
-              pv_status_li_only:
+                description: Returned only when consent action was given from a privacy manager. If consent action was given from a privacy manager without viewing a first layer message first then message_id and privacy_manager_id will be the same.
+                example: 123456
+              msg_name:
                 type: string
-                description: Page views across users who selected Save and Exit across any version of the vendor list if legitimate interest is a legal basis for at least one of your purposes.
+                description: Message name
+                example: '"2.20.21 Desktop TCF v2 Notice"'
+              msg_type:
+                type: string
+                description: 'Possible values: message-v1 | message-v2 | privacy-manager. message-v1 response is a legacy response while message-v2 is the first layer message'
+                example: '"message-v2"'
+              msg_category_type:
+                type: string
+                description: The campaign type
+                example: '"gdpr"'
+              msg_sub_category_type:
+                type: string
+                description: 'The type of message delivered. Possible values: notice | privacy_manager | subject_access_request | dsar | notice-tcf-v2 | notice-native | privacy_manager_ott | notice_non_iab | privacy_manager_non_iab | ios | ccpa_ott | ccpa_pm | custom | native-ott'
+                example: '"notice-tcf-v2"'
+              total_actions:
+                type: string
+                description: Total number of end-user actions
+                example: 3
+              adjusted_actions:
+                type: string
+                description: Special processing to fix an issue
+                example: 3
+              message_opt_in_all:
+                type: string
+                description: Unique users within the periodization who received a message and then accepted all vendors and purposes.
+                example: 3
+              message_opt_out_all:
+                type: string
+                description: Unique users within the periodization who received a message and then rejected all vendors and purposes.
                 example: 0
-              pv_status_other:
+              message_li_only:
                 type: string
-                description: Page views across users who have made choices on the privacy manager that do not fall into the categories Accept All, Reject All, Previous Accept All or, Legitimate Interest Only on any version of the vendor list.
+                description: Unique users within the periodization who received a message and then clicked Save and Exit on the privacy manager if you have legitimate interest as a legal basis for at least one of your purposes.
                 example: 0
-              pv_default_consent_only:
+              message_other:
                 type: string
-                description: Page views across users who have not made any choices on the consent banner on any version of the vendor list.
-                example: 496
-              pv_status_previous_optin_all:
-                type: string
-                description: Page views across users who have accepted all purposes and vendors on a previous version of the vendor list. These users may be eligible to receive a re-consent experience.
+                description: Unique users within the periodization who received a message and then made choices on the privacy manager that do not fall into the categories Accept All, Reject All, Previous Accept All or, Legitimate Interest Only.
                 example: 0
-              unique_users:
+              message_previous_optin_to_all:
                 type: string
-                description: Total number of users for the selected properties in the configured periodization.
-                example: 372
-              user_status_opt_in_all:
-                type: string
-                description: Unique users who have accepted all purposes and vendors on the most recent version of the vendor list.
-                example: 68
-              user_status_opt_out_all:
-                type: string
-                description: Unique users who have rejected all purposes and vendors across any version of the vendor list.
-                example: 33
-              user_status_li_only:
-                type: string
-                description: Unique users who have clicked Save and Exit across any version of the vendor list if you have legitimate interest as a legal basis for at least one of your purposes.
-                example: 0
-              user_status_other:
-                type: string
-                description: Unique users who have made choices on the privacy manager that do not fall into the categories Accept All, Reject All, Previous Accept All or, Legitimate Interest Only on any version of the vendor list.
-                example: 0
-              user_default_consent_only:
-                type: string
-                description: Unique users who have not made any choices on the consent banner on any version of the vendor list.
-                example: 273
-              user_status_previous_optin_all:
-                type: string
-                description: Unique users who have accepted all purposes and vendors on a previous version of the vendor list. These users may be eligible to receive a re-consent experience.
+                description: Unique users within the periodization who received a message and then made choices on the privacy manager that do not fall into the categories Accept All, Reject All, Previous Accept All or, Legitimate Interest Only. Property should always return 0.
                 example: 0
   parameters:
     periodFilter:
@@ -404,6 +413,13 @@ components:
         - daily
         - weekly
         - monthly
+  responses:
+    UnauthorizedError:
+      description: API key is missing or invalid
+      headers:
+        WWW-Authenticate:
+          schema:
+            type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

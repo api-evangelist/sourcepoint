@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Sourcepoint U.S. Multi-State Privacy U.S. Multi-State Privacy end-user consent status API
+  title: Sourcepoint U.S.
   version: 1.0.0
   description: Sourcepoint Technologies API for managing property and end-user U.S. Multi-State Privacy information.
 servers:
@@ -13,7 +13,7 @@ paths:
       tags:
       - U.S. Multi-State Privacy end-user consent status
       summary: Get end-user consent history
-      description: Returns end-user consent history. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `usnatUUID` or `authId`.
+      description: Returns end-user consent history. In addition to the `siteId`, you will also need to include either the end-user's `usnatUUID` or `authId`.
       parameters:
       - name: siteId
         in: path
@@ -31,12 +31,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/getConsentHistory'
+      operationId: getConsentHistoryBySiteId
+      x-operation-id-source: derived
   /consent/{siteId}:
     delete:
       tags:
       - U.S. Multi-State Privacy end-user consent status
       summary: Delete end-user consent status
-      description: Deletes end-user U.S. Multi-State Privacy consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `usnatUUID` or `authId`.<br><br>This endpoint does not support mass deletions of end-user consent records. Please speak to your Sourcepoint representative to execute any mass deletions.
+      description: 'Deletes end-user U.S. Multi-State Privacy consent status for a property. In addition to the `siteId`, you will also need to include either the end-user''s `usnatUUID` or `authId`.
+
+
+        This endpoint does not support mass deletions of end-user consent records. Please speak to your Sourcepoint representative to execute any mass deletions.'
       parameters:
       - name: siteId
         in: path
@@ -53,12 +58,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/deleteConsentStatus'
+      operationId: deleteConsentBySiteId
+      x-operation-id-source: derived
   /consent/{siteId}/reject-all:
     post:
       tags:
       - U.S. Multi-State Privacy end-user consent status
       summary: Opt-out all privacy choices and vendors
-      description: Opt-out of all vendors and privacy choices for an end-user's consent profile within the U.S. Multi-State Privacy framework. In addition to the `siteId`, you will also need to include the end-user's `authId` or `uuid`.<br><br>**Note:** This is a server-side call and will not update client-side end-user consent unless your organization is utilizing `authId`. To opt an end-user out of all vendors and purposes using their `uuid` please refer to [postRejectAll command](https://sourcepoint-public-api.readme.io/reference/postrejectall-4).
+      description: 'Opt-out of all vendors and privacy choices for an end-user''s consent profile within the U.S. Multi-State Privacy framework. In addition to the `siteId`, you will also need to include the end-user''s `authId` or `uuid`.
+
+
+        **Note:** This is a server-side call and will not update client-side end-user consent unless your organization is utilizing `authId`. To opt an end-user out of all vendors and purposes using their `uuid` please refer to postRejectAll command.'
       parameters:
       - name: siteId
         in: path
@@ -75,8 +85,116 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/rejectAll'
+      operationId: postConsentBySiteIdRejectAll
+      x-operation-id-source: derived
 components:
+  parameters:
+    uuid:
+      name: uuid
+      in: query
+      description: Retrieved from`usnat` object in the `_sp_user_consent_{propertyId}` local storage item
+      schema:
+        type: string
+    authId:
+      name: authId
+      in: query
+      description: Retrieved from the first-party cookie authId
+      required: false
+      schema:
+        type: string
+    latest:
+      name: latest
+      in: query
+      description: (Optional) Only return latest consent record for the end-user
+      schema:
+        type: boolean
   schemas:
+    getConsentHistory:
+      description: Returned response to get consent history
+      type: array
+      items:
+        type: object
+        description: Consent status entry for the given `dateCreated`
+        properties:
+          _id:
+            type: string
+            description: Unique identifier for the consent record
+            example: 6842d825666f5a1254fd263f
+          siteId:
+            type: number
+            description: Sourcepoint ID for property.
+            example: 39470
+          dateCreated:
+            type: string
+            description: The date the consent status was created/last updated.
+            example: '2023-08-07T14:17:35.388Z'
+          uuid:
+            type: string
+            description: Retrieved from`usnat` object in the `_sp_user_consent_{propertyId}` local storage item
+            example: abcd0c03-b8d6-49a4-a2e8-6bbcb8d0e1d7
+          messageId:
+            type: number
+            description: First layer message ID.
+            example: 123456
+          privacyManagerId:
+            type: string
+            description: Privacy manager ID. This property will be `null` if consent was given from the first layer message.
+            example: 987654
+          vendorListId:
+            type: string
+            description: The U.S. Multi-State Privacy vendor list associated with the property
+            example: 656a2175e17a3c2f823f12345
+          vendors:
+            type: array
+            description: Vendors that have been opted into by the end-user. A vendor is considered opted into if at least one of the mapped privacy choices to the vendor is opted into.
+            items:
+              type: object
+              properties:
+                _id:
+                  type: string
+                  description: Vendor ID
+                  example: 5e37fc3e56a5e60e0031234
+                name:
+                  type: string
+                  description: Name of the vendor
+                  example: Demo vendor name
+                vendorType:
+                  type: string
+                  description: Whether the vendor is an IAB vendor or custom vendor
+                  example: IAB
+          categories:
+            type: array
+            description: Privacy choices that has been opted into by the end-user
+            items:
+              type: object
+              properties:
+                _id:
+                  type: string
+                  description: Privacy choice ID
+                  example: 656f28c517853af88460a54a
+                name:
+                  type: string
+                  description: Name of the privacy choice
+                  example: Sell or share my personal information / opt into targeted advertising
+                systemId:
+                  type: number
+                  description: If available, a global ID that remains the same across all vendor lists for Sourcepoint-supplied privacy choices. Custom privacy choices do not have system IDs because they vary for each vendor list.
+                  example: 3
+    usnatUUIDcookie:
+      type: object
+      properties:
+        key:
+          type: string
+          example: usnatUUID
+        value:
+          type: string
+          example: 68837d4a-d61a-4777-af52-03683c411cc3_126
+        maxAge:
+          type: number
+          example: 864000
+        shareRootDomain:
+          type: boolean
+          example: true
     consentDateUsnat:
       type: object
       properties:
@@ -92,6 +210,18 @@ components:
         shareRootDomain:
           type: boolean
           example: true
+    deleteConsentStatus:
+      description: Returned response to delete consent status
+      type: array
+      items:
+        type: object
+        properties:
+          acknowledged:
+            type: boolean
+            example: true
+          deletedCount:
+            type: number
+            example: 1
     rejectAll:
       description: Returned response for opt-out of all privacy choices and vendors
       type: object
@@ -206,124 +336,6 @@ components:
             anyOf:
             - $ref: '#/components/schemas/usnatUUIDcookie'
             - $ref: '#/components/schemas/consentDateUsnat'
-    deleteConsentStatus:
-      description: Returned response to delete consent status
-      type: array
-      items:
-        type: object
-        properties:
-          acknowledged:
-            type: boolean
-            example: true
-          deletedCount:
-            type: number
-            example: 1
-    getConsentHistory:
-      description: Returned response to get consent history
-      type: array
-      items:
-        type: object
-        description: Consent status entry for the given `dateCreated`
-        properties:
-          _id:
-            type: string
-            description: Unique identifier for the consent record
-            example: 6842d825666f5a1254fd263f
-          siteId:
-            type: number
-            description: Sourcepoint ID for property.
-            example: 39470
-          dateCreated:
-            type: string
-            description: The date the consent status was created/last updated.
-            example: '2023-08-07T14:17:35.388Z'
-          uuid:
-            type: string
-            description: Retrieved from`usnat` object in the `_sp_user_consent_{propertyId}` local storage item
-            example: abcd0c03-b8d6-49a4-a2e8-6bbcb8d0e1d7
-          messageId:
-            type: number
-            description: First layer message ID.
-            example: 123456
-          privacyManagerId:
-            type: string
-            description: Privacy manager ID. This property will be `null` if consent was given from the first layer message.
-            example: 987654
-          vendorListId:
-            type: string
-            description: The U.S. Multi-State Privacy vendor list associated with the property
-            example: 656a2175e17a3c2f823f12345
-          vendors:
-            type: array
-            description: Vendors that have been opted into by the end-user. A vendor is considered opted into if at least one of the mapped privacy choices to the vendor is opted into.
-            items:
-              type: object
-              properties:
-                _id:
-                  type: string
-                  description: Vendor ID
-                  example: 5e37fc3e56a5e60e0031234
-                name:
-                  type: string
-                  description: Name of the vendor
-                  example: Demo vendor name
-                vendorType:
-                  type: string
-                  description: Whether the vendor is an IAB vendor or custom vendor
-                  example: IAB
-          categories:
-            type: array
-            description: Privacy choices that has been opted into by the end-user
-            items:
-              type: object
-              properties:
-                _id:
-                  type: string
-                  description: Privacy choice ID
-                  example: 656f28c517853af88460a54a
-                name:
-                  type: string
-                  description: Name of the privacy choice
-                  example: Sell or share my personal information / opt into targeted advertising
-                systemId:
-                  type: number
-                  description: If available, a global ID that remains the same across all vendor lists for Sourcepoint-supplied privacy choices. Custom privacy choices do not have system IDs because they vary for each vendor list.
-                  example: 3
-    usnatUUIDcookie:
-      type: object
-      properties:
-        key:
-          type: string
-          example: usnatUUID
-        value:
-          type: string
-          example: 68837d4a-d61a-4777-af52-03683c411cc3_126
-        maxAge:
-          type: number
-          example: 864000
-        shareRootDomain:
-          type: boolean
-          example: true
-  parameters:
-    latest:
-      name: latest
-      in: query
-      description: (Optional) Only return latest consent record for the end-user
-      schema:
-        type: boolean
-    uuid:
-      name: uuid
-      in: query
-      description: Retrieved from`usnat` object in the `_sp_user_consent_{propertyId}` local storage item
-      schema:
-        type: string
-    authId:
-      name: authId
-      in: query
-      description: Retrieved from the first-party cookie authId
-      required: false
-      schema:
-        type: string
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

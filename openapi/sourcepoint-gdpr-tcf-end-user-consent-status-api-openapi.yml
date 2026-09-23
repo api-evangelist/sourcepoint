@@ -13,7 +13,7 @@ paths:
       tags:
       - GDPR TCF end-user consent status
       summary: Get end-user consent status
-      description: Returns end-user GDPR TCF consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `consentUUID` or `authId`.
+      description: Returns end-user GDPR TCF consent status for a property. In addition to the `siteId`, you will also need to include either the end-user's `consentUUID` or `authId`.
       parameters:
       - name: siteId
         in: path
@@ -31,12 +31,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/getConsentResponse'
+      operationId: getConsentV3HistoryBySiteId
+      x-operation-id-source: derived
   /consent/v3/{siteId}/tcstring:
     post:
       tags:
       - GDPR TCF end-user consent status
       summary: Merge end-user consent status with identity provider
-      description: Merge an end-user's custom vendor consent profile with the information Sourcepoint has for IAB vendors taken from a TCString that is provided. Though originally planned for the German consortium *NetId*, it is available for any identity provider to confirm or revoke vendor consent in one place<br><br>*Your organization will require their own CMP ID to use this API. Please contact your Sourcepoint Client Support team if you require more information.*
+      description: 'Merge an end-user''s custom vendor consent profile with the information Sourcepoint has for IAB vendors taken from a TCString that is provided. Though originally planned for the German consortium *NetId*, it is available for any identity provider to confirm or revoke vendor consent in one place
+
+
+        *Your organization will require their own CMP ID to use this API. Please contact your Sourcepoint Client Support team if you require more information.*'
       parameters:
       - name: siteId
         in: path
@@ -65,12 +70,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/mergeConsent'
+      operationId: postConsentV3BySiteIdTcstring
+      x-operation-id-source: derived
   /consent/v3/{siteId}:
     delete:
       tags:
       - GDPR TCF end-user consent status
       summary: Delete end-user consent status
-      description: Deletes end-user GDPR TCF consent status for a property. In addition to the `siteId`, you will also need to include <u>either</u> the end-user's `consentUUID` or `authId`.<br><br>This endpoint does not support mass deletions of end-user consent records. Please speak to your Sourcepoint representative to execute any mass deletions.
+      description: 'Deletes end-user GDPR TCF consent status for a property. In addition to the `siteId`, you will also need to include either the end-user''s `consentUUID` or `authId`.
+
+
+        This endpoint does not support mass deletions of end-user consent records. Please speak to your Sourcepoint representative to execute any mass deletions.'
       parameters:
       - name: siteId
         in: path
@@ -99,8 +109,57 @@ paths:
                     deletedCount:
                       type: integer
                       example: 1
+      operationId: deleteConsentV3BySiteId
+      x-operation-id-source: derived
 components:
   schemas:
+    IABAndCustomVendors:
+      description: Returns IAB and Custom vendor information
+      properties:
+        id:
+          type: string
+          description: Sourcepoint vendor ID
+          example: 5f23e826b8e05c0c0abcdef
+        name:
+          type: string
+          description: Vendor name
+          example: IAB vendor example
+        vendorType:
+          type: string
+          description: Vendor type
+          example: IAB
+    customPurposes:
+      description: Returns custom purpose information
+      properties:
+        id:
+          type: string
+          description: Sourcepoint purpose ID
+          example: 5fdbbcdf4f3f9789140e23a0
+        name:
+          type: string
+          description: Purpose name
+          example: Custom purpose example
+    IABPurposes:
+      description: Returns IAB purpose information
+      properties:
+        id:
+          type: string
+          description: Sourcepoint purpose ID
+          example: 5fd7e01e32bd4d27654ba1d5
+        name:
+          type: string
+          description: Purpose name
+          example: Store and/or access information on a device
+        iabPurposeRef:
+          properties:
+            name:
+              type: string
+              description: Purpose name
+              example: Store and/or access information on a device
+            iabId:
+              type: integer
+              description: IAB purpose id
+              example: 1
     mergeConsent:
       description: Returns end-user consent after merging consent profile
       properties:
@@ -171,6 +230,25 @@ components:
           type: string
           description: consentUUID for end-user after request
           example: ab126231-e899-4fbb-b7e2-e8f762f080e6_14_19
+    GoogleATPVendors:
+      description: Returns Google ATP vendor information
+      properties:
+        id:
+          type: string
+          description: Sourcepoint vendor ID
+          example: 1234abcd5678efgh0d4fdb8f
+        name:
+          type: string
+          description: Vendor name
+          example: Google ATP vendor
+        vendorType:
+          type: string
+          description: Vendor type
+          example: CUSTOM
+        googleId:
+          type: integer
+          description: Google vendor ID
+          example: 1234
     getConsentResponse:
       description: Returned response to get consent request
       type: array
@@ -229,73 +307,14 @@ components:
               anyOf:
               - $ref: '#/components/schemas/IABPurposes'
               - $ref: '#/components/schemas/customPurposes'
-    customPurposes:
-      description: Returns custom purpose information
-      properties:
-        id:
-          type: string
-          description: Sourcepoint purpose ID
-          example: 5fdbbcdf4f3f9789140e23a0
-        name:
-          type: string
-          description: Purpose name
-          example: Custom purpose example
-    IABAndCustomVendors:
-      description: Returns IAB and Custom vendor information
-      properties:
-        id:
-          type: string
-          description: Sourcepoint vendor ID
-          example: 5f23e826b8e05c0c0abcdef
-        name:
-          type: string
-          description: Vendor name
-          example: IAB vendor example
-        vendorType:
-          type: string
-          description: Vendor type
-          example: IAB
-    GoogleATPVendors:
-      description: Returns Google ATP vendor information
-      properties:
-        id:
-          type: string
-          description: Sourcepoint vendor ID
-          example: 1234abcd5678efgh0d4fdb8f
-        name:
-          type: string
-          description: Vendor name
-          example: Google ATP vendor
-        vendorType:
-          type: string
-          description: Vendor type
-          example: CUSTOM
-        googleId:
-          type: integer
-          description: Google vendor ID
-          example: 1234
-    IABPurposes:
-      description: Returns IAB purpose information
-      properties:
-        id:
-          type: string
-          description: Sourcepoint purpose ID
-          example: 5fd7e01e32bd4d27654ba1d5
-        name:
-          type: string
-          description: Purpose name
-          example: Store and/or access information on a device
-        iabPurposeRef:
-          properties:
-            name:
-              type: string
-              description: Purpose name
-              example: Store and/or access information on a device
-            iabId:
-              type: integer
-              description: IAB purpose id
-              example: 1
   parameters:
+    consentUUID:
+      name: consentUUID
+      in: query
+      description: Retrieved from the first-party cookie consentUUID
+      required: false
+      schema:
+        type: string
     latest:
       name: latest
       in: query
@@ -307,13 +326,6 @@ components:
       name: authId
       in: query
       description: Retrieved from the first-party cookie authId
-      required: false
-      schema:
-        type: string
-    consentUUID:
-      name: consentUUID
-      in: query
-      description: Retrieved from the first-party cookie consentUUID
       required: false
       schema:
         type: string

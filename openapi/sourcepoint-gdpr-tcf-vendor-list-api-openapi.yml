@@ -34,12 +34,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/mapResponse'
+      operationId: getVendorListVendorPurposeMapping
+      x-operation-id-source: derived
   /vendor-list/vendor-url-mapping:
     post:
       tags:
       - GDPR TCF vendor list
       summary: Vendor URL mapping
-      description: Intended to be used by publishing systems to help determine if a vendor URL has been defined appropriately in the Sourcepoint system. This API can help developers that are integrating with Content Management Systems (CMS) verify that a URL referenced in content can be related to vendor and purpose consent preferences which can be queried and set based on user actions.<br><br>Before utilizing this API, ensure [vendor URL mappings are configured for the vendor](https://docs.sourcepoint.com/hc/en-us/articles/4403605562259#h_01H08080CKBEKA9KBF6AHFB1TC) in the Sourcepoint portal.
+      description: 'Intended to be used by publishing systems to help determine if a vendor URL has been defined appropriately in the Sourcepoint system. This API can help developers that are integrating with Content Management Systems (CMS) verify that a URL referenced in content can be related to vendor and purpose consent preferences which can be queried and set based on user actions.
+
+
+        Before utilizing this API, ensure vendor URL mappings are configured for the vendor in the Sourcepoint portal.'
       parameters:
       - name: allCategoryMapping
         in: query
@@ -75,6 +80,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/vendorURLMappingResponse'
+      operationId: postVendorListVendorUrlMapping
+      x-operation-id-source: derived
   /vendor-list/vendors:
     get:
       tags:
@@ -95,8 +102,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/vendors'
+      operationId: getVendorListVendors
+      x-operation-id-source: derived
 components:
   schemas:
+    mapResponse:
+      description: Returned response to vendor purpose mapping
+      type: array
+      items:
+        type: object
+        properties:
+          vendorId:
+            type: string
+            description: Unique ID for a vendor
+            example: abcd2fbeb8e05c306f2aefgh
+          categories:
+            type: array
+            description: Details purposes configured for each vendor
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Unique ID for purpose
+                  example: 1234e01e32bd4d27654b5678
+                type:
+                  type: string
+                  description: Legal basis configured for purpose
+                  example: CONSENT
+    vendors:
+      description: Returns vendors on the vendor list associated with the property.
+      properties:
+        vendors:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: ID of the vendor
+                example: 623454ae293cdf6fc91234
+              name:
+                type: string
+                description: Name of the vendor
+                example: Vendor name
     vendorURLMappingResponse:
       description: Returns vendor URL mapping for property
       properties:
@@ -211,46 +260,6 @@ components:
                       type: string
                       description: Legal basis configured for the purpose.
                       example: LEGITIMATE_INTEREST
-    vendors:
-      description: Returns vendors on the vendor list associated with the property.
-      properties:
-        vendors:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-                description: ID of the vendor
-                example: 623454ae293cdf6fc91234
-              name:
-                type: string
-                description: Name of the vendor
-                example: Vendor name
-    mapResponse:
-      description: Returned response to vendor purpose mapping
-      type: array
-      items:
-        type: object
-        properties:
-          vendorId:
-            type: string
-            description: Unique ID for a vendor
-            example: abcd2fbeb8e05c306f2aefgh
-          categories:
-            type: array
-            description: Details purposes configured for each vendor
-            items:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: Unique ID for purpose
-                  example: 1234e01e32bd4d27654b5678
-                type:
-                  type: string
-                  description: Legal basis configured for purpose
-                  example: CONSENT
 x-readme:
   explorer-enabled: true
   proxy-enabled: true
