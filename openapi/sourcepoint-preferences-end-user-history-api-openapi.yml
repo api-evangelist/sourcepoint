@@ -69,36 +69,19 @@ paths:
       operationId: deleteUserPreference
       x-operation-id-source: derived
 components:
-  parameters:
-    uuid:
-      name: uuid
-      in: query
-      description: Retrieved from preferences object in the `_sp_user_consent_{propertyId}` local storage item
-      required: false
-      schema:
-        type: string
-    accountId:
-      name: accountId
-      in: query
-      description: Your organization's Sourcepoint account ID.
-      required: true
-      schema:
-        type: number
-    id:
-      name: id
-      in: query
-      description: The end-user's uuid or authId
-      required: true
-      schema:
-        type: string
-    authId:
-      name: authId
-      in: query
-      description: Retrieved from the first-party cookie `authId`
-      required: false
-      schema:
-        type: string
   schemas:
+    deletePreferencesHistory:
+      description: Returned response for successful delete end-user preferences history request.
+      type: object
+      properties:
+        deletedCount:
+          type: number
+          description: Number of preference records associated with the uuid or authId that was deleted.
+          example: 4
+        message:
+          type: string
+          description: Confirmation message.
+          example: Successfully deleted 4 user preference record(s)
     preferencesHistory:
       description: Returned response for successful get end-user preferences history.
       type: array
@@ -151,18 +134,35 @@ components:
             type: string
             description: ID of the end-user transaction where they made their preferences choice.
             example: 6877a0b70b23e3a5cbe11234
-    deletePreferencesHistory:
-      description: Returned response for successful delete end-user preferences history request.
-      type: object
-      properties:
-        deletedCount:
-          type: number
-          description: Number of preference records associated with the uuid or authId that was deleted.
-          example: 4
-        message:
-          type: string
-          description: Confirmation message.
-          example: Successfully deleted 4 user preference record(s)
+  parameters:
+    uuid:
+      name: uuid
+      in: query
+      description: Retrieved from preferences object in the `_sp_user_consent_{propertyId}` local storage item
+      required: false
+      schema:
+        type: string
+    id:
+      name: id
+      in: query
+      description: The end-user's uuid or authId
+      required: true
+      schema:
+        type: string
+    accountId:
+      name: accountId
+      in: query
+      description: Your organization's Sourcepoint account ID.
+      required: true
+      schema:
+        type: number
+    authId:
+      name: authId
+      in: query
+      description: Retrieved from the first-party cookie `authId`
+      required: false
+      schema:
+        type: string
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

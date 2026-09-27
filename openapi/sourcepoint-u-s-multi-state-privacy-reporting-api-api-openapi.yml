@@ -72,6 +72,127 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    usmspPvResponse:
+      type: object
+      description: Successful response for U.S. Multi-State Privacy pageview report request
+      properties:
+        performanceData:
+          type: object
+          description: Ignore. For internal troubleshooting.
+          properties:
+            total:
+              type: integer
+            messagesResults:
+              type: integer
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              ymd:
+                type: string
+                description: Year, month and day. Returned only for Daily periodization
+                example: '2023-09-02T00:00:00.000Z'
+              geo:
+                type: string
+                description: Geographic region to which the results pertain. Returned when request uses geo in the breakdownBy parameter
+                example: US
+              state:
+                type: string
+                description: US state to which the results pertain. Returned when request uses state in the breakdownBy parameter
+                example: CA
+              ua_os:
+                type: string
+                description: Operating system type to which the results pertain. Returned when request uses ua_os in the breakdownBy parameter
+                example: macOS
+              ua_device:
+                type: string
+                description: Device type to which the results pertain. Returned when request uses ua_device in the breakdownBy parameter
+                example: desktop
+              ua_browser:
+                type: string
+                description: Browser type to which the results pertain. Returned when request uses ua_browser in the breakdownBy parameter
+                example: Chrome
+              site_id:
+                type: string
+                description: Property ID within the Sourcepoint portal
+                example: 12345
+              property_name:
+                type: string
+                description: Domain reported upon
+                example: '"www.sourcepoint.com"'
+              'Page Views: Total':
+                type: number
+                description: Total number of page views for the given periodization
+                example: 2
+              'Page Views: Sell Opted-in':
+                type: number
+                description: Page views across users who have opted into the sale of personal information privacy choice
+                example: 2
+              'Page Views: Sell Opted-out':
+                type: number
+                description: Page views across users who have opted out of the sale of personal information privacy choice
+                example: 0
+              'Page Views: Share Opted-in':
+                type: number
+                description: Page views across users who have opted into the sharing of personal information privacy choice
+                example: 2
+              'Page Views: Share Opted-out':
+                type: number
+                description: Page views across users who have opted out of the sharing of personal information privacy choice
+                example: 0
+              'Page Views: Sensitive Data Opted-in':
+                type: number
+                description: Page views across users who have opted into sensitive data privacy choices
+                example: 0
+              'Page Views: Sensitive Data Opted-out':
+                type: number
+                description: Page views across users who have opted out of sensitive data privacy choices
+                example: 2
+              'Page Views: GPC Enabled':
+                type: number
+                description: Page views across users who had the Global Privacy Control setting enabled on their browser
+                example: 0
+              'Page Views: GPC Disabled':
+                type: number
+                description: Page views across users who had the Global Privacy Control setting disabled on their browser
+                example: 2
+              'Users: Total':
+                type: number
+                description: Total number of users for the selected properties in the configured periodization
+                example: 1
+              'Users: Sell Opted-in':
+                type: number
+                description: Unique users who have opted into the the sale of personal information privacy choice
+                example: 1
+              'Users: Sell Opted-out':
+                type: number
+                description: Unique users who have opted out of the sale of personal information privacy choice
+                example: 0
+              'Users: Share Opted-in':
+                type: number
+                description: Unique users who have opted into the sharing of personal information privacy choice
+                example: 1
+              'Users: Share Opted-out':
+                type: number
+                description: Unique users who have opted out of the sharing of personal information privacy choice
+                example: 0
+              'Users: Sensitive Data Opted-in':
+                type: number
+                description: Unique users who have opted into sensitive data privacy choices
+                example: 0
+              'Users: Sensitive Data Opted-out':
+                type: number
+                description: Unique users who have opted out of sensitive data privacy choices
+                example: 1
+              'Users: GPC Enabled':
+                type: number
+                description: Unique users who had the Global Privacy Control setting enabled on their browser
+                example: 0
+              'Users: GPC Disabled':
+                type: number
+                description: Unique users who had the Global Privacy Control setting disabled on their browser
+                example: 1
     usmspMsgResponse:
       type: object
       description: Successful response for U.S. Multi-State Privacy message report request
@@ -285,127 +406,6 @@ components:
       - startDate
       - endDate
       - siteId
-    usmspPvResponse:
-      type: object
-      description: Successful response for U.S. Multi-State Privacy pageview report request
-      properties:
-        performanceData:
-          type: object
-          description: Ignore. For internal troubleshooting.
-          properties:
-            total:
-              type: integer
-            messagesResults:
-              type: integer
-        results:
-          type: array
-          items:
-            type: object
-            properties:
-              ymd:
-                type: string
-                description: Year, month and day. Returned only for Daily periodization
-                example: '2023-09-02T00:00:00.000Z'
-              geo:
-                type: string
-                description: Geographic region to which the results pertain. Returned when request uses geo in the breakdownBy parameter
-                example: US
-              state:
-                type: string
-                description: US state to which the results pertain. Returned when request uses state in the breakdownBy parameter
-                example: CA
-              ua_os:
-                type: string
-                description: Operating system type to which the results pertain. Returned when request uses ua_os in the breakdownBy parameter
-                example: macOS
-              ua_device:
-                type: string
-                description: Device type to which the results pertain. Returned when request uses ua_device in the breakdownBy parameter
-                example: desktop
-              ua_browser:
-                type: string
-                description: Browser type to which the results pertain. Returned when request uses ua_browser in the breakdownBy parameter
-                example: Chrome
-              site_id:
-                type: string
-                description: Property ID within the Sourcepoint portal
-                example: 12345
-              property_name:
-                type: string
-                description: Domain reported upon
-                example: '"www.sourcepoint.com"'
-              'Page Views: Total':
-                type: number
-                description: Total number of page views for the given periodization
-                example: 2
-              'Page Views: Sell Opted-in':
-                type: number
-                description: Page views across users who have opted into the sale of personal information privacy choice
-                example: 2
-              'Page Views: Sell Opted-out':
-                type: number
-                description: Page views across users who have opted out of the sale of personal information privacy choice
-                example: 0
-              'Page Views: Share Opted-in':
-                type: number
-                description: Page views across users who have opted into the sharing of personal information privacy choice
-                example: 2
-              'Page Views: Share Opted-out':
-                type: number
-                description: Page views across users who have opted out of the sharing of personal information privacy choice
-                example: 0
-              'Page Views: Sensitive Data Opted-in':
-                type: number
-                description: Page views across users who have opted into sensitive data privacy choices
-                example: 0
-              'Page Views: Sensitive Data Opted-out':
-                type: number
-                description: Page views across users who have opted out of sensitive data privacy choices
-                example: 2
-              'Page Views: GPC Enabled':
-                type: number
-                description: Page views across users who had the Global Privacy Control setting enabled on their browser
-                example: 0
-              'Page Views: GPC Disabled':
-                type: number
-                description: Page views across users who had the Global Privacy Control setting disabled on their browser
-                example: 2
-              'Users: Total':
-                type: number
-                description: Total number of users for the selected properties in the configured periodization
-                example: 1
-              'Users: Sell Opted-in':
-                type: number
-                description: Unique users who have opted into the the sale of personal information privacy choice
-                example: 1
-              'Users: Sell Opted-out':
-                type: number
-                description: Unique users who have opted out of the sale of personal information privacy choice
-                example: 0
-              'Users: Share Opted-in':
-                type: number
-                description: Unique users who have opted into the sharing of personal information privacy choice
-                example: 1
-              'Users: Share Opted-out':
-                type: number
-                description: Unique users who have opted out of the sharing of personal information privacy choice
-                example: 0
-              'Users: Sensitive Data Opted-in':
-                type: number
-                description: Unique users who have opted into sensitive data privacy choices
-                example: 0
-              'Users: Sensitive Data Opted-out':
-                type: number
-                description: Unique users who have opted out of sensitive data privacy choices
-                example: 1
-              'Users: GPC Enabled':
-                type: number
-                description: Unique users who had the Global Privacy Control setting enabled on their browser
-                example: 0
-              'Users: GPC Disabled':
-                type: number
-                description: Unique users who had the Global Privacy Control setting disabled on their browser
-                example: 1
     usmspMsgRequestBody:
       description: Request body for US Multi-State Privacy message reporting data request
       type: object

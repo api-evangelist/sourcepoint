@@ -88,27 +88,22 @@ paths:
       operationId: postConsentBySiteIdRejectAll
       x-operation-id-source: derived
 components:
-  parameters:
-    uuid:
-      name: uuid
-      in: query
-      description: Retrieved from`usnat` object in the `_sp_user_consent_{propertyId}` local storage item
-      schema:
-        type: string
-    authId:
-      name: authId
-      in: query
-      description: Retrieved from the first-party cookie authId
-      required: false
-      schema:
-        type: string
-    latest:
-      name: latest
-      in: query
-      description: (Optional) Only return latest consent record for the end-user
-      schema:
-        type: boolean
   schemas:
+    usnatUUIDcookie:
+      type: object
+      properties:
+        key:
+          type: string
+          example: usnatUUID
+        value:
+          type: string
+          example: 68837d4a-d61a-4777-af52-03683c411cc3_126
+        maxAge:
+          type: number
+          example: 864000
+        shareRootDomain:
+          type: boolean
+          example: true
     getConsentHistory:
       description: Returned response to get consent history
       type: array
@@ -180,48 +175,6 @@ components:
                   type: number
                   description: If available, a global ID that remains the same across all vendor lists for Sourcepoint-supplied privacy choices. Custom privacy choices do not have system IDs because they vary for each vendor list.
                   example: 3
-    usnatUUIDcookie:
-      type: object
-      properties:
-        key:
-          type: string
-          example: usnatUUID
-        value:
-          type: string
-          example: 68837d4a-d61a-4777-af52-03683c411cc3_126
-        maxAge:
-          type: number
-          example: 864000
-        shareRootDomain:
-          type: boolean
-          example: true
-    consentDateUsnat:
-      type: object
-      properties:
-        key:
-          type: string
-          example: consentDateUsnat
-        value:
-          type: string
-          example: '2025-06-13T14:40:09.318Z'
-        maxAge:
-          type: number
-          example: 864000
-        shareRootDomain:
-          type: boolean
-          example: true
-    deleteConsentStatus:
-      description: Returned response to delete consent status
-      type: array
-      items:
-        type: object
-        properties:
-          acknowledged:
-            type: boolean
-            example: true
-          deletedCount:
-            type: number
-            example: 1
     rejectAll:
       description: Returned response for opt-out of all privacy choices and vendors
       type: object
@@ -336,6 +289,53 @@ components:
             anyOf:
             - $ref: '#/components/schemas/usnatUUIDcookie'
             - $ref: '#/components/schemas/consentDateUsnat'
+    consentDateUsnat:
+      type: object
+      properties:
+        key:
+          type: string
+          example: consentDateUsnat
+        value:
+          type: string
+          example: '2025-06-13T14:40:09.318Z'
+        maxAge:
+          type: number
+          example: 864000
+        shareRootDomain:
+          type: boolean
+          example: true
+    deleteConsentStatus:
+      description: Returned response to delete consent status
+      type: array
+      items:
+        type: object
+        properties:
+          acknowledged:
+            type: boolean
+            example: true
+          deletedCount:
+            type: number
+            example: 1
+  parameters:
+    authId:
+      name: authId
+      in: query
+      description: Retrieved from the first-party cookie authId
+      required: false
+      schema:
+        type: string
+    uuid:
+      name: uuid
+      in: query
+      description: Retrieved from`usnat` object in the `_sp_user_consent_{propertyId}` local storage item
+      schema:
+        type: string
+    latest:
+      name: latest
+      in: query
+      description: (Optional) Only return latest consent record for the end-user
+      schema:
+        type: boolean
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

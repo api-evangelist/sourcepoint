@@ -130,22 +130,6 @@ components:
                   type: string
                   description: Legal basis configured for purpose
                   example: CONSENT
-    vendors:
-      description: Returns vendors on the vendor list associated with the property.
-      properties:
-        vendors:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-                description: ID of the vendor
-                example: 623454ae293cdf6fc91234
-              name:
-                type: string
-                description: Name of the vendor
-                example: Vendor name
     vendorURLMappingResponse:
       description: Returns vendor URL mapping for property
       properties:
@@ -260,6 +244,22 @@ components:
                       type: string
                       description: Legal basis configured for the purpose.
                       example: LEGITIMATE_INTEREST
+    vendors:
+      description: Returns vendors on the vendor list associated with the property.
+      properties:
+        vendors:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: ID of the vendor
+                example: 623454ae293cdf6fc91234
+              name:
+                type: string
+                description: Name of the vendor
+                example: Vendor name
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

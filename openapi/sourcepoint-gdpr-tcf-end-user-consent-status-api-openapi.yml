@@ -128,38 +128,6 @@ components:
           type: string
           description: Vendor type
           example: IAB
-    customPurposes:
-      description: Returns custom purpose information
-      properties:
-        id:
-          type: string
-          description: Sourcepoint purpose ID
-          example: 5fdbbcdf4f3f9789140e23a0
-        name:
-          type: string
-          description: Purpose name
-          example: Custom purpose example
-    IABPurposes:
-      description: Returns IAB purpose information
-      properties:
-        id:
-          type: string
-          description: Sourcepoint purpose ID
-          example: 5fd7e01e32bd4d27654ba1d5
-        name:
-          type: string
-          description: Purpose name
-          example: Store and/or access information on a device
-        iabPurposeRef:
-          properties:
-            name:
-              type: string
-              description: Purpose name
-              example: Store and/or access information on a device
-            iabId:
-              type: integer
-              description: IAB purpose id
-              example: 1
     mergeConsent:
       description: Returns end-user consent after merging consent profile
       properties:
@@ -249,6 +217,38 @@ components:
           type: integer
           description: Google vendor ID
           example: 1234
+    customPurposes:
+      description: Returns custom purpose information
+      properties:
+        id:
+          type: string
+          description: Sourcepoint purpose ID
+          example: 5fdbbcdf4f3f9789140e23a0
+        name:
+          type: string
+          description: Purpose name
+          example: Custom purpose example
+    IABPurposes:
+      description: Returns IAB purpose information
+      properties:
+        id:
+          type: string
+          description: Sourcepoint purpose ID
+          example: 5fd7e01e32bd4d27654ba1d5
+        name:
+          type: string
+          description: Purpose name
+          example: Store and/or access information on a device
+        iabPurposeRef:
+          properties:
+            name:
+              type: string
+              description: Purpose name
+              example: Store and/or access information on a device
+            iabId:
+              type: integer
+              description: IAB purpose id
+              example: 1
     getConsentResponse:
       description: Returned response to get consent request
       type: array
