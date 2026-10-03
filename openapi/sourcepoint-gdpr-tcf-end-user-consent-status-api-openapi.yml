@@ -112,22 +112,29 @@ paths:
       operationId: deleteConsentV3BySiteId
       x-operation-id-source: derived
 components:
+  parameters:
+    latest:
+      name: latest
+      in: query
+      description: (Optional) Only return the latest consent record for the end-user.
+      required: false
+      schema:
+        type: boolean
+    consentUUID:
+      name: consentUUID
+      in: query
+      description: Retrieved from the first-party cookie consentUUID
+      required: false
+      schema:
+        type: string
+    authId:
+      name: authId
+      in: query
+      description: Retrieved from the first-party cookie authId
+      required: false
+      schema:
+        type: string
   schemas:
-    IABAndCustomVendors:
-      description: Returns IAB and Custom vendor information
-      properties:
-        id:
-          type: string
-          description: Sourcepoint vendor ID
-          example: 5f23e826b8e05c0c0abcdef
-        name:
-          type: string
-          description: Vendor name
-          example: IAB vendor example
-        vendorType:
-          type: string
-          description: Vendor type
-          example: IAB
     mergeConsent:
       description: Returns end-user consent after merging consent profile
       properties:
@@ -198,6 +205,42 @@ components:
           type: string
           description: consentUUID for end-user after request
           example: ab126231-e899-4fbb-b7e2-e8f762f080e6_14_19
+    IABPurposes:
+      description: Returns IAB purpose information
+      properties:
+        id:
+          type: string
+          description: Sourcepoint purpose ID
+          example: 5fd7e01e32bd4d27654ba1d5
+        name:
+          type: string
+          description: Purpose name
+          example: Store and/or access information on a device
+        iabPurposeRef:
+          properties:
+            name:
+              type: string
+              description: Purpose name
+              example: Store and/or access information on a device
+            iabId:
+              type: integer
+              description: IAB purpose id
+              example: 1
+    IABAndCustomVendors:
+      description: Returns IAB and Custom vendor information
+      properties:
+        id:
+          type: string
+          description: Sourcepoint vendor ID
+          example: 5f23e826b8e05c0c0abcdef
+        name:
+          type: string
+          description: Vendor name
+          example: IAB vendor example
+        vendorType:
+          type: string
+          description: Vendor type
+          example: IAB
     GoogleATPVendors:
       description: Returns Google ATP vendor information
       properties:
@@ -228,27 +271,6 @@ components:
           type: string
           description: Purpose name
           example: Custom purpose example
-    IABPurposes:
-      description: Returns IAB purpose information
-      properties:
-        id:
-          type: string
-          description: Sourcepoint purpose ID
-          example: 5fd7e01e32bd4d27654ba1d5
-        name:
-          type: string
-          description: Purpose name
-          example: Store and/or access information on a device
-        iabPurposeRef:
-          properties:
-            name:
-              type: string
-              description: Purpose name
-              example: Store and/or access information on a device
-            iabId:
-              type: integer
-              description: IAB purpose id
-              example: 1
     getConsentResponse:
       description: Returned response to get consent request
       type: array
@@ -307,28 +329,6 @@ components:
               anyOf:
               - $ref: '#/components/schemas/IABPurposes'
               - $ref: '#/components/schemas/customPurposes'
-  parameters:
-    consentUUID:
-      name: consentUUID
-      in: query
-      description: Retrieved from the first-party cookie consentUUID
-      required: false
-      schema:
-        type: string
-    latest:
-      name: latest
-      in: query
-      description: (Optional) Only return the latest consent record for the end-user.
-      required: false
-      schema:
-        type: boolean
-    authId:
-      name: authId
-      in: query
-      description: Retrieved from the first-party cookie authId
-      required: false
-      schema:
-        type: string
 x-readme:
   explorer-enabled: true
   proxy-enabled: true
