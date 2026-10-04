@@ -341,6 +341,9 @@ apis:
   - type: APIReference
     url: https://sourcepoint-public-api.readme.io/reference/gdpr-reporting-api
 common:
+  - type: CapabilityMap
+    url: capabilities/sourcepoint-capability-edges.yml
+    name: Sourcepoint Business Capability Map
   - type: Overlay
     url: overlays/sourcepoint-gdpr-tcf-overlay.yaml
   - type: Overlay

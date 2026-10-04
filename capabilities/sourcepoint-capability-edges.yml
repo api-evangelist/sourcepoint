@@ -1,0 +1,75 @@
+slug: sourcepoint
+provider: Sourcepoint
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: GDPR TCF end-user consent status
+  spec_file: sourcepoint-gdpr-tcf-end-user-consent-status-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.88
+  evidence: '''Get end-user consent status'', ''Delete end-user consent status''; description ''API for
+    managing property and end-user GDPR TCF information''; schemas IABPurposes, customPurposes'
+  reason: Capture, retrieval and deletion of end-user GDPR/TCF consent records is squarely GDPR data-protection
+    compliance and data-subject rights handling.
+- tag: U.S. Multi-State Privacy end-user consent status
+  spec_file: sourcepoint-u-s-multi-state-privacy-end-user-consent-status-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.88
+  evidence: '''Get end-user consent history'', ''Delete end-user consent status'', ''Opt-out all privacy
+    choices and vendors''; description ''managing property and end-user U.S. Multi-State Privacy information'''
+  reason: Opt-out and consent-status management under US state privacy laws is directly privacy and data-protection
+    compliance with data-subject rights handling.
+- tag: GDPR TCF vendor list
+  spec_file: sourcepoint-gdpr-tcf-vendor-list-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.72
+  evidence: '''Map vendors and purposes'', ''Retrieve vendors on vendor list'' under ''API for managing
+    property and end-user GDPR TCF information'''
+  reason: The IAB TCF vendor list and vendor-purpose mapping is part of the GDPR consent framework, i.e.
+    privacy and data-protection compliance — not procurement supplier management despite the word 'vendor'.
+- tag: GDPR reporting API
+  spec_file: sourcepoint-gdpr-reporting-api-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.72
+  evidence: '''GDPR pageview data'', ''GDPR message data''; description ''API for retrieving GDPR TCF
+    dashboard report data'''
+  reason: Reporting over consent-message and pageview performance for GDPR TCF is monitoring of the privacy/consent
+    compliance programme. Reporting-only surface, so confidence is moderate.
+- tag: U.S. Multi-State Privacy reporting API
+  spec_file: sourcepoint-u-s-multi-state-privacy-reporting-api-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.72
+  evidence: '''U.S. Multi-State Privacy pageview data'', ''U.S. Multi-State Privacy message data''; description
+    ''retrieving U.S. Multi-State Privacy dashboard report data'''
+  reason: Dashboard reporting on US privacy consent messaging is monitoring of the privacy compliance
+    programme. Read-only reporting surface, so moderate confidence.
+- tag: Preferences end-user history
+  spec_file: sourcepoint-preferences-end-user-history-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.7
+  evidence: '''Get end-user preferences history'', ''Delete end-user preferences history''; description
+    ''API for managing end-user Preferences data'''
+  reason: End-user privacy preference records with a deletion endpoint are consent/preference management
+    supporting data-subject rights under a CMP, i.e. privacy and data protection.
