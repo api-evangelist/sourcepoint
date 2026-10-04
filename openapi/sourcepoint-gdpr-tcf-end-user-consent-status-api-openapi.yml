@@ -112,120 +112,7 @@ paths:
       operationId: deleteConsentV3BySiteId
       x-operation-id-source: derived
 components:
-  parameters:
-    latest:
-      name: latest
-      in: query
-      description: (Optional) Only return the latest consent record for the end-user.
-      required: false
-      schema:
-        type: boolean
-    consentUUID:
-      name: consentUUID
-      in: query
-      description: Retrieved from the first-party cookie consentUUID
-      required: false
-      schema:
-        type: string
-    authId:
-      name: authId
-      in: query
-      description: Retrieved from the first-party cookie authId
-      required: false
-      schema:
-        type: string
   schemas:
-    mergeConsent:
-      description: Returns end-user consent after merging consent profile
-      properties:
-        userConsentRecord:
-          type: object
-          properties:
-            categories:
-              type: array
-              description: Purposes consented to by end-user
-              items:
-                type: string
-                description: Sourcepoint's purpose ID
-                example: 5f9aa28f7ab71b20a1b12345
-            legIntCategories:
-              type: array
-              description: Purposes consented to who use legitimate interest as a legal basis.
-              items:
-                type: string
-                description: Sourcepoint's purpose ID
-                example: 5f9aa28fabcd1b20a1babcde
-            vendors:
-              type: array
-              description: Vendors consented to by end-user
-              items:
-                type: string
-                description: Sourcepoint's vendor ID
-                example: 12343c6c091a5047885cf964
-            legIntVendors:
-              type: array
-              description: Vendors consented to by end-user who use legitimate interest as a legal basis for at least one purpose
-              items:
-                type: string
-                description: Sourcepoint's vendor ID
-                example: abcd3c6c12345047885cf964
-            id:
-              type: string
-              description: Request ID
-              example: 645b8e5f19a120048b8d24f8
-            consentUUID:
-              type: string
-              description: consentUUID for end-user
-              example: ab126231-e899-4fbb-b7e2-e8f762f080e6_14
-            siteId:
-              type: integer
-              description: Property ID for the property in the Sourcepoint portal.
-              example: 1234
-            euconsent:
-              type: string
-              description: tcString for end-user
-              example: 12344IAPrf4IAAjABCENDDCgAP_AAAAAACiQI5hV5DrMTWFAUXxZQNsgOYgU1sATIGQCCBCAAyABAAGA8AQA0WESEASAAAACAAAAowIBAAAEGAFEAAAAAAAEABEAAAQAgAAIIABAAAEQAAIAAAgIAAAAAAAAAAABAAAAmAAQIcKAREAAAIAQIgAAAAABAAAAAgIABAAAAAAAAAAAAgAAAAAAAAAAAAACARAAgAAAPCQKQAEAALAAqABkADkAHwAgABkADQAHkARABFACYAE8AN4AcwA_ACEAENAIgAiQBLACaAFKALcAYcA-wD9AIoARoAjgBJgCUgFzAMUAbQA3ACRAFDgLzAYMAw0AAMgAaAA8gCIAIoATAAngBSADEAHMAPwAhoBEAESAKUAWIAtwBowD7AP0Ai0BHAEdAJSAXMAvIBigDaAG4APsAi8BIgChwF5gMNAZIAywBrIDgigAUAC4AJAA2gEiALqAAA.YAAAAAAAAAAA
-            vendorListId:
-              type: string
-              description: Vendor list ID
-              example: 5f9aa290a228638af82db511
-            fromNetId:
-              type: boolean
-              description: Is the consent profile from an end-user using the netID single sign-on?
-              example: true
-            dateCreated:
-              type: string
-              description: Timestamp on the request
-              example: '2023-05-10T12:30:23.918Z'
-            __v:
-              type: integer
-              description: WIP
-              example: 0
-        appendedConsentUUID:
-          type: string
-          description: consentUUID for end-user after request
-          example: ab126231-e899-4fbb-b7e2-e8f762f080e6_14_19
-    IABPurposes:
-      description: Returns IAB purpose information
-      properties:
-        id:
-          type: string
-          description: Sourcepoint purpose ID
-          example: 5fd7e01e32bd4d27654ba1d5
-        name:
-          type: string
-          description: Purpose name
-          example: Store and/or access information on a device
-        iabPurposeRef:
-          properties:
-            name:
-              type: string
-              description: Purpose name
-              example: Store and/or access information on a device
-            iabId:
-              type: integer
-              description: IAB purpose id
-              example: 1
     IABAndCustomVendors:
       description: Returns IAB and Custom vendor information
       properties:
@@ -329,6 +216,119 @@ components:
               anyOf:
               - $ref: '#/components/schemas/IABPurposes'
               - $ref: '#/components/schemas/customPurposes'
+    IABPurposes:
+      description: Returns IAB purpose information
+      properties:
+        id:
+          type: string
+          description: Sourcepoint purpose ID
+          example: 5fd7e01e32bd4d27654ba1d5
+        name:
+          type: string
+          description: Purpose name
+          example: Store and/or access information on a device
+        iabPurposeRef:
+          properties:
+            name:
+              type: string
+              description: Purpose name
+              example: Store and/or access information on a device
+            iabId:
+              type: integer
+              description: IAB purpose id
+              example: 1
+    mergeConsent:
+      description: Returns end-user consent after merging consent profile
+      properties:
+        userConsentRecord:
+          type: object
+          properties:
+            categories:
+              type: array
+              description: Purposes consented to by end-user
+              items:
+                type: string
+                description: Sourcepoint's purpose ID
+                example: 5f9aa28f7ab71b20a1b12345
+            legIntCategories:
+              type: array
+              description: Purposes consented to who use legitimate interest as a legal basis.
+              items:
+                type: string
+                description: Sourcepoint's purpose ID
+                example: 5f9aa28fabcd1b20a1babcde
+            vendors:
+              type: array
+              description: Vendors consented to by end-user
+              items:
+                type: string
+                description: Sourcepoint's vendor ID
+                example: 12343c6c091a5047885cf964
+            legIntVendors:
+              type: array
+              description: Vendors consented to by end-user who use legitimate interest as a legal basis for at least one purpose
+              items:
+                type: string
+                description: Sourcepoint's vendor ID
+                example: abcd3c6c12345047885cf964
+            id:
+              type: string
+              description: Request ID
+              example: 645b8e5f19a120048b8d24f8
+            consentUUID:
+              type: string
+              description: consentUUID for end-user
+              example: ab126231-e899-4fbb-b7e2-e8f762f080e6_14
+            siteId:
+              type: integer
+              description: Property ID for the property in the Sourcepoint portal.
+              example: 1234
+            euconsent:
+              type: string
+              description: tcString for end-user
+              example: 12344IAPrf4IAAjABCENDDCgAP_AAAAAACiQI5hV5DrMTWFAUXxZQNsgOYgU1sATIGQCCBCAAyABAAGA8AQA0WESEASAAAACAAAAowIBAAAEGAFEAAAAAAAEABEAAAQAgAAIIABAAAEQAAIAAAgIAAAAAAAAAAABAAAAmAAQIcKAREAAAIAQIgAAAAABAAAAAgIABAAAAAAAAAAAAgAAAAAAAAAAAAACARAAgAAAPCQKQAEAALAAqABkADkAHwAgABkADQAHkARABFACYAE8AN4AcwA_ACEAENAIgAiQBLACaAFKALcAYcA-wD9AIoARoAjgBJgCUgFzAMUAbQA3ACRAFDgLzAYMAw0AAMgAaAA8gCIAIoATAAngBSADEAHMAPwAhoBEAESAKUAWIAtwBowD7AP0Ai0BHAEdAJSAXMAvIBigDaAG4APsAi8BIgChwF5gMNAZIAywBrIDgigAUAC4AJAA2gEiALqAAA.YAAAAAAAAAAA
+            vendorListId:
+              type: string
+              description: Vendor list ID
+              example: 5f9aa290a228638af82db511
+            fromNetId:
+              type: boolean
+              description: Is the consent profile from an end-user using the netID single sign-on?
+              example: true
+            dateCreated:
+              type: string
+              description: Timestamp on the request
+              example: '2023-05-10T12:30:23.918Z'
+            __v:
+              type: integer
+              description: WIP
+              example: 0
+        appendedConsentUUID:
+          type: string
+          description: consentUUID for end-user after request
+          example: ab126231-e899-4fbb-b7e2-e8f762f080e6_14_19
+  parameters:
+    latest:
+      name: latest
+      in: query
+      description: (Optional) Only return the latest consent record for the end-user.
+      required: false
+      schema:
+        type: boolean
+    authId:
+      name: authId
+      in: query
+      description: Retrieved from the first-party cookie authId
+      required: false
+      schema:
+        type: string
+    consentUUID:
+      name: consentUUID
+      in: query
+      description: Retrieved from the first-party cookie consentUUID
+      required: false
+      schema:
+        type: string
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

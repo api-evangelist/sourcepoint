@@ -173,6 +173,107 @@ components:
                 type: string
                 description: Unique users within the periodization who received a message and then made choices on the privacy manager that do not fall into the categories Accept All, Reject All, Previous Accept All or, Legitimate Interest Only. Property should always return 0.
                 example: 0
+    gdprPvResponse:
+      type: object
+      description: Successful response for GDPR pageview report request
+      properties:
+        performanceData:
+          type: object
+          description: Ignore. For internal troubleshooting.
+          properties:
+            total:
+              type: integer
+            propertiesResults:
+              type: integer
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              ymd:
+                type: string
+                description: Year, month and day. Returned only for Daily periodization
+                example: '2023-09-02T00:00:00.000Z'
+              geo:
+                type: string
+                description: Geographic region to which the results pertain. Returned when request uses geo in the breakdownBy parameter
+                example: DE
+              ua_os:
+                type: string
+                description: Operating system type to which the results pertain. Returned when request uses ua_os in the breakdownBy parameter
+                example: macOS
+              ua_device:
+                type: string
+                description: Device type to which the results pertain. Returned when request uses ua_device in the breakdownBy parameter
+                example: desktop
+              ua_browser:
+                type: string
+                description: Browser type to which the results pertain. Returned when request uses ua_browser in the breakdownBy parameter
+                example: Chrome
+              site_id:
+                type: string
+                description: Property ID within the Sourcepoint portal
+                example: 12345
+              domain:
+                type: string
+                description: Domain reported upon
+                example: '"www.sourcepoint.com"'
+              pv:
+                type: string
+                description: Number of pageviews for the given periodization
+                example: 784
+              pv_status_opt_in_all:
+                type: string
+                description: Page views across users who have accepted all purposes and vendors on the most recent version of the vendor list.
+                example: 218
+              pv_status_opt_out_all:
+                type: string
+                description: Page views across users who have rejected all purposes and vendors across any version of the vendor list.
+                example: 51
+              pv_status_li_only:
+                type: string
+                description: Page views across users who selected Save and Exit across any version of the vendor list if legitimate interest is a legal basis for at least one of your purposes.
+                example: 0
+              pv_status_other:
+                type: string
+                description: Page views across users who have made choices on the privacy manager that do not fall into the categories Accept All, Reject All, Previous Accept All or, Legitimate Interest Only on any version of the vendor list.
+                example: 0
+              pv_default_consent_only:
+                type: string
+                description: Page views across users who have not made any choices on the consent banner on any version of the vendor list.
+                example: 496
+              pv_status_previous_optin_all:
+                type: string
+                description: Page views across users who have accepted all purposes and vendors on a previous version of the vendor list. These users may be eligible to receive a re-consent experience.
+                example: 0
+              unique_users:
+                type: string
+                description: Total number of users for the selected properties in the configured periodization.
+                example: 372
+              user_status_opt_in_all:
+                type: string
+                description: Unique users who have accepted all purposes and vendors on the most recent version of the vendor list.
+                example: 68
+              user_status_opt_out_all:
+                type: string
+                description: Unique users who have rejected all purposes and vendors across any version of the vendor list.
+                example: 33
+              user_status_li_only:
+                type: string
+                description: Unique users who have clicked Save and Exit across any version of the vendor list if you have legitimate interest as a legal basis for at least one of your purposes.
+                example: 0
+              user_status_other:
+                type: string
+                description: Unique users who have made choices on the privacy manager that do not fall into the categories Accept All, Reject All, Previous Accept All or, Legitimate Interest Only on any version of the vendor list.
+                example: 0
+              user_default_consent_only:
+                type: string
+                description: Unique users who have not made any choices on the consent banner on any version of the vendor list.
+                example: 273
+              user_status_previous_optin_all:
+                type: string
+                description: Unique users who have accepted all purposes and vendors on a previous version of the vendor list. These users may be eligible to receive a re-consent experience.
+                example: 0
     gdprRequestBody:
       description: Request body for GDPR reporting data request
       type: object
@@ -294,107 +395,6 @@ components:
       - startDate
       - endDate
       - siteId
-    gdprPvResponse:
-      type: object
-      description: Successful response for GDPR pageview report request
-      properties:
-        performanceData:
-          type: object
-          description: Ignore. For internal troubleshooting.
-          properties:
-            total:
-              type: integer
-            propertiesResults:
-              type: integer
-        results:
-          type: array
-          items:
-            type: object
-            properties:
-              ymd:
-                type: string
-                description: Year, month and day. Returned only for Daily periodization
-                example: '2023-09-02T00:00:00.000Z'
-              geo:
-                type: string
-                description: Geographic region to which the results pertain. Returned when request uses geo in the breakdownBy parameter
-                example: DE
-              ua_os:
-                type: string
-                description: Operating system type to which the results pertain. Returned when request uses ua_os in the breakdownBy parameter
-                example: macOS
-              ua_device:
-                type: string
-                description: Device type to which the results pertain. Returned when request uses ua_device in the breakdownBy parameter
-                example: desktop
-              ua_browser:
-                type: string
-                description: Browser type to which the results pertain. Returned when request uses ua_browser in the breakdownBy parameter
-                example: Chrome
-              site_id:
-                type: string
-                description: Property ID within the Sourcepoint portal
-                example: 12345
-              domain:
-                type: string
-                description: Domain reported upon
-                example: '"www.sourcepoint.com"'
-              pv:
-                type: string
-                description: Number of pageviews for the given periodization
-                example: 784
-              pv_status_opt_in_all:
-                type: string
-                description: Page views across users who have accepted all purposes and vendors on the most recent version of the vendor list.
-                example: 218
-              pv_status_opt_out_all:
-                type: string
-                description: Page views across users who have rejected all purposes and vendors across any version of the vendor list.
-                example: 51
-              pv_status_li_only:
-                type: string
-                description: Page views across users who selected Save and Exit across any version of the vendor list if legitimate interest is a legal basis for at least one of your purposes.
-                example: 0
-              pv_status_other:
-                type: string
-                description: Page views across users who have made choices on the privacy manager that do not fall into the categories Accept All, Reject All, Previous Accept All or, Legitimate Interest Only on any version of the vendor list.
-                example: 0
-              pv_default_consent_only:
-                type: string
-                description: Page views across users who have not made any choices on the consent banner on any version of the vendor list.
-                example: 496
-              pv_status_previous_optin_all:
-                type: string
-                description: Page views across users who have accepted all purposes and vendors on a previous version of the vendor list. These users may be eligible to receive a re-consent experience.
-                example: 0
-              unique_users:
-                type: string
-                description: Total number of users for the selected properties in the configured periodization.
-                example: 372
-              user_status_opt_in_all:
-                type: string
-                description: Unique users who have accepted all purposes and vendors on the most recent version of the vendor list.
-                example: 68
-              user_status_opt_out_all:
-                type: string
-                description: Unique users who have rejected all purposes and vendors across any version of the vendor list.
-                example: 33
-              user_status_li_only:
-                type: string
-                description: Unique users who have clicked Save and Exit across any version of the vendor list if you have legitimate interest as a legal basis for at least one of your purposes.
-                example: 0
-              user_status_other:
-                type: string
-                description: Unique users who have made choices on the privacy manager that do not fall into the categories Accept All, Reject All, Previous Accept All or, Legitimate Interest Only on any version of the vendor list.
-                example: 0
-              user_default_consent_only:
-                type: string
-                description: Unique users who have not made any choices on the consent banner on any version of the vendor list.
-                example: 273
-              user_status_previous_optin_all:
-                type: string
-                description: Unique users who have accepted all purposes and vendors on a previous version of the vendor list. These users may be eligible to receive a re-consent experience.
-                example: 0
   responses:
     UnauthorizedError:
       description: API key is missing or invalid

@@ -106,22 +106,30 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    vendors:
-      description: Returns vendors on the vendor list associated with the property.
-      properties:
-        vendors:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-                description: ID of the vendor
-                example: 623454ae293cdf6fc91234
-              name:
-                type: string
-                description: Name of the vendor
-                example: Vendor name
+    mapResponse:
+      description: Returned response to vendor purpose mapping
+      type: array
+      items:
+        type: object
+        properties:
+          vendorId:
+            type: string
+            description: Unique ID for a vendor
+            example: abcd2fbeb8e05c306f2aefgh
+          categories:
+            type: array
+            description: Details purposes configured for each vendor
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Unique ID for purpose
+                  example: 1234e01e32bd4d27654b5678
+                type:
+                  type: string
+                  description: Legal basis configured for purpose
+                  example: CONSENT
     vendorURLMappingResponse:
       description: Returns vendor URL mapping for property
       properties:
@@ -236,30 +244,22 @@ components:
                       type: string
                       description: Legal basis configured for the purpose.
                       example: LEGITIMATE_INTEREST
-    mapResponse:
-      description: Returned response to vendor purpose mapping
-      type: array
-      items:
-        type: object
-        properties:
-          vendorId:
-            type: string
-            description: Unique ID for a vendor
-            example: abcd2fbeb8e05c306f2aefgh
-          categories:
-            type: array
-            description: Details purposes configured for each vendor
-            items:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: Unique ID for purpose
-                  example: 1234e01e32bd4d27654b5678
-                type:
-                  type: string
-                  description: Legal basis configured for purpose
-                  example: CONSENT
+    vendors:
+      description: Returns vendors on the vendor list associated with the property.
+      properties:
+        vendors:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: ID of the vendor
+                example: 623454ae293cdf6fc91234
+              name:
+                type: string
+                description: Name of the vendor
+                example: Vendor name
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

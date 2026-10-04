@@ -142,6 +142,13 @@ components:
       required: false
       schema:
         type: string
+    authId:
+      name: authId
+      in: query
+      description: Retrieved from the first-party cookie `authId`
+      required: false
+      schema:
+        type: string
     id:
       name: id
       in: query
@@ -156,13 +163,6 @@ components:
       required: true
       schema:
         type: number
-    authId:
-      name: authId
-      in: query
-      description: Retrieved from the first-party cookie `authId`
-      required: false
-      schema:
-        type: string
 x-readme:
   explorer-enabled: true
   proxy-enabled: true
