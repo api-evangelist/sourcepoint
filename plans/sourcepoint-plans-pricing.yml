@@ -71,3 +71,32 @@ notes:
   no switch labels for the two states, so the unit of that second set cannot be determined from the published
   page and it is deliberately not recorded as a price.
 - 'No free tier, no self-serve signup, no trial: every CTA on the page routes to a contact form.'
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - negotiated
+  - subscription
+  units: []
+  plans:
+  - name: Essentials
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - month
+  - name: Pro
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - month
+  - name: Enterprise
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods:
+    - month
